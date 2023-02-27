@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-scroll";
 
-import CarouselImages from "../components/CarouselImages";
-import ProductInfo from "../components/ProductInfo";
+import CarouselImages from "./CarouselImages";
+import ProductInfo from "./ProductInfo";
 
 import { randomStar, starIcons, randomReviewNum } from "../utils";
 
