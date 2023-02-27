@@ -1,6 +1,6 @@
 import { AiOutlineLike } from "react-icons/ai";
 
-import Review from "../components/Review";
+import Review from "./Review";
 
 import {dummyReview } from "../utils";
 
