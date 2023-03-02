@@ -1,9 +1,13 @@
 import { AiOutlineLike } from "react-icons/ai";
+import { useContext } from 'react';
+
+import { StoreContext } from "../store";
 
 import '../styles/ProductInfos.css';
 
 const Review = (props) => {
-	const { product, reviewInfo } = props;
+	const {reviewInfo } = props;
+	const store = useContext(StoreContext);
 
 	return (
 		<div className="review-section" id="review">
@@ -19,8 +23,8 @@ const Review = (props) => {
 				</div>
 				<div className="review-body">
 					<img
-						src={`.${product.img}`}
-						alt={product.title}
+						src={`.${store.state.product.img}`}
+						alt={store.state.product.title}
 						className="review-body-img"
 					/>
 					<p className="review-body-text">{reviewInfo.feedback}</p>

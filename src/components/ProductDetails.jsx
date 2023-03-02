@@ -1,22 +1,24 @@
-import React from "react";
 import { Link } from "react-scroll";
+import React, { useContext } from "react";
 
 import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
-
+import {StoreContext} from '../store';
 import { randomStar, starIcons, randomReviewNum } from "../utils";
 
 const ProductDetails = (props) => {
-	const { product, addToBasketHandler, quantityHandler, quantity } = props;
+	const { addToBasketHandler, quantityHandler, quantity } = props;
+
+	const store = useContext(StoreContext);
 
 	return (
 		<section className="product-item">
 			<div className="productImg-container">
-				<img src={`.${product.img}`} alt={product.title} />
+				<img src={`.${store.state.product.img}`} alt={store.state.product.title} />
 				<CarouselImages />
 			</div>
 			<div className="productInfo-container">
-				<h2 className="productInfo-title">{product.title}</h2>
+				<h2 className="productInfo-title">{store.state.product.title}</h2>
 				<div className="stars">
 					{starIcons.map((star, index) => {
 						return <span key={index}>{star}</span>;
@@ -27,7 +29,7 @@ const ProductDetails = (props) => {
 						{randomReviewNum()}Reviews
 					</Link>
 				</div>
-				<h3 className="productInfo-price">£{product.price}</h3>
+				<h3 className="productInfo-price">£{store.state.product.price}</h3>
 				<ProductInfo />
 				<div className="productInfo-select">
 					<input
@@ -39,7 +41,7 @@ const ProductDetails = (props) => {
 					/>
 					<button
 						className="add-btn"
-						onClick={() => addToBasketHandler(product)}
+						onClick={() => addToBasketHandler(store.state.product)}
 					>
 						Add to basket
 					</button>

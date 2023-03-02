@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import "../styles/Basket.css";
-
+import { StoreContext, StoreActions } from "../store";
 import { APIEndPoints, PAGE_LINK } from "../config";
 
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
 
-const Basket = (props) => {
-	const { setShoppingCart, shoppingCart } = props;
+const Basket = () => {
+	const store = useContext(StoreContext);
 	const [deletedItem, setDeletedItem] = useState(null);
 	const [total, setTotal] = useState(0);
-	const [product, setProduct] = useState({});
 	const [isEdited, setIsEdited] = useState(false);
 	let navigate = useNavigate();
 
@@ -22,41 +22,30 @@ const Basket = (props) => {
 		const getBasketData = async () => {
 			const res = await fetch(APIEndPoints.basket);
 			const data = await res.json();
-			setShoppingCart(data);
+			store.dispatch({type: StoreActions.SHOPPINGCARD, payload: data})
 		};
 		getBasketData();
-	}, [setShoppingCart]);
+	}, []);
 
 	// add more items to cart ================================
 	const addItem = (item) => {
-		const updatedArr = shoppingCart.map((el) => {
-			if (el.id === item.id) {
-				setProduct({ ...el, quantity: Number(el.quantity) + 1 });
-				return { ...el, quantity: Number(el.quantity) + 1 };
-			} else {
-				return el;
-			}
-		});
-		setShoppingCart(updatedArr);
+		const foundItem = store.state.shoppingCart.find((el) => el.id === item.id);
+		if (foundItem) {
+			store.dispatch({type: StoreActions.ADDMOREITEM_TOBASKET, payload: item})
+			setIsEdited(true);
+		} 
 		setIsEdited(true);
 	};
 
 	// remove items from cart==================================
 	const removeItem = (item) => {
-		const foundItem = shoppingCart.find((el) => el.id === item.id);
+		const foundItem = store.state.shoppingCart.find((el) => el.id === item.id);
 		if (foundItem.quantity > 1) {
-			const updatedArr = shoppingCart.map((el) => {
-				if (el.id === item.id) {
-					setProduct({ ...el, quantity: Number(el.quantity) - 1 });
-					return { ...el, quantity: Number(el.quantity) - 1 };
-				} else {
-					return el;
-				}
-			});
-			setShoppingCart(updatedArr);
+			store.dispatch({type: StoreActions.REMOVEITEM_FROMBASKET, payload:item})
 			setIsEdited(true);
-		} else if (foundItem.quantity <= 1) {
-			setShoppingCart(shoppingCart.filter((el) => el.id !== item.id));
+		} 
+		else if (foundItem.quantity <= 1) {
+			store.dispatch({type: StoreActions.FILTER_SHOPPINGCART, payload: item})
 			setDeletedItem(foundItem);
 		}
 	};
@@ -64,28 +53,28 @@ const Basket = (props) => {
 	// use effect for updating basket quantity======================
 	useEffect(() => {
 		const updateBasketData = async () => {
-			await fetch(`${APIEndPoints.basket}/${product.id}`, {
+			await fetch(`${APIEndPoints.basket}/${store.state.product.id}`, {
 				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(product),
+				body: JSON.stringify(store.state.product),
 			});
 		};
 		if (isEdited) {
 			updateBasketData();
 		}
 		setIsEdited(false);
-	}, [isEdited, product]);
+	}, [isEdited, store.state.product]);
 
 	// update total============================================
 	useEffect(() => {
-		if (shoppingCart.length >= 1) {
-			const priceQty = shoppingCart.map((el) => el.price * Number(el.quantity));
+		if (store.state.shoppingCart.length >= 1) {
+			const priceQty = store.state.shoppingCart.map((el) => el.price * Number(el.quantity));
 			const total = priceQty.reduce((acc, curr) => acc + curr).toFixed(2);
 			setTotal(total);
 		}
-	}, [shoppingCart]);
+	}, [store.state.shoppingCart]);
 
 	// delete item from json server============================
 	useEffect(() => {
@@ -103,9 +92,9 @@ const Basket = (props) => {
 	return (
 		<div className="shopping-cart">
 			<h1>
-				Shopping Cart <span>: {shoppingCart.length} items</span>
+				Shopping Cart <span>: {store.state.shoppingCart.length} items</span>
 			</h1>
-			{shoppingCart.length < 1 ? (
+			{store.state.shoppingCart.length < 1 ? (
 				<EmptyBasket />
 			) : (
 				<>
@@ -117,7 +106,7 @@ const Basket = (props) => {
 							<p className="header">Total</p>
 						</div>
 						<div className="cart">
-							{shoppingCart.map((item, index) => {
+							{store.state.shoppingCart.map((item, index) => {
 								return (
 									<CartItem
 										key={index}
@@ -129,7 +118,7 @@ const Basket = (props) => {
 							})}
 						</div>
 					</div>
-					<TotalCart total={total} shoppingCart={shoppingCart} />
+					<TotalCart total={total} />
 				</>
 			)}
 		</div>

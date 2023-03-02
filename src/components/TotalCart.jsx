@@ -1,8 +1,11 @@
 import { GrDeliver } from "react-icons/gr";
 import { BsShop } from "react-icons/bs";
+import { useContext } from "react";
+import { StoreContext } from "../store";
 
 const TotalCart = (props) => {
-	const { total, shoppingCart } = props;
+	const { total } = props;
+	const store = useContext(StoreContext);
 
 	return (
 		<>
@@ -28,7 +31,7 @@ const TotalCart = (props) => {
 					<p className="delivery-price">£39</p>
 				</div>
 				<div className="total-section">
-					<p>{`Subtotal (${shoppingCart.length} item)`}</p>
+					<p>{`Subtotal (${store.state.shoppingCart.length} item)`}</p>
 					<p>£{total}</p>
 				</div>
 			</div>

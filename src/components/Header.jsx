@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { useContext } from "react";
 
 import { PAGE_LINK } from "../config";
+import { StoreContext } from "../store";
 
 import "../styles/Header.css";
 
-const Header = (props) => {
-	const { shoppingCart } = props;
+const Header = () => {
+	const store = useContext(StoreContext);
+
 	const className =
-		shoppingCart.length === 0 ? "basket-num hide" : "basket-num";
+		store.state.shoppingCart.length === 0 ? "basket-num hide" : "basket-num";
 
 	return (
 		<header>
@@ -37,7 +40,7 @@ const Header = (props) => {
 
 					<div className="navbar__icon">
 						<Link to={PAGE_LINK.basket}>
-							<div className={className}>{shoppingCart.length}</div>
+							<div className={className}>{store.state.shoppingCart.length}</div>
 							<span>
 								<FaShoppingCart />
 							</span>
