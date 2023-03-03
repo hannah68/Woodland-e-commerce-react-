@@ -1,13 +1,17 @@
+import { useContext } from "react";
+
 import "../styles/Shop.css";
 
 import { categoryNames } from "../utils";
+import { StoreContext } from "../store";
 
 const FilterCategoryMenu = (props) => {
-	const { handleFilterChange, filterData } = props;
+	const store = useContext(StoreContext);
+	const { handleFilterChange } = props;
 
 	// check Checkbox Handler ===============================
 	const checkCheckboxHandler = (categoryName) => {
-		return filterData.category.includes(categoryName) ? true : false;
+		return store.state.filterData.category.includes(categoryName) ? true : false;
 	};
 
 	return (

@@ -14,36 +14,33 @@ const Shop = () => {
 	const store = useContext(StoreContext);
 	const [products, setProducts] = useState([]);
 	const [priceValue, setPriceValue] = useState(1000);
-	const [filterData, setFilterData] = useState({
-		collection: [],
-		category: [],
-		color: [],
-	});
 
 	// handle filter changes================================================
 	const handleFilterChange = (e, filterName) => {
-		if (filterData[filterName].includes(e.target.name)) {
-			let previousfilterNameArr = [...filterData[filterName]];
-			const updatedfilterNameArr = previousfilterNameArr.filter(
-				(el) => el !== e.target.name
-			);
-			setFilterData({ ...filterData, [filterName]: updatedfilterNameArr });
+		const data = store.state.filterData;
+		const name = e.target.name;
+		if (data[filterName].includes(name)) {
+			store.dispatch({
+				type: StoreActions.ISEXISTED_FILTERNAME,
+				payload: { name, filterName }
+			})
 		} else {
-			setFilterData({
-				...filterData,
-				[filterName]: [...filterData[filterName], e.target.name],
-			});
+			store.dispatch({
+				type: StoreActions.NEW_FILTERNAME,
+				payload: { name, filterName }
+			})
 		}
 	};
 
 	// submit Filter Form Handler ============================================
 	const submitFilterFormHandler = (e) => {
 		e.preventDefault();
+		const data = store.state.filterData;
 		const filteredArr = products.filter((el) => {
 			return (
-				filterData.collection.includes(el.collection) &&
-				filterData.color.includes(el.color) &&
-				filterData.category.includes(el.category) &&
+				data.collection.includes(el.collection) &&
+				data.color.includes(el.color) &&
+				data.category.includes(el.category) &&
 				el.price <= priceValue
 			);
 		});
@@ -76,10 +73,9 @@ const Shop = () => {
 
 	// clear All Filters Handler================================================
 	const clearAllFilterHandler = () => {
-		setFilterData({
-			collection: [],
-			category: [],
-			color: [],
+		store.dispatch({
+			type: StoreActions.UPDATE_FILTERDATA, 
+			payload: { collection: [], category: [], color: [] }
 		});
 		setPriceValue(1000);
 		window.location.reload();
@@ -123,8 +119,6 @@ const Shop = () => {
 			<section className="container">
 				<div className="filter-container">
 					<FilterProducts
-						setFilterData={setFilterData}
-						filterData={filterData}
 						products={products}
 						handleFilterChange={handleFilterChange}
 						handleFilterPrice={handleFilterPrice}

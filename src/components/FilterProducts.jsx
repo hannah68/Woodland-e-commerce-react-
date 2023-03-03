@@ -8,9 +8,10 @@ import FilterColorMenu from "./FilterColorMenu";
 import FilterCategoryMenu from "./FilterCategoryMenu";
 import FilterPrice from "./FilterPrice";
 
+
 const FilterProducts = (props) => {
+	
 	const {
-		filterData,
 		handleFilterChange,
 		handleFilterPrice,
 		priceValue,
@@ -48,7 +49,6 @@ const FilterProducts = (props) => {
 				{collectionMenuOpen && (
 					<FilterCollectionMenu
 						handleFilterChange={handleFilterChange}
-						filterData={filterData}
 					/>
 				)}
 
@@ -64,7 +64,6 @@ const FilterProducts = (props) => {
 				{colorMenuOpen && (
 					<FilterColorMenu
 						handleFilterChange={handleFilterChange}
-						filterData={filterData}
 					/>
 				)}
 
@@ -82,7 +81,6 @@ const FilterProducts = (props) => {
 				{categoryMenuOpen && (
 					<FilterCategoryMenu
 						handleFilterChange={handleFilterChange}
-						filterData={filterData}
 					/>
 				)}
 
