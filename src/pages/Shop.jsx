@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import FilterProducts from "../components/FilterProducts";
 import Product from "../components/Product";
@@ -7,13 +7,12 @@ import SearchShop from "../components/SearchShop";
 import "../styles/Shop.css";
 
 import { APIEndPoints } from "../config";
-
 import { randomFnForProducts } from "../utils";
+import { StoreActions, StoreContext } from "../store";
 
 const Shop = () => {
+	const store = useContext(StoreContext);
 	const [products, setProducts] = useState([]);
-	const [searchValue, setSearchValue] = useState("");
-	const [randomProducts, setRandomProducts] = useState([]);
 	const [priceValue, setPriceValue] = useState(1000);
 	const [filterData, setFilterData] = useState({
 		collection: [],
@@ -48,7 +47,7 @@ const Shop = () => {
 				el.price <= priceValue
 			);
 		});
-		setRandomProducts(filteredArr);
+		store.dispatch({type: StoreActions.UPDATE_RANDOMPRODUCTS, payload: filteredArr});
 	};
 
 	// handle Filter Price ==================================================
@@ -60,10 +59,11 @@ const Shop = () => {
 	const submitSearchHandler = (e) => {
 		e.preventDefault();
 		const filteredData = products.filter((el) => {
-			return el.category === searchValue || el.title === searchValue
+			return el.category === store.state.searchValue || el.title === store.state.searchValue
 		});
-		setRandomProducts(filteredData);
-		setSearchValue("");
+
+		store.dispatch({ type: StoreActions.UPDATE_RANDOMPRODUCTS, payload: filteredData });
+		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload:"" });
 	};
 
 	// search Filter Handler===================================================
@@ -71,7 +71,7 @@ const Shop = () => {
 		const value = e.target.value;
 		const capitalize = value.charAt(0).toUpperCase();
 		const inputValue = capitalize + value.slice(1);
-		setSearchValue(inputValue);
+		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload: inputValue });
 	};
 
 	// clear All Filters Handler================================================
@@ -87,16 +87,14 @@ const Shop = () => {
 
 	// sort By Highest price Handler=============================================
 	const sortByHighestHandler = () => {
-		const newArr = [...randomProducts];
-		const sortedArr = newArr.sort((a, b) => b.price - a.price);
-		setRandomProducts(sortedArr);
+		const newArr = [...store.state.randomProducts];
+		store.dispatch({ type: StoreActions.SORTRANDOMBY_HIGHEST, payload: newArr });
 	};
 
 	// sort By Lowest price Handler==============================================
 	const sortByLowestHandler = () => {
-		const newArr = [...randomProducts];
-		const sortedArr = newArr.sort((a, b) => a.price - b.price);
-		setRandomProducts(sortedArr);
+		const newArr = [...store.state.randomProducts];
+		store.dispatch({ type: StoreActions.SORTRANDOMBY_HIGHEST, payload: newArr });
 	};
 
 	// use effect for fetching products and displaying on screen==================
@@ -108,10 +106,7 @@ const Shop = () => {
 			setProducts(data);
 			// cleaned data / only show 6 product on screen(based on random number)
 			const productArrId = randomFnForProducts(42);
-			const cleanData = data.filter((item) => {
-				return productArrId.includes(item.id);
-			});
-			setRandomProducts(cleanData);
+			store.dispatch({ type: StoreActions.SHOW_RANDOMPRODUCTS, payload: { data, productArrId }})
 		};
 		fetchProducts();
 	}, []);
@@ -119,10 +114,8 @@ const Shop = () => {
 	return (
 		<div className="shop-section">
 			<SearchShop
-				searchValue={searchValue}
 				searchFilterHandler={searchFilterHandler}
 				submitSearchHandler={submitSearchHandler}
-				randomFnForProducts={setRandomProducts}
 				sortByHighestHandler={sortByHighestHandler}
 				sortByLowestHandler={sortByLowestHandler}
 			/>
@@ -142,7 +135,7 @@ const Shop = () => {
 				</div>
 
 				<div className="product-container">
-					{randomProducts.map((item, index) => {
+					{store.state.randomProducts.map((item, index) => {
 						return <Product key={index} item={item} />;
 					})}
 				</div>

@@ -6,6 +6,7 @@ export const initialState = {
     product: {},
     isSubmitReviewForm: false,
     searchValue: "",
+    randomProducts: []
 }
 
 export const StoreContext = createContext();
@@ -17,7 +18,11 @@ export class StoreActions {
     static ADDMOREITEM_TOBASKET = 'addMoreItemToBasket';
     static FILTER_SHOPPINGCART = 'filterShoppingCart';
     static SHOPPINGCARD = 'shoppingCard';
-    static UPDATE_SEARCHVALUE = 'updateSerachValue'
+    static UPDATE_SEARCHVALUE = 'updateSerachValue';
+    static UPDATE_RANDOMPRODUCTS = 'updateRandomproducts';
+    static SORTRANDOMBY_HIGHEST = 'sortRandomByHighest';
+    static SORTRANDOMBY_LOWEST = 'sortRandomByLowest';
+    static SHOW_RANDOMPRODUCTS = 'showRandomProducts';
 }
 
 export const shoppingCartReducer = (shoppingCart, action) =>{
@@ -89,6 +94,25 @@ export const searchValueReducer = (searchValue, action) => {
     }
 }
 
+export const randomProductsReducer = (randomProducts, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_RANDOMPRODUCTS:
+            return action.payload;
+
+        case StoreActions.SORTRANDOMBY_HIGHEST:
+            return action.payload.sort((a, b) => b.price - a.price);
+
+        case StoreActions.SORTRANDOMBY_LOWEST:
+            return action.payload.sort((a, b) => a.price - b.price);
+        
+        case StoreActions.SHOW_RANDOMPRODUCTS:
+            return action.payload.data.filter(item => action.payload.productArrId.includes(item.id));
+			
+        default: 
+            return randomProducts;
+    }
+}
+
 
 
 
@@ -105,5 +129,6 @@ const combineReducers = reducers => {
 export const rootReducer = combineReducers({
     shoppingCart: shoppingCartReducer,
     product: productReducer,
-    searchValue: searchValueReducer
+    searchValue: searchValueReducer,
+    randomProducts: randomProductsReducer
 })

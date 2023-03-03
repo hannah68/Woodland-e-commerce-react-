@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
 import "../styles/Shop.css";
 
 import SortProducts from "./SortProducts";
+import { StoreContext } from "../store";
 
 const SearchShop = (props) => {
+	const store = useContext(StoreContext); 
 	const {
-		searchValue,
 		searchFilterHandler,
 		submitSearchHandler,
 		sortByHighestHandler,
 		sortByLowestHandler,
 	} = props;
+
 
 	const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
 
@@ -24,7 +26,7 @@ const SearchShop = (props) => {
 						className="search__input"
 						type="text"
 						placeholder="Search by a Category / Title..."
-						value={searchValue}
+						value={store.state.searchValue}
 						onChange={searchFilterHandler}
 					/>
 				</form>
