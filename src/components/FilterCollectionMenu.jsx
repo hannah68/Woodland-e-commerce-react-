@@ -3,11 +3,28 @@ import { useContext } from "react";
 import "../styles/Shop.css";
 
 import { collectionNames } from "../utils";
-import { StoreContext } from "../store";
+import { StoreContext, StoreActions } from "../store";
 
-const FilterCollectionMenu = (props) => {
+const FilterCollectionMenu = () => {
 	const store = useContext(StoreContext);
-	const { handleFilterChange } = props;
+
+	// handle filter changes================================================
+	const handleFilterChange = (e, filterName) => {
+		const data = store.state.filterData;
+		const name = e.target.name;
+		
+		if (data[filterName].includes(name)) {
+			store.dispatch({
+				type: StoreActions.ISEXISTED_FILTERNAME,
+				payload: { name, filterName }
+			})
+		} else {
+			store.dispatch({
+				type: StoreActions.NEW_FILTERNAME,
+				payload: { name, filterName }
+			})
+		}
+	};
 
 	// check Checkbox Handler ================================
 	const checkCheckboxHandler = (collectionName) => {
@@ -21,12 +38,12 @@ const FilterCollectionMenu = (props) => {
 					<div key={index}>
 						<input
 							type="checkbox"
-							id={collectionName}
-							name={collectionName}
-							onChange={(e) => handleFilterChange(e, "collection")}
-							checked={checkCheckboxHandler(collectionName)}
+							id={ collectionName }
+							name={ collectionName }
+							onChange={ (e) => handleFilterChange(e, "collection") }
+							checked={ checkCheckboxHandler(collectionName) }
 						/>
-						<label htmlFor={collectionName}>{collectionName}</label>
+						<label htmlFor={ collectionName }>{ collectionName }</label>
 					</div>
 				);
 			})}

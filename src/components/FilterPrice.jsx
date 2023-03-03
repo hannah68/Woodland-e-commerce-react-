@@ -1,7 +1,16 @@
+import { useContext } from "react";
+
+import { StoreContext, StoreActions } from "../store";
 import "../styles/Shop.css";
 
-const FilterPrice = (props) => {
-	const { handleFilterPrice, priceValue } = props;
+const FilterPrice = () => {
+	const store = useContext(StoreContext);
+
+	// handle Filter Price ==================================================
+	const handleFilterPrice = (e) => {
+		const value = e.target.value;
+		store.dispatch({ type: StoreActions.UPDATE_PRICEVALUE, payload: value });
+	};
 
 	return (
 		<div className="price__list">
@@ -10,7 +19,7 @@ const FilterPrice = (props) => {
 					type="range"
 					id="min-price"
 					name="min-price"
-					min={0}
+					min={ 0 }
 					max="8"
 					step="10"
 				/>
@@ -18,11 +27,11 @@ const FilterPrice = (props) => {
 					type="range"
 					id="max-price"
 					name="max-price"
-					value={priceValue}
+					value={ store.state.priceValue }
 					min="0"
-					max={1000}
+					max={ 1000 }
 					step="10"
-					onChange={handleFilterPrice}
+					onChange={ handleFilterPrice }
 				/>
 			</div>
 			<div className="price-text">
@@ -31,8 +40,8 @@ const FilterPrice = (props) => {
 					<input
 						type="number"
 						defaultValue="0"
-						min={0}
-						max={1000}
+						min={ 0 }
+						max={ 1000 }
 						id="min-num"
 					/>
 				</div>
@@ -40,11 +49,11 @@ const FilterPrice = (props) => {
 					<span>£</span>
 					<input
 						type="number"
-						value={priceValue}
-						min={0}
-						max={1000}
+						value={ store.state.priceValue }
+						min={ 0 }
+						max={ 1000 }
 						id="max-num"
-						onChange={handleFilterPrice}
+						onChange={ handleFilterPrice }
 					/>
 				</div>
 			</div>

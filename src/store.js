@@ -7,6 +7,7 @@ export const initialState = {
     isSubmitReviewForm: false,
     searchValue: "",
     randomProducts: [],
+    priceValue: 1000,
     filterData: {
 		collection: [],
 		category: [],
@@ -31,6 +32,7 @@ export class StoreActions {
     static UPDATE_FILTERDATA = 'updateFilterData';
     static ISEXISTED_FILTERNAME = 'isExistedFilterName';
     static NEW_FILTERNAME = 'newFilterName';
+    static UPDATE_PRICEVALUE = 'updatePriceValue';
 }
 
 export const shoppingCartReducer = (shoppingCart, action) =>{
@@ -144,6 +146,15 @@ export const filterDataReducer = (filterData, action) => {
     }
 }
 
+export const priceValueReducer = (priceValue, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_PRICEVALUE:
+            return action.payload;
+        default:
+            return priceValue;
+    }
+}
+
 
 
 
@@ -162,5 +173,6 @@ export const rootReducer = combineReducers({
     product: productReducer,
     searchValue: searchValueReducer,
     randomProducts: randomProductsReducer,
-    filterData: filterDataReducer
+    filterData: filterDataReducer,
+    priceValue: priceValueReducer
 })
