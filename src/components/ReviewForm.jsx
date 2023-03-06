@@ -1,25 +1,23 @@
 import { FaUser, FaPen } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useContext } from "react";
 
 import StarRating from "./StarRating";
-
 import { starMaking } from "../utils";
+import { StoreActions, StoreContext } from "../store";
 
-const ReviewForm = (props) => {
-	const {
-		setReviewInfo,
-		reviewInfo,
-		setIsSubmitReviewForm,
-		rating,
-		setRating,
-		hover,
-		setHover,
-	} = props;
+const ReviewForm = ({ setIsSubmitReviewForm }) => {
+	const store = useContext(StoreContext);
 
 	// reviewer change handler =================================
 	const changeHandler = (e) => {
 		const { name, value } = e.target;
-		setReviewInfo({ ...reviewInfo, [name]: value });
+		const reviewInfo = store.state.reviewInfo;
+
+		store.dispatch({ 
+			type: StoreActions.UPDATE_REVIEWINFO, 
+			payload: { ...reviewInfo, [name]: value }
+		});
 	};
 
 	// submit review ==========================================
@@ -27,15 +25,21 @@ const ReviewForm = (props) => {
 		e.preventDefault();
 		let today = new Date().toLocaleDateString();
 
-		if (today && rating) {
-			const starArr = starMaking(rating);
-			setReviewInfo({ ...reviewInfo, date: today, stars: starArr });
+		if (today && store.state.rating) {
+			const reviewInfo = store.state.reviewInfo;
+			const starArr = starMaking(store.state.rating);
+
+			store.dispatch({ 
+				type: StoreActions.UPDATE_REVIEWINFO, 
+				payload: { ...reviewInfo, date: today, stars: starArr }
+			})
 		}
+
 		setIsSubmitReviewForm(true);
 	};
 
 	return (
-		<form className="review-form" onSubmit={submitReviewFormHandler}>
+		<form className="review-form" onSubmit={ submitReviewFormHandler }>
 			<div className="review-container">
 				<p className="review-title">Your personal info.</p>
 				<div className="user-name">
@@ -47,8 +51,8 @@ const ReviewForm = (props) => {
 						className="user-input"
 						placeholder="Enter your name"
 						name="reviewerName"
-						value={reviewInfo.reviewerName}
-						onChange={changeHandler}
+						value={ store.state.reviewInfo.reviewerName }
+						onChange={ changeHandler }
 					/>
 				</div>
 				<div className="user-email">
@@ -60,18 +64,13 @@ const ReviewForm = (props) => {
 						className="user-input"
 						name="reviewerEmail"
 						placeholder="Enter your email"
-						value={reviewInfo.reviewerEmail}
-						onChange={changeHandler}
+						value={ store.state.reviewInfo.reviewerEmail }
+						onChange={ changeHandler }
 					/>
 				</div>
 				<div className="rating">
 					<p>Rate our overall services.</p>
-					<StarRating
-						rating={rating}
-						setRating={setRating}
-						hover={hover}
-						setHover={setHover}
-					/>
+					<StarRating/>
 				</div>
 
 				<div className="feedback">
@@ -82,8 +81,8 @@ const ReviewForm = (props) => {
 						</span>
 						<textarea
 							name="feedback"
-							value={reviewInfo.feedback}
-							onChange={changeHandler}
+							value={ store.state.reviewInfo.feedback }
+							onChange={ changeHandler }
 						></textarea>
 					</div>
 				</div>

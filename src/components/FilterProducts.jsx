@@ -9,7 +9,7 @@ import FilterCategoryMenu from "./FilterCategoryMenu";
 import FilterPrice from "./FilterPrice";
 import { StoreContext, StoreActions } from "../store";
 
-const FilterProducts = ({submitFilterFormHandler}) => {
+const FilterProducts = ({ submitFilterFormHandler }) => {
 	const store = useContext(StoreContext);		
 
 	const [collectionMenuOpen, setCollectionMenuOpen] = useState(false);

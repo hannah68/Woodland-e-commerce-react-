@@ -1,6 +1,5 @@
 import { createContext } from "react";
 
-
 export const initialState = {
     shoppingCart : [],
     product: {},
@@ -12,7 +11,16 @@ export const initialState = {
 		collection: [],
 		category: [],
 		color: [],
-	}
+	}, 
+    rating: null,
+    ratingHover: null,
+    reviewInfo: {
+        reviewerName: "",
+	    reviewerEmail: "",
+	    stars: [],
+	    feedback: "",
+	    date: ""
+    }
 }
 
 export const StoreContext = createContext();
@@ -33,49 +41,29 @@ export class StoreActions {
     static ISEXISTED_FILTERNAME = 'isExistedFilterName';
     static NEW_FILTERNAME = 'newFilterName';
     static UPDATE_PRICEVALUE = 'updatePriceValue';
+    static ADD_RATING = 'addRating';
+    static ADD_HOVER = 'addHover';
+    static UPDATE_REVIEWINFO = 'updateReviewInfo';
 }
 
+// shopping cart reducer======================================
 export const shoppingCartReducer = (shoppingCart, action) =>{
   switch(action.type){
     case StoreActions.SHOPPINGCARD:
         return action.payload;
+
     case StoreActions.UPDATE_SHOPPINGCART:
         return shoppingCart.map((el) => {
             if (el.id === action.payload.id) {
-                // StoreContext.dispatch({
-                //     type: StoreActions.UPDATE_PRODUCT, 
-                //     payload: {...el, quantity: Number(el.quantity) + Number(action.payload.quantity),}
-                // })
-                return { ...el, quantity: Number(el.quantity) + Number(action.payload.quantity) };
+                return { 
+                    ...el, 
+                    quantity: Number(el.quantity) + Number(action.payload.quantity) 
+                };
             } else {
                 return el;
             }
         });
 
-    case StoreActions.REMOVEITEM_FROMBASKET:
-        return shoppingCart.map((el) => {
-            if (el.id === action.payload.id) {
-                // StoreContext.dispatch({
-                //     type: StoreActions.UPDATE_PRODUCT,
-                //     payload: { ...el, quantity: Number(el.quantity) - 1 }
-                // });
-                return { ...el, quantity: Number(el.quantity) - 1 };
-            } else {
-                return el;
-            }
-        });
-
-    case StoreActions.ADDMOREITEM_TOBASKET:
-        return shoppingCart.map((el) => {
-			if (el.id === action.payload.id) {
-				// setProduct({ ...el, quantity: Number(el.quantity) + 1 });
-				return { ...el, quantity: Number(el.quantity) + 1 };
-			} else {
-				return el;
-			}
-		});
-
-    
     case StoreActions.FILTER_SHOPPINGCART:
         return shoppingCart.filter((el) => el.id !== action.payload.id);
         
@@ -84,17 +72,18 @@ export const shoppingCartReducer = (shoppingCart, action) =>{
   }
 }
 
-
-
+// product reducer========================================
 export const productReducer = (product, action) => {
     switch(action.type){
         case StoreActions.UPDATE_PRODUCT:
             return action.payload;
+
         default: 
             return product;
     }
 }
 
+// search value reducer====================================
 export const searchValueReducer = (searchValue, action) => {
     switch(action.type){
         case StoreActions.UPDATE_SEARCHVALUE:
@@ -104,6 +93,7 @@ export const searchValueReducer = (searchValue, action) => {
     }
 }
 
+// random product reducer=================================
 export const randomProductsReducer = (randomProducts, action) => {
     switch(action.type){
         case StoreActions.UPDATE_RANDOMPRODUCTS:
@@ -123,6 +113,7 @@ export const randomProductsReducer = (randomProducts, action) => {
     }
 }
 
+// filter data reducer ===================================
 export const filterDataReducer = (filterData, action) => {
     switch(action.type){
         case StoreActions.UPDATE_FILTERDATA:
@@ -146,6 +137,7 @@ export const filterDataReducer = (filterData, action) => {
     }
 }
 
+// price value reducer ====================================
 export const priceValueReducer = (priceValue, action) => {
     switch(action.type){
         case StoreActions.UPDATE_PRICEVALUE:
@@ -155,9 +147,38 @@ export const priceValueReducer = (priceValue, action) => {
     }
 }
 
+// rating reducer==========================================
+export const ratingReducer = (rating, action) => {
+    switch(action.type){
+        case StoreActions.ADD_RATING:
+            return action.payload;
+        default:
+            return rating;
+    }
+}
 
+// rating hover reducer==========================================
+export const ratingHoverReducer = (ratingHover, action) => {
+    switch(action.type){
+        case StoreActions.ADD_HOVER:
+            return action.payload;
 
+        default:
+            return ratingHover;
+    }
+}
 
+// rating hover reducer==========================================
+export const reviewInfoReducer = (reviewInfo, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_REVIEWINFO:
+            return action.payload;
+        default:
+            return reviewInfo;
+    }
+}
+
+//  combine reducers======================================
 const combineReducers = reducers => {
     return (state = {}, action) => {
       const newState = {}
@@ -167,12 +188,16 @@ const combineReducers = reducers => {
       return newState
     }
   }
-  
+
+// export all reducers ===================================
 export const rootReducer = combineReducers({
     shoppingCart: shoppingCartReducer,
     product: productReducer,
     searchValue: searchValueReducer,
     randomProducts: randomProductsReducer,
     filterData: filterDataReducer,
-    priceValue: priceValueReducer
+    priceValue: priceValueReducer,
+    rating: ratingReducer,
+    ratingHover: ratingHoverReducer,
+    reviewInfo: reviewInfoReducer
 })

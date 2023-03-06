@@ -1,9 +1,12 @@
 import { FaStar } from "react-icons/fa";
+import { useContext } from "react";
+
+import { StoreActions, StoreContext } from "../store";
 
 import "../styles/ProductInfos.css";
 
-const StarRating = (props) => {
-	const { rating, setRating, hover, setHover } = props;
+const StarRating = () => {
+	const store = useContext(StoreContext);
 	
 	return (
 		<div className="stars review-stars">
@@ -16,14 +19,20 @@ const StarRating = (props) => {
 							className="radio-stars"
 							type="radio"
 							name="rating"
-							value={ratingValue}
-							onClick={() => setRating(ratingValue)}
+							value={ ratingValue }
+							onClick={() => store.dispatch(
+								{ type: StoreActions.ADD_RATING, payload: ratingValue }
+							)}
 						/>
 						<FaStar
 							className="star-icons"
-							color={ratingValue <= (hover || rating) ? "#FF9529" : "#bbb6b2"}
-							onMouseEnter={() => setHover(ratingValue)}
-							onMouseLeave={() => setHover(null)}
+							color={ ratingValue <= (store.state.hover || store.state.rating) ? "#FF9529" : "#bbb6b2"}
+							onMouseEnter={() => store.dispatch(
+								{ type:StoreActions.ADD_HOVER, payload: ratingValue }
+							)}
+							onMouseLeave={() => store.dispatch(
+								{ type:StoreActions.ADD_HOVER, payload: null }
+							)}
 						/>
 					</label>
 				);

@@ -463,17 +463,5 @@
       "feature": false
     }
   ],
-  "basket": [
-    {
-      "id": 23,
-      "collection": "Autumn-Winter",
-      "title": "Fabric Sofa with Table",
-      "color": "Brown",
-      "category": "Sofa",
-      "img": "./assets/images/table1.jpg",
-      "price": 399,
-      "quantity": "1",
-      "feature": false
-    }
-  ]
+  "basket": []
 }
