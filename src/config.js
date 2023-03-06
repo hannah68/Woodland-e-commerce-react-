@@ -10,8 +10,8 @@ export const APIEndPoints = {
 
 export const PAGE_LINK = {
 	home: "/",
-	about: "/about",
+	login: "/login",
 	shop: "/products",
 	contact: "/contact",
-    basket: "/basket"
+    basket: "/basket",
 };
