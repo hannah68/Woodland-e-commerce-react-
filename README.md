@@ -19,6 +19,7 @@ The user has the ability to:
 ## Lessons Learned
 During this project, I learned how to:
 - navigate UI with react-router
+- Implement global state with useReducer and useContext
 - Transfer states between routes with useNavigate
 - Work with useLocation to get the necessary information about the current route
 - Remove the side effect of fetching data from API endpoints by using useEffect
@@ -29,7 +30,7 @@ As a result of doing this project, I developed a deep understanding of array met
 ## Tech Stack
 - Applied figma to design <a href="https://www.figma.com/file/AQ7tZRnMHqPFyOhUmfWrsi/furniture?node-id=0%3A1">my wireframe</a>
 - HTML, CSS, Javascript
-- React (Ract-router, useState, useEffect, React-icons,...)
+- React (Ract-router, userReducer, useContext, useState, useEffect, React-icons,...)
 - REST API (JSON server)
 
 ## Installation
