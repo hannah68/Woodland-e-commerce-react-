@@ -38,6 +38,5 @@ As a result of doing this project, I developed a deep understanding of array met
 - Finally, run `npm run start` to run the app via <a href="http://localhost:3000">localhost<a/>
 
 ## Future development
-1. As a general optimization throughout my code, I would use the global state to prevent the props drilling. Moreover, I will use UseReducer to obtain better performance and sustain a more maintainable state.
-2. I would implement MySQL or MongoDB for my database.
-3. Users should be able to register on the website to keep track of the items that were added to the basket and write reviews.
+1. I would implement MySQL or MongoDB for my database.
+2. Users should be able to register on the website to keep track of the items that were added to the basket and write reviews.
