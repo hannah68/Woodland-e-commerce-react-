@@ -2,8 +2,7 @@ import "../styles/Home.css";
 
 import FeaturedItem from "./FeaturedItem";
 
-const FeatureSection = (props) => {
-	const { featuredItems } = props;
+const FeatureSection = ({ featuredItems }) => {
 
 	return (
 		<section className="features-section">

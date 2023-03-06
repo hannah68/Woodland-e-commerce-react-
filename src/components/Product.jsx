@@ -6,8 +6,7 @@ import { randomStar, starIcons } from "../utils";
 
 import { PAGE_LINK } from "../config";
 
-const Product = (props) => {
-	const { item } = props;
+const Product = ({ item }) => {
 
 	return (
 		<div className="product">

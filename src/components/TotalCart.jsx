@@ -1,8 +1,21 @@
 import { GrDeliver } from "react-icons/gr";
 import { BsShop } from "react-icons/bs";
+import { useContext, useState, useEffect} from "react";
 
-const TotalCart = (props) => {
-	const { total, shoppingCart } = props;
+import { StoreContext } from "../store";
+
+const TotalCart = () => {
+	const [total, setTotal] = useState(0);
+	const store = useContext(StoreContext);
+
+	// update total============================================
+	useEffect(() => {
+		if (store.state.shoppingCart.length >= 1) {
+			const priceQty = store.state.shoppingCart.map((el) => el.price * Number(el.quantity));
+			const total = priceQty.reduce((acc, curr) => acc + curr).toFixed(2);
+			setTotal(total);
+		}
+	}, [store.state.shoppingCart]);
 
 	return (
 		<>
@@ -28,7 +41,7 @@ const TotalCart = (props) => {
 					<p className="delivery-price">£39</p>
 				</div>
 				<div className="total-section">
-					<p>{`Subtotal (${shoppingCart.length} item)`}</p>
+					<p>{`Subtotal (${store.state.shoppingCart.length} item)`}</p>
 					<p>£{total}</p>
 				</div>
 			</div>

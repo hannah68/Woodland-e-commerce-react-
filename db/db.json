@@ -463,17 +463,5 @@
       "feature": false
     }
   ],
-  "basket": [
-    {
-      "id": 5,
-      "collection": "Spring-Summer",
-      "title": "Woodland Double Bed Frame",
-      "color": "Beige",
-      "category": "Bed",
-      "img": "./assets/images/bed1.jpg",
-      "price": 189,
-      "quantity": "1",
-      "feature": false
-    }
-  ]
+  "basket": []
 }

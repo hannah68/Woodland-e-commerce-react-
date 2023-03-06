@@ -1,29 +1,38 @@
 import { AiOutlineLike } from "react-icons/ai";
+import { useContext } from 'react';
+
+import { StoreContext } from "../store";
 
 import '../styles/ProductInfos.css';
 
-const Review = (props) => {
-	const { product, reviewInfo } = props;
+const Review = () => {
+	const store = useContext(StoreContext);
 
 	return (
 		<div className="review-section" id="review">
 			<div className="review">
 				<div className="review-header">
-					<p className="review-header-name">{reviewInfo.reviewerName}</p>
+					<p className="review-header-name">
+						{store.state.reviewInfo.reviewerName}
+					</p>
 					<p className="review-header-star">
-						{reviewInfo.stars.map((star, index) => (
-							<span key={index}>{star}</span>
+						{store.state.reviewInfo.stars.map((star, index) => (
+							<span key={ index }>{ star }</span>
 						))}
 					</p>
-					<p className="review-header-date">{reviewInfo.date}</p>
+					<p className="review-header-date">
+						{ store.state.reviewInfo.date }
+					</p>
 				</div>
 				<div className="review-body">
 					<img
-						src={`.${product.img}`}
-						alt={product.title}
+						src={`.${ store.state.product.img }`}
+						alt={ store.state.product.title }
 						className="review-body-img"
 					/>
-					<p className="review-body-text">{reviewInfo.feedback}</p>
+					<p className="review-body-text">
+						{ store.state.reviewInfo.feedback }
+					</p>
 					<button className="review-body-btn">
 						<span>
 							<AiOutlineLike className="likeStyle"/>

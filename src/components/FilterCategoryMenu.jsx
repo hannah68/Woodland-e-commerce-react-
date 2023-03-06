@@ -1,13 +1,35 @@
+import { useContext } from "react";
+
 import "../styles/Shop.css";
 
 import { categoryNames } from "../utils";
+import { StoreContext, StoreActions } from "../store";
 
-const FilterCategoryMenu = (props) => {
-	const { handleFilterChange, filterData } = props;
+
+const FilterCategoryMenu = () => {
+	const store = useContext(StoreContext);
+
+	// handle filter changes================================================
+	const handleFilterChange = (e, filterName) => {
+		const data = store.state.filterData;
+		const name = e.target.name;
+		
+		if (data[filterName].includes(name)) {
+			store.dispatch({
+				type: StoreActions.ISEXISTED_FILTERNAME,
+				payload: { name, filterName }
+			})
+		} else {
+			store.dispatch({
+				type: StoreActions.NEW_FILTERNAME,
+				payload: { name, filterName }
+			})
+		}
+	};
 
 	// check Checkbox Handler ===============================
 	const checkCheckboxHandler = (categoryName) => {
-		return filterData.category.includes(categoryName) ? true : false;
+		return store.state.filterData.category.includes(categoryName) ? true : false;
 	};
 
 	return (
@@ -17,12 +39,12 @@ const FilterCategoryMenu = (props) => {
 					<div key={index}>
 						<input
 							type="checkbox"
-							id={categoryName}
-							name={categoryName}
-							onChange={(e) => handleFilterChange(e, "category")}
-							checked={checkCheckboxHandler(categoryName)}
+							id={ categoryName }
+							name={ categoryName }
+							onChange={ (e) => handleFilterChange(e, "category") }
+							checked={ checkCheckboxHandler(categoryName) }
 						/>
-						<label htmlFor={categoryName}>{categoryName}</label>
+						<label htmlFor={categoryName}>{ categoryName }</label>
 					</div>
 				);
 			})}

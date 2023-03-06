@@ -1,4 +1,7 @@
 import { AiOutlineLike } from "react-icons/ai";
+import { useContext } from 'react';
+
+import { StoreContext } from "../store";
 
 import Review from "./Review";
 
@@ -6,12 +9,12 @@ import {dummyReview } from "../utils";
 
 import '../styles/ProductInfos.css';
 
-const DummyReview = (props) => {
-	const { product, isSubmitReviewForm, reviewInfo } = props;
+const DummyReview = ({ isSubmitReviewForm }) => {
+	const store = useContext(StoreContext);
 
 	return (
 		<div className="review-section">
-			{dummyReview.map((el, index) => {
+			{ dummyReview.map((el, index) => {
 				return (
 					<div className="review" key={index}>
 						<div className="review-header">
@@ -25,7 +28,7 @@ const DummyReview = (props) => {
 						</div>
 						<div className="review-body">
 							<img
-								src={`.${product.img}`}
+								src={`.${store.state.product.img}`}
 								alt="furniture"
 								className="review-body-img"
 							/>
@@ -41,9 +44,7 @@ const DummyReview = (props) => {
 				);
 			})}
 
-			{isSubmitReviewForm && (
-				<Review reviewInfo={reviewInfo} product={product} />
-			)}
+			{ isSubmitReviewForm && <Review /> }
 		</div>
 	);
 };

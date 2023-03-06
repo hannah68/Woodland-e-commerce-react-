@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 import "../styles/Shop.css";
@@ -7,31 +7,35 @@ import FilterCollectionMenu from "./FilterCollectionMenu";
 import FilterColorMenu from "./FilterColorMenu";
 import FilterCategoryMenu from "./FilterCategoryMenu";
 import FilterPrice from "./FilterPrice";
+import { StoreContext, StoreActions } from "../store";
 
-const FilterProducts = (props) => {
-	const {
-		filterData,
-		handleFilterChange,
-		handleFilterPrice,
-		priceValue,
-		submitFilterFormHandler,
-		clearAllFilterHandler,
-	} = props;
+const FilterProducts = ({ submitFilterFormHandler }) => {
+	const store = useContext(StoreContext);		
 
 	const [collectionMenuOpen, setCollectionMenuOpen] = useState(false);
 	const [colorMenuOpen, setColorMenuOpen] = useState(false);
 	const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
 
+	// clear All Filters Handler================================================
+	const clearAllFilterHandler = () => {
+		store.dispatch({
+			type: StoreActions.UPDATE_FILTERDATA, 
+			payload: { collection: [], category: [], color: [] }
+		});
+		store.dispatch({ type: StoreActions.UPDATE_PRICEVALUE, payload: 1000 })
+		window.location.reload();
+	};
+
 	return (
 		<>
 			<div className="clear-container">
 				<h2>Filtered by</h2>
-				<button className="clear-btn" onClick={clearAllFilterHandler}>
+				<button className="clear-btn" onClick={ clearAllFilterHandler }>
 					Clear All
 				</button>
 			</div>
 
-			<form className="filter__collection" onSubmit={submitFilterFormHandler}>
+			<form className="filter__collection" onSubmit={ submitFilterFormHandler }>
 				{/* collection section */}
 				<div
 					className={
@@ -45,28 +49,18 @@ const FilterProducts = (props) => {
 						<FaChevronDown />
 					</span>
 				</div>
-				{collectionMenuOpen && (
-					<FilterCollectionMenu
-						handleFilterChange={handleFilterChange}
-						filterData={filterData}
-					/>
-				)}
+				{ collectionMenuOpen && <FilterCollectionMenu/> }
 
 				{/* color section */}
 				<div
 					className={colorMenuOpen ? "color__menu removeBorder" : "color__menu"}
 				>
 					<span>Color</span>
-					<span onClick={() => setColorMenuOpen(!colorMenuOpen)}>
+					<span onClick={ () => setColorMenuOpen(!colorMenuOpen) }>
 						<FaChevronDown />
 					</span>
 				</div>
-				{colorMenuOpen && (
-					<FilterColorMenu
-						handleFilterChange={handleFilterChange}
-						filterData={filterData}
-					/>
-				)}
+				{ colorMenuOpen && <FilterColorMenu/> }
 
 				{/* category section */}
 				<div
@@ -75,25 +69,17 @@ const FilterProducts = (props) => {
 					}
 				>
 					<span>Category</span>
-					<span onClick={() => setCategoryMenuOpen(!categoryMenuOpen)}>
+					<span onClick={ () => setCategoryMenuOpen(!categoryMenuOpen) }>
 						<FaChevronDown />
 					</span>
 				</div>
-				{categoryMenuOpen && (
-					<FilterCategoryMenu
-						handleFilterChange={handleFilterChange}
-						filterData={filterData}
-					/>
-				)}
+				{categoryMenuOpen && <FilterCategoryMenu/>}
 
 				{/* price section */}
 				<div className="price__menu">
 					<span className="price-name">Price Range</span>
 				</div>
-				<FilterPrice
-					handleFilterPrice={handleFilterPrice}
-					priceValue={priceValue}
-				/>
+				<FilterPrice/>
 
 				<button type="submit" className="search-btn">
 					Search
