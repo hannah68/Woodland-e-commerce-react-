@@ -11,6 +11,7 @@ export const APIEndPoints = {
 export const PAGE_LINK = {
 	home: "/",
 	login: "/login",
+	register: "/register",
 	shop: "/products",
 	contact: "/contact",
     basket: "/basket",
