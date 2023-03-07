@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { BsFillPersonFill } from "react-icons/bs";
 import { useContext } from "react";
 
 import { PAGE_LINK } from "../config";
@@ -28,17 +29,19 @@ const Header = () => {
 							<Link to={PAGE_LINK.home}>Home</Link>
 						</li>
 						<li className="navbar__lists--item">
-							<Link to={PAGE_LINK.about}>About</Link>
-						</li>
-						<li className="navbar__lists--item">
 							<Link to={PAGE_LINK.shop}>Shop</Link>
 						</li>
 						<li className="navbar__lists--item">
-							<Link to={PAGE_LINK.contact}>Contact</Link>
+							<Link to={PAGE_LINK.contact}>Contact Us</Link>
 						</li>
 					</ul>
 
 					<div className="navbar__icon">
+						<Link to={PAGE_LINK.login}>
+							<span className="login-icon">
+								<BsFillPersonFill/>
+							</span>
+						</Link>
 						<Link to={PAGE_LINK.basket}>
 							<div className={className}>{store.state.shoppingCart.length}</div>
 							<span>
