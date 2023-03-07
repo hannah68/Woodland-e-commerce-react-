@@ -11,7 +11,7 @@ import Header from "./components/Header";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 
-import { PAGE_LINK } from "./config";
+import { PAGE_LINK } from "./utils/config";
 import { initialState, StoreContext, rootReducer } from "./store";
 
 const App = () => {

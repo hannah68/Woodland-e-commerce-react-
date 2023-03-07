@@ -2,11 +2,16 @@ import { useContext } from "react";
 
 import "../styles/Shop.css";
 
-import { collectionNames } from "../utils";
 import { StoreContext, StoreActions } from "../store";
+import { colorNames } from "../utils/utils";
 
-const FilterCollectionMenu = () => {
+const FilterColorMenu = () => {
 	const store = useContext(StoreContext);
+
+	// check Checkbox Handler ===============================
+	const checkCheckboxHandler = (colorName) => {
+		return store.state.filterData.color.includes(colorName) ? true : false;
+	};
 
 	// handle filter changes================================================
 	const handleFilterChange = (e, filterName) => {
@@ -26,24 +31,19 @@ const FilterCollectionMenu = () => {
 		}
 	};
 
-	// check Checkbox Handler ================================
-	const checkCheckboxHandler = (collectionName) => {
-		return store.state.filterData.collection.includes(collectionName) ? true : false;
-	};
-
 	return (
-		<div className="collection__list">
-			{collectionNames.map((collectionName, index) => {
+		<div className="color__list">
+			{colorNames.map((colorName, index) => {
 				return (
-					<div key={index}>
+					<div key={ index }>
 						<input
 							type="checkbox"
-							id={ collectionName }
-							name={ collectionName }
-							onChange={ (e) => handleFilterChange(e, "collection") }
-							checked={ checkCheckboxHandler(collectionName) }
+							id={ colorName }
+							name={ colorName }
+							onChange={ (e) => handleFilterChange(e, "color") }
+							checked={ checkCheckboxHandler(colorName) }
 						/>
-						<label htmlFor={ collectionName }>{ collectionName }</label>
+						<label htmlFor={ colorName }>{ colorName }</label>
 					</div>
 				);
 			})}
@@ -51,4 +51,4 @@ const FilterCollectionMenu = () => {
 	);
 };
 
-export default FilterCollectionMenu;
+export default FilterColorMenu;

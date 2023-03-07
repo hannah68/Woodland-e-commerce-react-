@@ -5,7 +5,7 @@ import HeroSection from "../components/HeroSection";
 
 import "../styles/Home.css";
 
-import { APIEndPoints } from "../config";
+import { APIEndPoints } from "../utils/config";
 
 const Home = () => {
 	const [featuredItems, setFeaturedItems] = useState([]);

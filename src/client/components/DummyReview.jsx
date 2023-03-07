@@ -5,7 +5,7 @@ import { StoreContext } from "../store";
 
 import Review from "./Review";
 
-import {dummyReview } from "../utils";
+import {dummyReview } from "../utils/utils";
 
 import '../styles/ProductInfos.css';
 

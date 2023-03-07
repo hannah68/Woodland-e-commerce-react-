@@ -3,7 +3,7 @@ import { MdEmail } from "react-icons/md";
 import { useContext } from "react";
 
 import StarRating from "./StarRating";
-import { starMaking } from "../utils";
+import { starMaking } from "../utils/utils";
 import { StoreActions, StoreContext } from "../store";
 
 const ReviewForm = ({ setIsSubmitReviewForm }) => {

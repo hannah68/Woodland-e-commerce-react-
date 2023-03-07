@@ -3,7 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useContext } from "react";
 
-import { PAGE_LINK } from "../config";
+import { PAGE_LINK } from "../utils/config";
 import { StoreContext } from "../store";
 
 import "../styles/Header.css";

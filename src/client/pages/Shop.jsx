@@ -6,8 +6,8 @@ import SearchShop from "../components/SearchShop";
 
 import "../styles/Shop.css";
 
-import { APIEndPoints } from "../config";
-import { randomFnForProducts } from "../utils";
+import { APIEndPoints } from "../utils/config";
+import { randomFnForProducts } from "../utils/utils";
 import { StoreActions, StoreContext } from "../store";
 
 const Shop = () => {

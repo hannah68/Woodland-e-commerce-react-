@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import "../styles/Basket.css";
 import { StoreContext, StoreActions } from "../store";
-import { APIEndPoints } from "../config";
+import { APIEndPoints } from "../utils/config";
 
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";

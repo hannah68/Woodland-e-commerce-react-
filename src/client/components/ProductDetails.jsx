@@ -5,8 +5,8 @@ import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
 
 import {StoreContext, StoreActions} from '../store';
-import { randomStar, starIcons, randomReviewNum } from "../utils";
-import { APIEndPoints } from "../config";
+import { randomStar, starIcons, randomReviewNum } from "../utils/utils";
+import { APIEndPoints } from "../utils/config";
 
 const ProductDetails = () => {
 	const store = useContext(StoreContext);

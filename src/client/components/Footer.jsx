@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
-import { PAGE_LINK } from "../config";
+import { PAGE_LINK } from "../utils/config";
 
 import "../styles/Footer.css";
 

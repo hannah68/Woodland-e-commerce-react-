@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { StoreContext, StoreActions } from "../store";
-import { starIcons, randomStar } from "../utils";
-import { APIEndPoints, PAGE_LINK } from "../config";
+import { starIcons, randomStar } from "../utils/utils";
+import { APIEndPoints, PAGE_LINK } from "../utils/config";
 
 import "../styles/Basket.css";
 

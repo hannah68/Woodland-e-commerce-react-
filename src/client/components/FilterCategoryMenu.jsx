@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import "../styles/Shop.css";
 
-import { categoryNames } from "../utils";
+import { categoryNames } from "../utils/utils";
 import { StoreContext, StoreActions } from "../store";
 
 

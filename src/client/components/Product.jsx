@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 import "../styles/Shop.css";
 
-import { randomStar, starIcons } from "../utils";
+import { randomStar, starIcons } from "../utils/utils";
 
-import { PAGE_LINK } from "../config";
+import { PAGE_LINK } from "../utils/config";
 
 const Product = ({ item }) => {
 
