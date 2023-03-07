@@ -26,7 +26,8 @@ mongoose
 	.catch((error) => {
 		console.log("Error connecting to MongoDB Atlas database:", error);
 	});
-
+	
+// connect to the server
 app.listen(port, () => {
 	console.log(`Server started on port ${port}`);
 });
