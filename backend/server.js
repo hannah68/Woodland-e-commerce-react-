@@ -1,18 +1,24 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-const path = require("path");
-const cors = require("cors");
+
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import mongoose from "mongoose";
+
+import userRouter from "./routes/user";
 
 const app = express();
+const port = process.env.PORT || 5000;
+const dbUrl = process.env.DB_URl;
 
 app.use(express.json());
-app.use("/static", express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 
-const port = process.env.PORT || 5000;
-const dbUrl = process.env.DB_URl;
+// routes
+app.use("/user", userRouter);
+
+
 
 // Connect to MongoDB Atlas database
 mongoose
