@@ -5,6 +5,7 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 
 import userRouter from "./routes/user";
+import initProductRouter from "./routes/init";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,7 +18,7 @@ app.use(cors());
 
 // routes
 app.use("/user", userRouter);
-
+app.use("/init", initProductRouter);
 
 
 // Connect to MongoDB Atlas database
