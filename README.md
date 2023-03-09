@@ -27,16 +27,19 @@ During this project, I learned how to:
 
 As a result of doing this project, I developed a deep understanding of array methods such as map, filter, reduce, sort, etc.
 
-## Tech Stack
-- Applied figma to design <a href="https://www.figma.com/file/AQ7tZRnMHqPFyOhUmfWrsi/furniture?node-id=0%3A1">my wireframe</a>
-- HTML, CSS, Javascript
-- React (Ract-router, userReducer, useContext, useState, useEffect, React-icons,...)
-- REST API (JSON server)
+## Tech Stack and Technologies Used
+- Utilized the **useContext** and **useReducer** hooks in **React** to manage global state and facilitate data flow between components
+- Designed the UI in **Figma**
+- Implemented UI navigation using **React Router**
+- Used **JSON-server** to create a **REST API** that connects the database with the front-end
+- Created **CRUD operations** for the REST API to enable data management
 
 ## Installation
 - First, run `npm ci` to install the dependencies (need node.js for npm)
 - Finally, run `npm run start` to run the app via <a href="http://localhost:3000">localhost<a/>
 
-## Future development
-1. I would implement MySQL or MongoDB for my database.
-2. Users should be able to register on the website to keep track of the items that were added to the basket and write reviews.
+## In Progress
+1. Users should be able to register on the website to keep track of the items added to their basket and write reviews. Currently, I am working on a branch to create a backend for my project using MongoDB and Express.
+2. I will probably use a CDN such as Cloudinary to enhance the speed of image loading instead of storing them in assests.
+
+2. 
