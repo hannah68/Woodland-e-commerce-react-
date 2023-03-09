@@ -41,5 +41,3 @@ As a result of doing this project, I developed a deep understanding of array met
 ## In Progress
 1. Users should be able to register on the website to keep track of the items added to their basket and write reviews. Currently, I am working on a branch to create a backend for my project using MongoDB and Express.
 2. I will probably use a CDN such as Cloudinary to enhance the speed of image loading instead of storing them in assests.
-
-2. 
