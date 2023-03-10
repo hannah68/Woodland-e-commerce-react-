@@ -1,7 +1,7 @@
 # WoodLand
 > WoodLand is a fully responsive e-commerce furniture website.
 
-<img src='./public/assets/images/woodland.gif' width="600px"/>
+<img src='./frontend/public/assets/images/woodland.gif' width="600px"/>
 
 ## Description
 After learning react during the Boolean's bootcamp, we had to do a solo project with react. I was always curious how e-commerce websites were built. Hence, I challenged myself to create one in less than a week. I decided to create a furniture online store because of my passion for interior design.
