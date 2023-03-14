@@ -1,7 +1,7 @@
 export const seedProducts = [
 	{
 		id: 1,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Stylish Double Bed",
 		color: "Brown",
 		category: "Bed",
@@ -12,7 +12,7 @@ export const seedProducts = [
 	},
 	{
 		id: 2,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Double Bed Frame- Oak",
 		color: "Beige",
 		category: "Bed",
@@ -23,7 +23,7 @@ export const seedProducts = [
 	},
 	{
 		id: 3,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "3 Seater Leather Sofa",
 		color: "Brown",
 		category: "Sofa",
@@ -34,7 +34,7 @@ export const seedProducts = [
 	},
 	{
 		id: 4,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand 3 Seater Sofa",
 		color: "Lavender",
 		category: "Sofa",
@@ -45,7 +45,7 @@ export const seedProducts = [
 	},
 	{
 		id: 5,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "Woodland Double Bed Frame",
 		color: "Beige",
 		category: "Bed",
@@ -56,7 +56,7 @@ export const seedProducts = [
 	},
 	{
 		id: 6,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "White & Black Double Bed",
 		color: "Black",
 		category: "Bed",
@@ -67,7 +67,7 @@ export const seedProducts = [
 	},
 	{
 		id: 7,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand 2 Seater Fabric Sofa",
 		color: "Blue",
 		category: "Sofa",
@@ -78,7 +78,7 @@ export const seedProducts = [
 	},
 	{
 		id: 8,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Kingsize Black Bed",
 		color: "Black",
 		category: "Bed",
@@ -89,7 +89,7 @@ export const seedProducts = [
 	},
 	{
 		id: 9,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand Fabric ArmChair",
 		color: "Pink",
 		category: "Chair",
@@ -100,7 +100,7 @@ export const seedProducts = [
 	},
 	{
 		id: 10,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "Modern Double Bed",
 		color: "Brown",
 		category: "Bed",
@@ -111,7 +111,7 @@ export const seedProducts = [
 	},
 	{
 		id: 11,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "Royal Bed Kingsize",
 		color: "White",
 		category: "Bed",
@@ -122,7 +122,7 @@ export const seedProducts = [
 	},
 	{
 		id: 12,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "White Armchair",
 		color: "White",
 		category: "Chair",
@@ -133,7 +133,7 @@ export const seedProducts = [
 	},
 	{
 		id: 13,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "Cocktail Fabric Chair",
 		color: "Yellow",
 		category: "Chair",
@@ -144,7 +144,7 @@ export const seedProducts = [
 	},
 	{
 		id: 14,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand Velvet Chair",
 		color: "Brown",
 		category: "Chair",
@@ -155,7 +155,7 @@ export const seedProducts = [
 	},
 	{
 		id: 15,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Old Fashioned Chocktail Chair",
 		color: "Yellow",
 		category: "Chair",
@@ -166,7 +166,7 @@ export const seedProducts = [
 	},
 	{
 		id: 16,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Modern Dinning Chair",
 		color: "Brown",
 		category: "Chair",
@@ -177,7 +177,7 @@ export const seedProducts = [
 	},
 	{
 		id: 17,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand Velvet Armchair-White",
 		color: "White",
 		category: "Chair",
@@ -188,7 +188,7 @@ export const seedProducts = [
 	},
 	{
 		id: 18,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand White Shade",
 		color: "Grey",
 		category: "Lamp",
@@ -199,7 +199,7 @@ export const seedProducts = [
 	},
 	{
 		id: 19,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand 2 Seater Velvet Sofa",
 		color: "Grey",
 		category: "Sofa",
@@ -210,7 +210,7 @@ export const seedProducts = [
 	},
 	{
 		id: 20,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "White Fabric Sofa",
 		color: "White",
 		category: "Sofa",
@@ -221,7 +221,7 @@ export const seedProducts = [
 	},
 	{
 		id: 21,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand 3 Seater Velvet Sofa",
 		color: "Green",
 		category: "Sofa",
@@ -232,7 +232,7 @@ export const seedProducts = [
 	},
 	{
 		id: 22,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand Velvet Sofa- Beige",
 		color: "Beige",
 		category: "Sofa",
@@ -243,7 +243,7 @@ export const seedProducts = [
 	},
 	{
 		id: 23,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Fabric Sofa with Table",
 		color: "Brown",
 		category: "Sofa",
@@ -254,7 +254,7 @@ export const seedProducts = [
 	},
 	{
 		id: 24,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Simple White Coffe Table",
 		color: "White",
 		category: "Table",
@@ -265,7 +265,7 @@ export const seedProducts = [
 	},
 	{
 		id: 25,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Green Sylish Sofa with Coffe Table",
 		color: "Green",
 		category: "Sofa",
@@ -276,7 +276,7 @@ export const seedProducts = [
 	},
 	{
 		id: 26,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Fabric Sofa with Coffe Table",
 		color: "Black",
 		category: "Sofa",
@@ -287,7 +287,7 @@ export const seedProducts = [
 	},
 	{
 		id: 27,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "Modern Fabric Sofa with Coffe Table",
 		color: "Grey",
 		category: "Sofa",
@@ -298,7 +298,7 @@ export const seedProducts = [
 	},
 	{
 		id: 28,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand Fabric Sofa with Coffe Table",
 		color: "Grey",
 		category: "Sofa",
@@ -309,7 +309,7 @@ export const seedProducts = [
 	},
 	{
 		id: 29,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "New WoodLand Furniture",
 		color: "Beige",
 		category: "Sofa",
@@ -320,7 +320,7 @@ export const seedProducts = [
 	},
 	{
 		id: 30,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "Leather Sofa with Table",
 		color: "Brown",
 		category: "Sofa",
@@ -331,7 +331,7 @@ export const seedProducts = [
 	},
 	{
 		id: 31,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Grey Sofa with Table",
 		color: "Grey",
 		category: "Sofa",
@@ -342,7 +342,7 @@ export const seedProducts = [
 	},
 	{
 		id: 32,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "Modern Sofa with Table",
 		color: "White",
 		category: "Sofa",
@@ -353,7 +353,7 @@ export const seedProducts = [
 	},
 	{
 		id: 33,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "New and Modern Furniture",
 		color: "Grey",
 		category: "Sofa",
@@ -364,7 +364,7 @@ export const seedProducts = [
 	},
 	{
 		id: 34,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand Table Lamp",
 		color: "White",
 		category: "Lamp",
@@ -375,7 +375,7 @@ export const seedProducts = [
 	},
 	{
 		id: 35,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand Table Lamp",
 		color: "Grey",
 		category: "Lamp",
@@ -386,7 +386,7 @@ export const seedProducts = [
 	},
 	{
 		id: 36,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand White Table",
 		color: "White",
 		category: "Table",
@@ -397,7 +397,7 @@ export const seedProducts = [
 	},
 	{
 		id: 37,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand Table lamp",
 		color: "Lavender",
 		category: "Lamp",
@@ -408,7 +408,7 @@ export const seedProducts = [
 	},
 	{
 		id: 38,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand Coffe Table-Beige",
 		color: "Beige",
 		category: "Table",
@@ -419,7 +419,7 @@ export const seedProducts = [
 	},
 	{
 		id: 39,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand Coffe Table",
 		color: "Brown",
 		category: "Table",
@@ -430,7 +430,7 @@ export const seedProducts = [
 	},
 	{
 		id: 40,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "WoodLand Coffe Table",
 		color: "Brown",
 		category: "Table",
@@ -441,7 +441,7 @@ export const seedProducts = [
 	},
 	{
 		id: 41,
-		collection: "Autumn-Winter",
+		collection_: "Autumn-Winter",
 		title: "Coffe Table",
 		color: "Brown",
 		category: "Table",
@@ -452,7 +452,7 @@ export const seedProducts = [
 	},
 	{
 		id: 42,
-		collection: "Spring-Summer",
+		collection_: "Spring-Summer",
 		title: "WoodLand Coffe Table",
 		color: "White",
 		category: "Table",
