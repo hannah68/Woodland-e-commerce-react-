@@ -9,7 +9,6 @@ export const seedProductDB = async (req, res) => {
         console.log('Products inserted into DB', products);
         res.status(HTTP_RESPONSE.OK.CODE).json("Database seeded successfully")
     }catch(err){
-        console.log('productSeedsError', err);
         res.status(500).json("Error seeding database");
     }
 }
