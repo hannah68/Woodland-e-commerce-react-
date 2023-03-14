@@ -7,16 +7,6 @@ export const randomStar = () => {
 	return starClass === 1 ? <FaStarHalfAlt /> : <FaStar />;
 };
 
-// create random product for product section=================
-export const randomFnForProducts = (num) => {
-	let numIndex = [];
-	while (numIndex.length < 6) {
-		const randomNum = Math.floor(Math.random() * num) + 1;
-		if (numIndex.indexOf(randomNum) === -1) numIndex.push(randomNum);
-	}
-	return numIndex;
-};
-
 // create a random review number=============================
 export const randomReviewNum = () => {
 	const min = 28;

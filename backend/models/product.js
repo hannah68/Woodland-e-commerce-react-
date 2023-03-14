@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const productSchema = new Schema({
 	title: { type: String, required: true },
 	price: { type: String, required: true },
-	collection: { type: String, required: true },
+	collection_: { type: String, required: true },
 	color: { type: String, required: true },
 	category: { type: String, required: true },
 	img: { type: String, required: true },
@@ -12,5 +12,4 @@ const productSchema = new Schema({
 	quantity: { type: Number, required: true },
 });
 
-
-module.exports = mongoose.model("Product", productSchema);
+export const Product = mongoose.model("Product", productSchema);

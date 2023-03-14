@@ -10,20 +10,19 @@ import { APIEndPoints } from "../utils/config";
 const Home = () => {
 	const [featuredItems, setFeaturedItems] = useState([]);
 
-	// use effect for fetching featured item from json====================
+	// use effect for fetching featured item from server====================
 	useEffect(() => {
 		try {
-			const fetchFeaturedItems = async () => {
-				const res = await fetch(APIEndPoints.shop);
-				const data = await res.json();
-				const cleanData = data.filter((item) => item.feature === true);
-				setFeaturedItems(cleanData);
-			};
-			fetchFeaturedItems();
+		  const fetchFeaturedItems = async () => {
+			const res = await fetch(APIEndPoints.home);
+			const featuredData = await res.json();
+			setFeaturedItems(featuredData.data);
+		  };
+		  fetchFeaturedItems();
 		} catch (error) {
-			console.log("could not fetch featured items from db file!");
+		  console.log("could not fetch featured items from the server!");
 		}
-	}, []);
+	  }, [])
 
 	return (
 		<div className="home-section">
