@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/user.js";
 import initProductRouter from "./routes/init.js";
 import featuredItemsRouter from "./routes/featuredItems.js";
+import productsRouter from "./routes/product.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use(cors());
 app.use("/user", userRouter);
 app.use("/init", initProductRouter);
 app.use("/featuredItems", featuredItemsRouter);
+app.use("/products", productsRouter)
 
 
 // Connect to MongoDB Atlas database

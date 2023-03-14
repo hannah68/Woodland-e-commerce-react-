@@ -7,7 +7,6 @@ import SearchShop from "../components/SearchShop";
 import "../styles/Shop.css";
 
 import { APIEndPoints } from "../utils/config";
-import { randomFnForProducts } from "../utils/utils";
 import { StoreActions, StoreContext } from "../store";
 
 const Shop = () => {
@@ -45,15 +44,17 @@ const Shop = () => {
 	// use effect for fetching products and displaying on screen==================
 	useEffect(() => {
 		const fetchProducts = async () => {
-			const res = await fetch(APIEndPoints.shop);
-			const data = await res.json();
-			// uncleaned data/ all products
-			setProducts(data);
-			// cleaned data / only show 6 product on screen(based on random number)
-			const productArrId = randomFnForProducts(42);
-			store.dispatch({ type: StoreActions.SHOW_RANDOMPRODUCTS, payload: { data, productArrId }})
+			try{
+				const res = await fetch("http://localhost:5000/products/");
+				const products = await res.json();
+				setProducts(products.data);
+			}catch(error){
+				console.error("error", error);
+			}
+			
 		};
 		fetchProducts();
+		
 	}, []);
 
 	return (
@@ -66,7 +67,7 @@ const Shop = () => {
 				</div>
 
 				<div className="product-container">
-					{store.state.randomProducts.map((item, index) => {
+					{ products && products.map((item, index) => {
 						return <Product key={ index } item={ item } />;
 					})}
 				</div>
