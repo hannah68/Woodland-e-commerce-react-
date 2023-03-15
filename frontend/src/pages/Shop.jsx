@@ -6,7 +6,6 @@ import SearchShop from "../components/SearchShop";
 
 import "../styles/Shop.css";
 
-import { APIEndPoints } from "../utils/config";
 import { StoreActions, StoreContext } from "../store";
 
 const Shop = () => {

@@ -1,7 +1,25 @@
 import { User }from "../models/user.js";
+import { hashPassword, createToken, checkPasswordMatch } from "../utils/auth.js";
 
+// create user without password
+const createUserWithoutPass = async (user) => {
+	const newUser = {
+		username: user.username,
+		email: user.email,
+		id: user.id
+	};
+	return newUser;
+};
+
+// create user
 export const registerUser = async (req, res) => {
-	const { name, email, password } = req.body;
+	const { username, email, password } = req.body;
+
+	if (!password) {
+		return res.status(400).json({ error: 'Password is required' });
+	}
+
+	const passwordHashed = await hashPassword(password);
 
 	try {
 		//check to make sure the email provided not registered
@@ -9,36 +27,47 @@ export const registerUser = async (req, res) => {
 
 		if (registeredUser) {
 			// throw an error if the email address already registered
-			return res
-				.status(400)
-				.json({
-					email: "A user has already registered with this email address.",
-				});
+			return res.status(400).json({email: "A user has already registered with this email address."});
 		} else {
 			// create a new user
 			const newUser = await new User({
-				name,
+				username,
 				email,
-				password,
+				password: passwordHashed,
 			});
 
 			await newUser.save();
-			return res.status(200).json({ data: newUser });
+
+			const userWithoutpassword = await createUserWithoutPass(newUser);
+			const token = await createToken({ id: userWithoutpassword.id });
+
+			return res.status(200).json({ data: userWithoutpassword, token });
 		}
 	} catch (err) {
 		console.log("error inside register user!", err);
 	}
 };
 
+// log in user
 export const loginUser = async ( req, res ) => {
     const { email, password } = req.body;
-    // need to hash password
+    
     try{
-        const user = await User.findOne({ email });
-        if(!user){
+        const foundUser = await User.findOne({ email });
+        if(!foundUser){
             return res.status(500).json({data: 'Invalid email or password...'})
         }
-        return res.status(200).json({ data: user });
+
+		// check password match
+		const matchedPassword = await checkPasswordMatch(password, foundUser.password );
+		if (!matchedPassword) {
+			return res.status(401).json({ error: "Unauthorized" });
+		}
+
+		const userWithoutPassword = await createUserWithoutPass(foundUser);
+		const token = await createToken({ id: userWithoutPassword.id });
+
+        return res.status(200).json({ data: userWithoutPassword, token });
 
     }catch(err){
         console.log('An error inside user login.', err);
