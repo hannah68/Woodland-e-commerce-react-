@@ -1,8 +1,10 @@
 import { GrDeliver } from "react-icons/gr";
 import { BsShop } from "react-icons/bs";
 import { useContext, useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 
 import { StoreContext } from "../store";
+import { PAGE_LINK } from "../utils/config";
 
 const TotalCart = () => {
 	const [total, setTotal] = useState(0);
@@ -45,7 +47,12 @@ const TotalCart = () => {
 					<p>£{total}</p>
 				</div>
 			</div>
-			<div className="checkout-btn">Go to checkout</div>
+			<Link 
+				className="checkout-btn" 
+				to={!store.state.isLoggedIn ? PAGE_LINK.register : ''}>
+				Go to checkout
+			</Link>
+			
 		</>
 	);
 };

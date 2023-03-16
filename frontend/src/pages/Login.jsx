@@ -1,22 +1,47 @@
-import { Link } from "react-router-dom";
-
-import { PAGE_LINK } from "../utils/config";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import "../styles/Login.css";
 
-const Login = ({ login, setLogin }) => {
-    
+import { PAGE_LINK } from "../utils/config";
+
+const Login = () => {
+	const [submit, setSubmit] = useState(false);
+    const [userLogin, setUserLogin] = useState({ email: "", password: "" });
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if(submit){
+		  const postUserLoginToDB = async() => {
+			  const useRes = await fetch("http://localhost:5000/user/login", {
+				  method: "POST",
+				  headers: {"Content-Type": "application/json"},
+				  body: JSON.stringify(userLogin)
+			  });
+			  const userData = await useRes.json();
+  
+			  localStorage.setItem("token", userData.token);
+			  if(userData.data){
+				  localStorage.setItem("userId", userData.data.id.toString());
+				  navigate();
+			  }
+		  }
+		  postUserLoginToDB()
+		}
+		setSubmit(false);
+	  }, [submit, userLogin, navigate])
 
     // submit login form handler =========================
 	const submitLoginFormHandler = (e) => {
 		e.preventDefault();
-        console.log(login);
+        
 	};
 
     // change login form =================================
 	const changeHandler = (e) => {
 		const { name, value } = e.target;
-        setLogin({ ...login, [name]: value });
+        setUserLogin({ ...userLogin, [name]: value });
 	};
 
 	return (
@@ -31,7 +56,7 @@ const Login = ({ login, setLogin }) => {
 						type="email"
 						id="email"
 						name="email"
-                        value={ login.email }
+                        value={ userLogin.email }
 						onChange={ changeHandler }
 					/>
 				</div>
@@ -41,7 +66,7 @@ const Login = ({ login, setLogin }) => {
 						type="password"
 						id="password"
 						name="password"
-                        value={ login.password }
+                        value={ userLogin.password }
 						onChange={ changeHandler }
 					/>
 				</div>

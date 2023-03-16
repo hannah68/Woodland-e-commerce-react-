@@ -159,6 +159,7 @@
 
 .checkout-btn {
 	text-transform: uppercase;
+	text-decoration: none;
 	background-color: rgb(107, 107, 107);
 	color: #fff;
 	width: 20rem;
