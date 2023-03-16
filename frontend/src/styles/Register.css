@@ -93,3 +93,9 @@
 	border-radius: 4px;
     margin-top: 0;
 }
+
+.login-container{
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+}

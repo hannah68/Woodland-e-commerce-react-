@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import { useReducer, useMemo, useState } from "react";
+import { useReducer, useMemo } from "react";
 
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
@@ -15,12 +15,6 @@ import { PAGE_LINK } from "./utils/config";
 import { initialState, StoreContext, rootReducer } from "./store";
 
 const App = () => {
-	const [login, setLogin] = useState({ email: "", password: "" });
-	const [register, setRegister] = useState({
-		username: "",
-		email: "",
-		password: "",
-	});
 	const [state, dispatch] = useReducer(rootReducer, initialState);
 
 	const store = useMemo(() => {
@@ -36,11 +30,11 @@ const App = () => {
 					<Route path={PAGE_LINK.shop} element={<Shop />} />
 					<Route
 						path={PAGE_LINK.login}
-						element={<Login setLogin={setLogin} login={login} />}
+						element={<Login />}
 					/>
 					<Route
 						path={PAGE_LINK.register}
-						element={<Register register={register} setRegister={setRegister} />}
+						element={<Register/>}
 					/>
 					<Route path={`${PAGE_LINK.shop}/:id`} element={<ProductInfos />} />
 					<Route path={PAGE_LINK.contact} element={<Contact />} />

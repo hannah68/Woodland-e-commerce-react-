@@ -20,7 +20,8 @@ export const initialState = {
 	    stars: [],
 	    feedback: "",
 	    date: ""
-    }
+    },
+    isLoggedIn: false
 }
 
 export const StoreContext = createContext();
@@ -44,6 +45,7 @@ export class StoreActions {
     static ADD_RATING = 'addRating';
     static ADD_HOVER = 'addHover';
     static UPDATE_REVIEWINFO = 'updateReviewInfo';
+    static UPDATE_ISLOGGEDIN = 'isLoggedIn';
 }
 
 // shopping cart reducer======================================
@@ -157,6 +159,16 @@ export const ratingReducer = (rating, action) => {
     }
 }
 
+// is Logged In reducer====================================
+export const isLoggedInReducer = (isLoggedIn, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_ISLOGGEDIN:
+            return action.payload;
+        default: 
+            return isLoggedIn;
+    }
+}
+
 // rating hover reducer==========================================
 export const ratingHoverReducer = (ratingHover, action) => {
     switch(action.type){
@@ -199,5 +211,6 @@ export const rootReducer = combineReducers({
     priceValue: priceValueReducer,
     rating: ratingReducer,
     ratingHover: ratingHoverReducer,
-    reviewInfo: reviewInfoReducer
+    reviewInfo: reviewInfoReducer,
+    isLoggedIn: isLoggedInReducer
 })

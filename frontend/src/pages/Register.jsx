@@ -1,18 +1,52 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
+import { PAGE_LINK } from "../utils/config.js";
+
 import "../styles/Register.css";
 
-const Register = ({ register, setRegister }) => {
+const Register = () => {
+	const [submit, setSubmit] = useState(false);
+	const [userInfo, setUserInfo] = useState({
+		username: "",
+		email: "",
+		password: "",
+	});
+	const navigate = useNavigate();
+
+	useEffect(() => {
+	  if(submit){
+		const postUserInfoToDB = async() => {
+			const useRes = await fetch("http://localhost:5000/user/register", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify(userInfo)
+			});
+			const userData = await useRes.json();
+
+			localStorage.setItem("token", userData.token);
+			if(userData.data){
+				localStorage.setItem("userId", userData.data.id.toString());
+				navigate()
+			}
+		}
+		postUserInfoToDB()
+	  }
+	  setSubmit(false);
+	}, [submit, userInfo, navigate])
+	
+
 	const submitRegisterFormHandler = (e) => {
 		e.preventDefault();
+		setSubmit(true);
 	};
 
 	const changeHandler = (e) => {
 		const { name, value } = e.target;
-		setRegister({ ...register, [name]: value });
+		setUserInfo({ ...userInfo, [name]: value });
 	};
 
 	return (
@@ -36,7 +70,7 @@ const Register = ({ register, setRegister }) => {
 							id="username"
 							name="username"
 							data-lpignore="true"
-							value={register.username}
+							value={userInfo.username}
 							onChange={changeHandler}
 						/>
 					</div>
@@ -50,7 +84,7 @@ const Register = ({ register, setRegister }) => {
 							id="email"
 							name="email"
 							data-lpignore="true"
-							value={register.email}
+							value={userInfo.email}
 							onChange={changeHandler}
 						/>
 					</div>
@@ -64,7 +98,7 @@ const Register = ({ register, setRegister }) => {
 							name="password"
 							id="password"
 							data-lpignore="true"
-							value={register.password}
+							value={userInfo.password}
 							onChange={changeHandler}
 						/>
 					</div>
@@ -77,6 +111,13 @@ const Register = ({ register, setRegister }) => {
 					<button type="submit" className="register-button">
 						Register
 					</button>
+
+					<div className="login-container">
+						<p className="signin-text">Already have an account?</p>
+						<Link to={PAGE_LINK.login} className="signin-btn">
+							Signin
+						</Link>
+					</div>
 				</form>
 			</div>
 		</div>
