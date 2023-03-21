@@ -24,10 +24,11 @@ const Login = () => {
 			  localStorage.setItem("token", userData.token);
 			  if(userData.data){
 				  localStorage.setItem("userId", userData.data.id.toString());
-				  navigate();
+				  
 			  }
 		  }
-		  postUserLoginToDB()
+		  postUserLoginToDB();
+		  navigate(PAGE_LINK.home, { replace: true });
 		}
 		setSubmit(false);
 	  }, [submit, userLogin, navigate])

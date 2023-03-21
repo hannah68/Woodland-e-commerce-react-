@@ -1,24 +1,30 @@
-import { useEffect } from "react";
-
-import { useContext } from "react";
+import { useEffect, useState } from "react";
 
 import "../styles/Basket.css";
-import { StoreContext, StoreActions } from "../store";
-import { APIEndPoints } from "../utils/config";
+import { LOCAL_STORAGE } from "../utils/config";
+
 
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
 
 const Basket = () => {
-	const store = useContext(StoreContext);
+	const [basketItems, setBasketItems] = useState([])
 
-	// get data from basket (json server)=====================
+	// get data from db=====================
 	useEffect(() => {
 		const getBasketData = async () => {
-			const res = await fetch(APIEndPoints.basket);
-			const data = await res.json();
-			store.dispatch({ type: StoreActions.SHOPPINGCARD, payload: data });
+			const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+
+			const res = await fetch(`http://localhost:5000/basket/${userId}`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+				}
+			});
+			const resData = await res.json();
+			setBasketItems(resData.data.items);
 		};
 		getBasketData();
 	}, []);
@@ -26,9 +32,9 @@ const Basket = () => {
 	return (
 		<div className="shopping-cart">
 			<h1>
-				Shopping Cart <span>: {store.state.shoppingCart.length} items</span>
+				Shopping Cart <span>: {basketItems.length} items</span>
 			</h1>
-			{store.state.shoppingCart.length < 1 ? (
+			{basketItems.length < 1 ? (
 				<EmptyBasket />
 			) : (
 				<>
@@ -40,7 +46,7 @@ const Basket = () => {
 							<p className="header">Total</p>
 						</div>
 						<div className="cart">
-							{store.state.shoppingCart.map((item, index) => {
+							{ basketItems.map((item, index) => {
 								return (
 									<CartItem
 										key={index}

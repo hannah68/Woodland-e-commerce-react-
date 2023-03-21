@@ -16,3 +16,8 @@ export const PAGE_LINK = {
 	contact: "/contact",
     basket: "/basket",
 };
+
+export const LOCAL_STORAGE = {
+    TOKEN: 'token',
+    USER_ID: 'userId',
+};

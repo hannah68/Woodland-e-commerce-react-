@@ -56,7 +56,7 @@ export const shoppingCartReducer = (shoppingCart, action) =>{
 
     case StoreActions.UPDATE_SHOPPINGCART:
         return shoppingCart.map((el) => {
-            if (el.id === action.payload.id) {
+            if (el._id === action.payload._id) {
                 return { 
                     ...el, 
                     quantity: Number(el.quantity) + Number(action.payload.quantity) 
@@ -67,7 +67,7 @@ export const shoppingCartReducer = (shoppingCart, action) =>{
         });
 
     case StoreActions.FILTER_SHOPPINGCART:
-        return shoppingCart.filter((el) => el.id !== action.payload.id);
+        return shoppingCart.filter((el) => el._id !== action.payload._id);
         
     default: 
         return shoppingCart;
@@ -108,7 +108,7 @@ export const randomProductsReducer = (randomProducts, action) => {
             return action.payload.sort((a, b) => a.price - b.price);
         
         case StoreActions.SHOW_RANDOMPRODUCTS:
-            return action.payload.data.filter(item => action.payload.productArrId.includes(item.id));
+            return action.payload.data.filter(item => action.payload.productArrId.includes(item._id));
 			
         default: 
             return randomProducts;

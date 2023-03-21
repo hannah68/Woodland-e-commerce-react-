@@ -30,7 +30,7 @@ const Register = () => {
 			localStorage.setItem("token", userData.token);
 			if(userData.data){
 				localStorage.setItem("userId", userData.data.id.toString());
-				navigate()
+				navigate(PAGE_LINK.home, { replace: true });
 			}
 		}
 		postUserInfoToDB()

@@ -3,10 +3,10 @@ import { useContext, useState, useEffect } from "react";
 
 import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
+import { LOCAL_STORAGE } from "../utils/config.js";
 
-import {StoreContext, StoreActions} from '../store';
+import {StoreContext} from '../store';
 import { randomStar, starIcons, randomReviewNum } from "../utils/utils";
-import { APIEndPoints } from "../utils/config";
 
 const ProductDetails = () => {
 	const store = useContext(StoreContext);
@@ -16,78 +16,60 @@ const ProductDetails = () => {
 
 
 	// use effect for update quantity of product in basket================
-	useEffect(() => {
-		const updateBasketData = async () => {
-			await fetch(`${APIEndPoints.basket}/${store.state.product.id}`, {
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ ...store.state.product, quantity: Number(quantity) + 1 }),
-			});
-		};
+	// useEffect(() => {
+	// 	const updateBasketData = async () => {
+	// 		await fetch(`${APIEndPoints.basket}/${store.state.product._id}`, {
+	// 			method: "PATCH",
+	// 			headers: {
+	// 				"Content-Type": "application/json",
+	// 			},
+	// 			body: JSON.stringify({ ...store.state.product, quantity: Number(quantity) + 1 }),
+	// 		});
+	// 	};
 
-		if (isEdited) {
-			updateBasketData();	
-		}
+	// 	if (isEdited) {
+	// 		updateBasketData();	
+	// 	}
 
-		setIsEdited(false);
-		setQuantity(0);
+	// 	setIsEdited(false);
+	// 	setQuantity(0);
 
-	}, [isEdited, store]);
+	// }, [isEdited, store]);
 
-
-	// use effect for posting data to basket===============================
+	// use effect for posting data to db===============================
 	useEffect(() => {
 		const postBasketData = async () => {
-			await fetch(APIEndPoints.basket, {
+			await fetch("http://localhost:5000/basket/", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
 				},
-				body: JSON.stringify({ ...store.state.product, quantity: Number(quantity) }),
+				body: JSON.stringify({
+					productId: store.state.product._id,
+					userId: localStorage.getItem(LOCAL_STORAGE.USER_ID), 
+					quantity: Number(quantity)
+				}),
 			});
 		};
 
 		if (submit) {
 			postBasketData();
-			store.dispatch({
-				type: StoreActions.SHOPPINGCARD, 
-				payload: [
-					...store.state.shoppingCart, 
-					{ ...store.state.product, quantity: Number(quantity) }
-				]
-			});
-			
 		}
 		
+		// reset submit to false after the POST request is made
 		setSubmit(false);
-		setQuantity(0);
-		// eslint-disable-next-line
-	}, [submit, store.state.product]);
-
+	}, [submit, store.state.product, quantity]);
 	
 
 	// add item to basket handler ========================================
-	const addToBasketHandler = () => {
-		const product = store.state.product;
-		const existedItem = store.state.shoppingCart.find((el) => el.id === product.id);
-
-		if (existedItem) {
-			store.dispatch({
-				type: StoreActions.UPDATE_SHOPPINGCART, 
-				payload: store.state.product
-			});
-			setIsEdited(true);
-		} else {
-			setSubmit(true);
-		}
+	const addItemToBasketHandler = () => {
+		// set submit to true to trigger the POST request
+		setSubmit(true);
+		// reset the quantity after the item has been added to the basket
+		setQuantity(0);
 	};
 
-	// quantity handler ====================
-	const quantityHandler = (e) => {
-		setQuantity(e.target.value);
-	};
 
 	return (
 		<section className="product-item">
@@ -115,11 +97,11 @@ const ProductDetails = () => {
 						name="num"
 						className="num"
 						value={ quantity }
-						onChange={ quantityHandler }
+						onChange={ (e) => setQuantity(e.target.value) }
 					/>
 					<button
 						className="add-btn"
-						onClick={ addToBasketHandler }
+						onClick={ addItemToBasketHandler }
 					>
 						Add to basket
 					</button>
