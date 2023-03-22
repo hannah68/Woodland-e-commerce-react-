@@ -1,5 +1,6 @@
-import { Link } from "react-scroll";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
+import { PAGE_LINK } from "../utils/config.js";
 
 import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
@@ -13,6 +14,8 @@ const ProductDetails = () => {
 	const [isEdited, setIsEdited] = useState(false);
 	const [submit, setSubmit] = useState(false);
 	const [quantity, setQuantity] = useState(0);
+
+	const navigate = useNavigate();
 
 
 	// use effect for update quantity of product in basket================
@@ -64,10 +67,14 @@ const ProductDetails = () => {
 
 	// add item to basket handler ========================================
 	const addItemToBasketHandler = () => {
-		// set submit to true to trigger the POST request
-		setSubmit(true);
-		// reset the quantity after the item has been added to the basket
-		setQuantity(0);
+		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+		if(userId){
+			// set submit to true to trigger the POST request
+			setSubmit(true);
+			// reset the quantity after the item has been added to the basket
+			setQuantity(0);
+		}
+		navigate(PAGE_LINK.login, { replace: true });
 	};
 
 
@@ -85,7 +92,7 @@ const ProductDetails = () => {
 					})}
 					<span>{randomStar()}</span>
 					{/* react-scroll */}
-					<Link to="review" spy={true} smooth={true} className="review-number">
+					<Link to="review" spy="true" smooth="true" className="review-number">
 						{ randomReviewNum() }Reviews
 					</Link>
 				</div>
@@ -101,8 +108,7 @@ const ProductDetails = () => {
 					/>
 					<button
 						className="add-btn"
-						onClick={ addItemToBasketHandler }
-					>
+						onClick={ addItemToBasketHandler }>
 						Add to basket
 					</button>
 				</div>
