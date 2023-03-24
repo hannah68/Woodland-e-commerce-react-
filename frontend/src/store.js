@@ -21,7 +21,8 @@ export const initialState = {
 	    feedback: "",
 	    date: ""
     },
-    isLoggedIn: false
+    isLoggedIn: false,
+    user: null
 }
 
 export const StoreContext = createContext();
@@ -46,17 +47,18 @@ export class StoreActions {
     static ADD_HOVER = 'addHover';
     static UPDATE_REVIEWINFO = 'updateReviewInfo';
     static UPDATE_ISLOGGEDIN = 'isLoggedIn';
+    static UPDATE_USER = 'updateUser';
 }
 
 // shopping cart reducer======================================
 export const shoppingCartReducer = (shoppingCart, action) =>{
   switch(action.type){
     case StoreActions.SHOPPINGCARD:
-        return action.payload;
+        return [...shoppingCart, action.payload];
 
     case StoreActions.UPDATE_SHOPPINGCART:
         return shoppingCart.map((el) => {
-            if (el._id === action.payload._id) {
+            if (el.id === action.payload.id) {
                 return { 
                     ...el, 
                     quantity: Number(el.quantity) + Number(action.payload.quantity) 
@@ -169,6 +171,16 @@ export const isLoggedInReducer = (isLoggedIn, action) => {
     }
 }
 
+// user reducer ====================================
+export const userReducer = (isLoggedIn, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_USER:
+            return action.payload;
+        default: 
+            return isLoggedIn;
+    }
+}
+
 // rating hover reducer==========================================
 export const ratingHoverReducer = (ratingHover, action) => {
     switch(action.type){
@@ -212,5 +224,6 @@ export const rootReducer = combineReducers({
     rating: ratingReducer,
     ratingHover: ratingHoverReducer,
     reviewInfo: reviewInfoReducer,
-    isLoggedIn: isLoggedInReducer
+    isLoggedIn: isLoggedInReducer,
+    user: userReducer
 })

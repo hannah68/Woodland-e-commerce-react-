@@ -40,9 +40,12 @@
 	justify-content: space-between;
 }
 
-.navbar__icon span {
-	font-size: 2.5rem;
+.navbar__icon{
 	color: #000;
+}
+
+.basket{
+	font-size: 2rem;
 }
 
 .basket-num {
