@@ -95,9 +95,10 @@ const CartItem = ({ item }) => {
 	return (
 		<div className="row body-row">
 			<div className="body-row-info">
-				<img src={item.productId.img} alt={item.productId.title} />
+				<img src={item.productId? item.productId.img : item.img} 
+				alt={item.productId? item.productId.title: item.title} />
 				<div className="info-cart">
-					<p>{item.productId.title}</p>
+					<p>{item.productId ? item.productId.title : item.title}</p>
 					<div className="cart-stars">
 						{starIcons.map((star, index) => {
 							return <span key={index}>{star}</span>;
@@ -107,7 +108,7 @@ const CartItem = ({ item }) => {
 					<p className="delivery">Estimated dispatch within 5 working days</p>
 				</div>
 			</div>
-			<p>£{item.productId.price}</p>
+			<p>£{item.productId ? item.productId.price: item.price}</p>
 			<div className="quantity-container">
 				<button className="popup-plus" onClick={() => removeItem(item)}>
 					<FaMinus />
@@ -117,7 +118,7 @@ const CartItem = ({ item }) => {
 					<FaPlus />
 				</button>
 			</div>
-			<p>£{(item.quantity * item.productId.price).toFixed(2)}</p>
+			<p>£{Number(item.quantity * (item.productId ? item.productId.price: item.price)).toFixed(2)}</p>
 		</div>
 	);
 };

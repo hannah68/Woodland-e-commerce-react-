@@ -6,60 +6,61 @@ import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
 import { LOCAL_STORAGE } from "../utils/config.js";
 
-import {StoreContext} from '../store';
+import {StoreContext, StoreActions} from '../store';
 import { randomStar, starIcons, randomReviewNum } from "../utils/utils";
 
 const ProductDetails = () => {
 	const store = useContext(StoreContext);
-	const [isEdited, setIsEdited] = useState(false);
+	// const [isEdited, setIsEdited] = useState(false);
 	const [submit, setSubmit] = useState(false);
 	const [quantity, setQuantity] = useState(0);
+	
+	let navigate = useNavigate();
 
-	const navigate = useNavigate();
-
-
-	// use effect for update quantity of product in basket================
-	// useEffect(() => {
-	// 	const updateBasketData = async () => {
-	// 		await fetch(`${APIEndPoints.basket}/${store.state.product._id}`, {
-	// 			method: "PATCH",
-	// 			headers: {
-	// 				"Content-Type": "application/json",
-	// 			},
-	// 			body: JSON.stringify({ ...store.state.product, quantity: Number(quantity) + 1 }),
-	// 		});
-	// 	};
-
-	// 	if (isEdited) {
-	// 		updateBasketData();	
-	// 	}
-
-	// 	setIsEdited(false);
-	// 	setQuantity(0);
-
-	// }, [isEdited, store]);
 
 	// use effect for posting data to db===============================
 	useEffect(() => {
-		const postBasketData = async () => {
-			await fetch("http://localhost:5000/basket/", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
-				},
-				body: JSON.stringify({
-					productId: store.state.product._id,
-					userId: localStorage.getItem(LOCAL_STORAGE.USER_ID), 
-					quantity: Number(quantity)
-				}),
-			});
-		};
-
-		if (submit) {
-			postBasketData();
+		const product = store.state.product;
+		const shoppingCart = store.state.shoppingCart
+		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+		// if user logged in
+		if(submit && userId){
+			// trigger the POST request
+			const postBasketData = async () => {
+				await fetch("http://localhost:5000/basket/", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+					},
+					body: JSON.stringify({
+						productId: store.state.product._id,
+						userId: localStorage.getItem(LOCAL_STORAGE.USER_ID), 
+						quantity: Number(quantity)
+					}),
+				});
+			};
+			postBasketData()
+			// reset the quantity after the item has been added to the basket
+			setQuantity(0);
 		}
-		
+		else if(submit){
+			// if user hasn't logged in yet(guest)
+			const existedItem = shoppingCart.find((el) => el.id === product.id);
+			if(existedItem){
+				store.dispatch({
+					type: StoreActions.UPDATE_SHOPPINGCART, 
+					payload: product
+				});
+			}else{
+				store.dispatch({
+					type: StoreActions.SHOPPINGCARD, 
+					payload: product
+				});
+			}
+			
+		}
+
 		// reset submit to false after the POST request is made
 		setSubmit(false);
 	}, [submit, store.state.product, quantity]);
@@ -67,14 +68,7 @@ const ProductDetails = () => {
 
 	// add item to basket handler ========================================
 	const addItemToBasketHandler = () => {
-		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
-		if(userId){
-			// set submit to true to trigger the POST request
-			setSubmit(true);
-			// reset the quantity after the item has been added to the basket
-			setQuantity(0);
-		}
-		navigate(PAGE_LINK.login, { replace: true });
+		setSubmit(true);
 	};
 
 

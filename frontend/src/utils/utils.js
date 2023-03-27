@@ -14,6 +14,10 @@ export const randomReviewNum = () => {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+// capitalise letter===================================
+export const capitaliseFirstLetter = (name) =>
+	name.replace(/\b\w/g, (c) => c.toUpperCase());
+
 // define filter names=======================================
 export const collectionNames = ["Spring-Summer", "Autumn-Winter"];
 export const colorNames = [

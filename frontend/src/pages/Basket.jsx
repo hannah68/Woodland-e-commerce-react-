@@ -1,33 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import "../styles/Basket.css";
 import { LOCAL_STORAGE } from "../utils/config";
-
+import { StoreContext } from "../store.js";
 
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
 
 const Basket = () => {
-	const [basketItems, setBasketItems] = useState([])
+	const store = useContext(StoreContext);
+	const [basketItems, setBasketItems] = useState([]);
 
 	// get data from db=====================
 	useEffect(() => {
-		const getBasketData = async () => {
-			const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
 
-			const res = await fetch(`http://localhost:5000/basket/${userId}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+		const getBasketData = async () => {
+			try {
+				const res = await fetch(`http://localhost:5000/basket/${userId}`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+					},
+				});
+				const resData = await res.json();
+				if (resData && resData.data && resData.data.items) {
+					setBasketItems(resData.data.items);
+				} else {
+					console.log("Data not found");
 				}
-			});
-			const resData = await res.json();
-			setBasketItems(resData.data.items);
+			} catch (err) {  console.log(err); }
 		};
-		getBasketData();
-	}, []);
+
+		if (userId) {
+			getBasketData();
+		}
+	}, [store.state.shoppingCart]);
 
 	return (
 		<div className="shopping-cart">
@@ -46,17 +56,12 @@ const Basket = () => {
 							<p className="header">Total</p>
 						</div>
 						<div className="cart">
-							{ basketItems.map((item, index) => {
-								return (
-									<CartItem
-										key={index}
-										item={item}
-									/>
-								);
+							{basketItems.map((item, index) => {
+								return <CartItem key={index} item={item} />;
 							})}
 						</div>
 					</div>
-					<TotalCart/>
+					<TotalCart />
 				</>
 			)}
 		</div>

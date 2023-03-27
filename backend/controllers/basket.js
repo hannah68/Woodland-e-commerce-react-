@@ -1,12 +1,18 @@
 import { Basket } from "../models/basket.js";
-import { Order } from "../models/order.js";
-import { Product } from "../models/product.js";
+import jwt from "jsonwebtoken";
 
 // post item to user's basket
 export const addItemsToBasket = async (req, res) => {
 	try {
 		const { userId, quantity, productId } = req.body;
-
+		const token = req.headers.authorization;
+		
+		const decodedToken = jwt.decode(token);
+		const tokenId = decodedToken.id;
+		
+		if(tokenId !== userId){
+			return res.status(401).json({ error: "Unauthorized" });
+		}
 		// find the user's basket
 		let basket = await Basket.findOne({ userId });
 
@@ -18,10 +24,10 @@ export const addItemsToBasket = async (req, res) => {
 			});
 		} else {
 			// check if the item is in the basket already
-			const foundItem = basket.items.find(
-				(item) => item.productId === productId
-			);
-
+			let foundItem = basket.items.find((item) => {
+				return (item.productId).toString() === productId
+			});
+			
 			if (foundItem) {
 				// update the quantity of the existing item
 				foundItem.quantity = Math.max(0, foundItem.quantity + quantity);
@@ -29,7 +35,7 @@ export const addItemsToBasket = async (req, res) => {
 				// remove the item if the quantity is zero
 				if (foundItem.quantity === 0) {
 					basket.items = basket.items.filter(
-						(item) => item.productId !== productId
+						(item) => (item.productId).toString() !== productId
 					);
 				}
 			} else {
