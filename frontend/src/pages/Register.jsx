@@ -49,11 +49,13 @@ const Register = () => {
 		// setSubmit(false);
 	}, [submit, userInfo, navigate]);
 
+	// submit register form handler
 	const submitRegisterFormHandler = (e) => {
 		e.preventDefault();
 		setSubmit(true);
 	};
 
+	// change register form handler
 	const changeHandler = (e) => {
 		const { name, value } = e.target;
 		setUserInfo({ ...userInfo, [name]: value });

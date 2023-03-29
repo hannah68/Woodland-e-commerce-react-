@@ -9,7 +9,6 @@ import DummyReview from "../components/DummyReview";
 import ProductDetails from "../components/ProductDetails";
 import { StoreActions, StoreContext } from "../store";
 
-
 const ProductInfos = () => {
 	const store = useContext(StoreContext);
 

@@ -1,6 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
-import { PAGE_LINK } from "../utils/config.js";
 
 import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
@@ -12,8 +11,6 @@ import { randomStar, starIcons, randomReviewNum } from "../utils/utils";
 const ProductDetails = () => {
 	const store = useContext(StoreContext);
 	const [submit, setSubmit] = useState(false);
-	let navigate = useNavigate();
-
 
 	// use effect for posting data to db===============================
 	useEffect(() => {

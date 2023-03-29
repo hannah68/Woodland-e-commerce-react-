@@ -1,35 +1,14 @@
-import { useContext, useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { StoreContext, StoreActions } from "../store";
 import { starIcons, randomStar } from "../utils/utils";
-import { APIEndPoints, PAGE_LINK } from "../utils/config";
 import { LOCAL_STORAGE } from "../utils/config.js";
 
 import "../styles/Basket.css";
 
 const CartItem = ({ item }) => {
-	
 	const store = useContext(StoreContext);
-	let navigate = useNavigate();
-
-
-	// delete item from json server============================
-	// useEffect(() => {
-	// 	const deleteItemFromBasket = async () => {
-	// 		await fetch(`${APIEndPoints.basket}/${deletedItem.id}`, {
-	// 			method: "DELETE",
-	// 		});
-	// 		navigate(PAGE_LINK.basket, { replace: true });
-	// 	};
-
-	// 	if (deletedItem) {
-	// 		deleteItemFromBasket();
-	// 		store.dispatch({ type: StoreActions.FILTER_SHOPPINGCART, payload: deletedItem});
-	// 	}
-	// 	setDeletedItem(null);
-	// }, [deletedItem, navigate]);
 
 	const updateBasketData = async (quantity, productId) => {
 		

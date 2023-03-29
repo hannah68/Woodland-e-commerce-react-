@@ -10,7 +10,6 @@ import { StoreActions } from "../store";
 
 import "../styles/Header.css";
 
-
 const Header = () => {
 	const store = useContext(StoreContext);
 
