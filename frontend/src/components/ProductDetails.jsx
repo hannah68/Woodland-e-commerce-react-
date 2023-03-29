@@ -11,10 +11,7 @@ import { randomStar, starIcons, randomReviewNum } from "../utils/utils";
 
 const ProductDetails = () => {
 	const store = useContext(StoreContext);
-	// const [isEdited, setIsEdited] = useState(false);
 	const [submit, setSubmit] = useState(false);
-	const [quantity, setQuantity] = useState(0);
-	
 	let navigate = useNavigate();
 
 
@@ -36,13 +33,13 @@ const ProductDetails = () => {
 					body: JSON.stringify({
 						productId: store.state.product._id,
 						userId: localStorage.getItem(LOCAL_STORAGE.USER_ID), 
-						quantity: Number(quantity)
+						quantity: Number(store.state.quantity)
 					}),
 				});
 			};
 			postBasketData()
 			// reset the quantity after the item has been added to the basket
-			setQuantity(0);
+			store.dispatch({ type: StoreActions.UPDATE_QUANTITY, payload: 0 });
 		}
 		else if(submit){
 			// if user hasn't logged in yet(guest)
@@ -63,7 +60,8 @@ const ProductDetails = () => {
 
 		// reset submit to false after the POST request is made
 		setSubmit(false);
-	}, [submit, store.state.product, quantity]);
+		
+	}, [submit, store.state.product, store.state.quantity]);
 	
 
 	// add item to basket handler ========================================
@@ -97,8 +95,12 @@ const ProductDetails = () => {
 						type="number"
 						name="num"
 						className="num"
-						value={ quantity }
-						onChange={ (e) => setQuantity(e.target.value) }
+						min="1"
+						value={ store.state.quantity }
+						onChange={e => store.dispatch({ 
+							type: StoreActions.UPDATE_QUANTITY, 
+							payload: e.target.value 
+						})}
 					/>
 					<button
 						className="add-btn"

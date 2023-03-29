@@ -67,3 +67,46 @@ export const getItemsFromBasket = async(req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 }
+
+// edit items inside the basket
+export const editItemsInBasket = async(req, res) => {
+	try{
+		const { userId, quantity, productId } = req.body;
+		const token = req.headers.authorization;
+		
+		const decodedToken = jwt.decode(token);
+		const tokenId = decodedToken.id;
+		
+		if(tokenId !== userId){
+			return res.status(401).json({ error: "Unauthorized" });
+		}
+
+		let basket = await Basket.findOne({ userId });
+		
+		// remove the item if the quantity is zero
+		if(quantity <= 0 ){
+			basket.items = basket.items.filter(
+				(item) => (item.productId).toString() !== productId
+			);
+
+			basket = await basket.save();
+			// Send the basket as the response
+			res.status(200).json({data: basket});
+		}else{
+			// find the item
+			let foundItem = basket.items.find((item) => {
+				return (item.productId).toString() === productId
+			});
+
+			// update the quantity of the item
+			foundItem.quantity = quantity;
+
+			basket = await basket.save();
+
+			// Send the basket as the response
+			res.status(200).json({data: basket});
+		}
+	}catch(err){
+		res.status(500).json({ error: 'Server error' });
+	}
+}

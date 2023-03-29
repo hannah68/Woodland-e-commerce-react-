@@ -5,90 +5,78 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { StoreContext, StoreActions } from "../store";
 import { starIcons, randomStar } from "../utils/utils";
 import { APIEndPoints, PAGE_LINK } from "../utils/config";
+import { LOCAL_STORAGE } from "../utils/config.js";
 
 import "../styles/Basket.css";
 
 const CartItem = ({ item }) => {
-	const [isEdited, setIsEdited] = useState(false);
-	const [deletedItem, setDeletedItem] = useState(null);
-	const [updatedProduct, setUpdatedProduct] = useState({});
 	
 	const store = useContext(StoreContext);
 	let navigate = useNavigate();
 
 
-	// use effect for updating basket quantity======================
-	useEffect(() => {
-		const updateBasketData = async () => {
-			await fetch(`${APIEndPoints.basket}/${updatedProduct.id}`, {
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(updatedProduct),
-			});
-		};
-
-		if (isEdited) {
-			updateBasketData();
-		}
-
-		setIsEdited(false);
-	}, [isEdited, updatedProduct]);
-
-
 	// delete item from json server============================
-	useEffect(() => {
-		const deleteItemFromBasket = async () => {
-			await fetch(`${APIEndPoints.basket}/${deletedItem.id}`, {
-				method: "DELETE",
-			});
-			navigate(PAGE_LINK.basket, { replace: true });
-		};
+	// useEffect(() => {
+	// 	const deleteItemFromBasket = async () => {
+	// 		await fetch(`${APIEndPoints.basket}/${deletedItem.id}`, {
+	// 			method: "DELETE",
+	// 		});
+	// 		navigate(PAGE_LINK.basket, { replace: true });
+	// 	};
 
-		if (deletedItem) {
-			deleteItemFromBasket();
-			store.dispatch({ type: StoreActions.FILTER_SHOPPINGCART, payload: deletedItem});
+	// 	if (deletedItem) {
+	// 		deleteItemFromBasket();
+	// 		store.dispatch({ type: StoreActions.FILTER_SHOPPINGCART, payload: deletedItem});
+	// 	}
+	// 	setDeletedItem(null);
+	// }, [deletedItem, navigate]);
+
+	const updateBasketData = async (quantity, productId) => {
+		
+		await fetch(`http://localhost:5000/basket/${productId}`, {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+			},
+			body: JSON.stringify({
+				productId,
+				userId: localStorage.getItem(LOCAL_STORAGE.USER_ID), 
+				quantity
+			}),
+		});
+
+		// if the quantity is zero or less, remove the item from basket
+		if(quantity <= 0 ){
+			const updatedItems = store.state.basketItems.filter((item) =>
+				item.productId._id !== productId 
+			);
+			store.dispatch({ type: StoreActions.BASKETITEMS, payload: updatedItems });
+
+		}else{
+			// update the quantity of the item in the state
+			const updatedItems = store.state.basketItems.map((item) =>
+				item.productId._id === productId ? { ...item, quantity } : item
+			);
+			store.dispatch({ type: StoreActions.BASKETITEMS, payload: updatedItems });
 		}
-		setDeletedItem(null);
-	}, [deletedItem, navigate]);
-
+	};
 
 	// add more items to cart ================================
 	const addItem = (item) => {
-		const updatedArr = store.state.shoppingCart.map((el) => {
-			if (el.id === item.id) {
-				setUpdatedProduct({ ...el, quantity: Number(el.quantity) + 1 });
-				return { ...el, quantity: Number(el.quantity) + 1 };
-			} else {
-				return el;
-			}
-		});
+		const quantity = Number(item.quantity) + 1;
+		const productId = item.productId._id;
 		
-		store.dispatch({type: StoreActions.SHOPPINGCARD, payload: updatedArr});
-		setIsEdited(true);
+		updateBasketData(quantity, productId);
 	};
 
 
 	// remove items from cart==================================
 	const removeItem = (item) => {
-		const foundItem = store.state.shoppingCart.find((el) => el.id === item.id);
-
-		if (foundItem.quantity > 1) {
-			const updatedArr = store.state.shoppingCart.map((el) => {
-				if (el.id === item.id) {
-					setUpdatedProduct({ ...el, quantity: Number(el.quantity) - 1 });
-					return { ...el, quantity: Number(el.quantity) - 1 };
-				} else {
-					return el;
-				}
-			});
-			store.dispatch({type: StoreActions.SHOPPINGCARD, payload: updatedArr});
-			setIsEdited(true);
-		} 
-		else if (foundItem.quantity <= 1) {
-			setDeletedItem(foundItem);
-		}
+		const quantity = Number(item.quantity) - 1;
+		const productId = item.productId._id;
+	
+		updateBasketData(quantity, productId);
 	};
 
 
@@ -118,7 +106,7 @@ const CartItem = ({ item }) => {
 					<FaPlus />
 				</button>
 			</div>
-			<p>£{Number(item.quantity * (item.productId ? item.productId.price: item.price)).toFixed(2)}</p>
+			<p>£{Number(item.quantity * item.productId.price).toFixed(2)}</p>
 		</div>
 	);
 };

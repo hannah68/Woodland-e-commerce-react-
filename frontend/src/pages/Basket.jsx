@@ -1,50 +1,56 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext, useCallback } from "react";
+// import { useDispatch } from 'react-redux';
 
 import "../styles/Basket.css";
 import { LOCAL_STORAGE } from "../utils/config";
-import { StoreContext } from "../store.js";
 
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
+import { StoreContext, StoreActions } from "../store";
+// import { store } from '../store';
 
 const Basket = () => {
 	const store = useContext(StoreContext);
-	const [basketItems, setBasketItems] = useState([]);
+	// const dispatch = useDispatch();
+
+	const getBasketData = useCallback(async () => {
+		try {
+			const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+			const res = await fetch(`http://localhost:5000/basket/${userId}`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+				},
+			});
+			const resData = await res.json();
+			
+			if (resData && resData.data && resData.data.items) {
+				store.dispatch({ 
+					type: StoreActions.BASKETITEMS, payload: resData.data.items 
+				});
+			} else {
+				console.log("Data not found");
+			}
+		} catch (err) {  console.log(err); }
+	}, []);
 
 	// get data from db=====================
 	useEffect(() => {
 		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
 
-		const getBasketData = async () => {
-			try {
-				const res = await fetch(`http://localhost:5000/basket/${userId}`, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
-					},
-				});
-				const resData = await res.json();
-				if (resData && resData.data && resData.data.items) {
-					setBasketItems(resData.data.items);
-				} else {
-					console.log("Data not found");
-				}
-			} catch (err) {  console.log(err); }
-		};
-
 		if (userId) {
 			getBasketData();
 		}
-	}, [store.state.shoppingCart]);
+	}, [getBasketData]);
 
 	return (
 		<div className="shopping-cart">
 			<h1>
-				Shopping Cart <span>: {basketItems.length} items</span>
+				Shopping Cart <span>: {store.state.basketItems.length} items</span>
 			</h1>
-			{basketItems.length < 1 ? (
+			{store.state.basketItems.length < 1 ? (
 				<EmptyBasket />
 			) : (
 				<>
@@ -56,8 +62,11 @@ const Basket = () => {
 							<p className="header">Total</p>
 						</div>
 						<div className="cart">
-							{basketItems.map((item, index) => {
-								return <CartItem key={index} item={item} />;
+							{store.state.basketItems.map((item, index) => {
+								return <CartItem 
+									key={index} 
+									item={item} 
+								/>;
 							})}
 						</div>
 					</div>

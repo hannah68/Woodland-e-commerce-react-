@@ -15,7 +15,7 @@ const Header = () => {
 	const store = useContext(StoreContext);
 
 	const className =
-		store.state.shoppingCart.length === 0 ? "basket-num hide" : "basket-num";
+		store.state.basketItems.length === 0 ? "basket-num hide" : "basket-num";
 
 	// format username================================
 	const formatUserName = (user) => {
@@ -75,7 +75,7 @@ const Header = () => {
 
 							<Link to={ PAGE_LINK.basket }>
 								<div className={ className }>
-									{ store.state.shoppingCart.length }
+									{ store.state.basketItems.length }
 								</div>
 								<span className="basket">
 									<FaShoppingCart />

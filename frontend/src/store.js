@@ -2,6 +2,7 @@ import { createContext } from "react";
 
 export const initialState = {
     shoppingCart : [],
+    basketItems:[],
     product: {},
     isSubmitReviewForm: false,
     searchValue: "",
@@ -22,13 +23,15 @@ export const initialState = {
 	    date: ""
     },
     isLoggedIn: false,
-    user: null
+    user: null,
+    quantity: 0
 }
 
 export const StoreContext = createContext();
 
 export class StoreActions {
     static UPDATE_SHOPPINGCART = 'updateShoppingCart';
+    static BASKETITEMS = 'baketItems';
     static UPDATE_PRODUCT = 'updateProduct';
     static REMOVEITEM_FROMBASKET = 'removeItemFromBasket';
     static ADDMOREITEM_TOBASKET = 'addMoreItemToBasket';
@@ -48,6 +51,7 @@ export class StoreActions {
     static UPDATE_REVIEWINFO = 'updateReviewInfo';
     static UPDATE_ISLOGGEDIN = 'isLoggedIn';
     static UPDATE_USER = 'updateUser';
+    static UPDATE_QUANTITY = 'updateQuantity';
 }
 
 // shopping cart reducer======================================
@@ -76,6 +80,16 @@ export const shoppingCartReducer = (shoppingCart, action) =>{
   }
 }
 
+
+// basket items reducer======================================
+export const basketItemsReducer = (basketItems, action) =>{
+    switch(action.type){
+      case StoreActions.BASKETITEMS:
+          return action.payload;
+      default: 
+          return basketItems;
+    }
+  }
 // product reducer========================================
 export const productReducer = (product, action) => {
     switch(action.type){
@@ -181,6 +195,16 @@ export const userReducer = (isLoggedIn, action) => {
     }
 }
 
+// user reducer ====================================
+export const quantityReducer = (quantity, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_QUANTITY:
+            return action.payload;
+        default: 
+            return quantity;
+    }
+}
+
 // rating hover reducer==========================================
 export const ratingHoverReducer = (ratingHover, action) => {
     switch(action.type){
@@ -216,6 +240,7 @@ const combineReducers = reducers => {
 // export all reducers ===================================
 export const rootReducer = combineReducers({
     shoppingCart: shoppingCartReducer,
+    basketItems: basketItemsReducer,
     product: productReducer,
     searchValue: searchValueReducer,
     randomProducts: randomProductsReducer,
@@ -225,5 +250,6 @@ export const rootReducer = combineReducers({
     ratingHover: ratingHoverReducer,
     reviewInfo: reviewInfoReducer,
     isLoggedIn: isLoggedInReducer,
-    user: userReducer
+    user: userReducer,
+    quantity: quantityReducer
 })
