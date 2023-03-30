@@ -4,7 +4,6 @@ export const initialState = {
     shoppingCart : [],
     basketItems:[],
     product: {},
-    isSubmitReviewForm: false,
     searchValue: "",
     randomProducts: [],
     priceValue: 1000,
@@ -24,14 +23,17 @@ export const initialState = {
     },
     isLoggedIn: false,
     user: null,
-    quantity: 0
+    quantity: 0,
+    isFiltered: false,
+    isSearched: false,
+    isSorted: false
 }
 
 export const StoreContext = createContext();
 
 export class StoreActions {
     static UPDATE_SHOPPINGCART = 'updateShoppingCart';
-    static BASKETITEMS = 'baketItems';
+    static UPDATE_BASKETITEMS = 'updateBaketItems';
     static UPDATE_PRODUCT = 'updateProduct';
     static REMOVEITEM_FROMBASKET = 'removeItemFromBasket';
     static ADDMOREITEM_TOBASKET = 'addMoreItemToBasket';
@@ -52,6 +54,7 @@ export class StoreActions {
     static UPDATE_ISLOGGEDIN = 'isLoggedIn';
     static UPDATE_USER = 'updateUser';
     static UPDATE_QUANTITY = 'updateQuantity';
+    static IS_FILTERED = 'isFiltered';
 }
 
 // shopping cart reducer======================================
@@ -84,7 +87,7 @@ export const shoppingCartReducer = (shoppingCart, action) =>{
 // basket items reducer======================================
 export const basketItemsReducer = (basketItems, action) =>{
     switch(action.type){
-      case StoreActions.BASKETITEMS:
+      case StoreActions.UPDATE_BASKETITEMS:
           return action.payload;
       default: 
           return basketItems;
@@ -195,7 +198,7 @@ export const userReducer = (isLoggedIn, action) => {
     }
 }
 
-// user reducer ====================================
+// quantity reducer ====================================
 export const quantityReducer = (quantity, action) => {
     switch(action.type){
         case StoreActions.UPDATE_QUANTITY:
@@ -226,6 +229,36 @@ export const reviewInfoReducer = (reviewInfo, action) => {
     }
 }
 
+// is items filtered reducer==========================================
+export const isFilteredReducer = (isFiltered, action) => {
+    switch(action.type){
+        case StoreActions.IS_FILTERED:
+            return action.payload;
+        default:
+            return isFiltered;
+    }
+}
+
+// is sorted reducer==========================================
+export const isSortedReducer = (isSorted, action) => {
+    switch(action.type){
+        case StoreActions.IS_FILTERED:
+            return action.payload;
+        default:
+            return isSorted;
+    }
+}
+
+// is Searched reducer==========================================
+export const isSearchedReducer = (isSearched, action) => {
+    switch(action.type){
+        case StoreActions.IS_FILTERED:
+            return action.payload;
+        default:
+            return isSearched;
+    }
+}
+
 //  combine reducers======================================
 const combineReducers = reducers => {
     return (state = {}, action) => {
@@ -251,5 +284,6 @@ export const rootReducer = combineReducers({
     reviewInfo: reviewInfoReducer,
     isLoggedIn: isLoggedInReducer,
     user: userReducer,
-    quantity: quantityReducer
+    quantity: quantityReducer,
+    isFiltered: isFilteredReducer
 })
