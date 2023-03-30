@@ -26,49 +26,59 @@ const Shop = () => {
 			);
 		});
 
-		store.dispatch({type: StoreActions.UPDATE_RANDOMPRODUCTS, payload: filteredArr});
+		store.dispatch({
+			type: StoreActions.UPDATE_RANDOMPRODUCTS,
+			payload: filteredArr,
+		});
 	};
 
 	// submit Search Handler ================================================
 	const submitSearchHandler = (e) => {
 		e.preventDefault();
-		const filteredData = products.filter((el) => {
-			return el.category === store.state.searchValue || el.title === store.state.searchValue
-		});
 
-		store.dispatch({ type: StoreActions.UPDATE_RANDOMPRODUCTS, payload: filteredData });
-		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload:"" });
+		const filteredData = products.filter((el) => {
+			return (
+				el.category === store.state.searchValue ||
+				el.title === store.state.searchValue
+			);
+		});
+		console.log("filteredData", filteredData);
+		store.dispatch({
+			type: StoreActions.UPDATE_RANDOMPRODUCTS,
+			payload: filteredData,
+		});
+		console.log("random", store.state.randomProducts);
+		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload: "" });
 	};
 
 	// use effect for fetching products and displaying on screen==================
 	useEffect(() => {
 		const fetchProducts = async () => {
-			try{
+			try {
 				const res = await fetch("http://localhost:5000/products/");
 				const products = await res.json();
 				setProducts(products.data);
-			}catch(error){
+			} catch (error) {
 				console.error("error", error);
 			}
-			
 		};
 		fetchProducts();
-		
 	}, []);
 
 	return (
 		<div className="shop-section">
-			<SearchShop submitSearchHandler={ submitSearchHandler }/>
+			<SearchShop submitSearchHandler={submitSearchHandler} />
 
 			<section className="container">
 				<div className="filter-container">
-					<FilterProducts submitFilterFormHandler={ submitFilterFormHandler }/>
+					<FilterProducts submitFilterFormHandler={submitFilterFormHandler} />
 				</div>
 
 				<div className="product-container">
-					{ products && products.map((item, index) => {
-						return <Product key={ index } item={ item } />;
-					})}
+					{products &&
+						products.map((item, index) => {
+							return <Product key={index} item={item} />;
+						})}
 				</div>
 			</section>
 		</div>

@@ -2,8 +2,8 @@ import { createContext } from "react";
 
 export const initialState = {
     shoppingCart : [],
+    basketItems:[],
     product: {},
-    isSubmitReviewForm: false,
     searchValue: "",
     randomProducts: [],
     priceValue: 1000,
@@ -21,13 +21,19 @@ export const initialState = {
 	    feedback: "",
 	    date: ""
     },
-    isLoggedIn: false
+    isLoggedIn: false,
+    user: null,
+    quantity: 0,
+    isFiltered: false,
+    isSearched: false,
+    isSorted: false
 }
 
 export const StoreContext = createContext();
 
 export class StoreActions {
     static UPDATE_SHOPPINGCART = 'updateShoppingCart';
+    static UPDATE_BASKETITEMS = 'updateBaketItems';
     static UPDATE_PRODUCT = 'updateProduct';
     static REMOVEITEM_FROMBASKET = 'removeItemFromBasket';
     static ADDMOREITEM_TOBASKET = 'addMoreItemToBasket';
@@ -46,13 +52,16 @@ export class StoreActions {
     static ADD_HOVER = 'addHover';
     static UPDATE_REVIEWINFO = 'updateReviewInfo';
     static UPDATE_ISLOGGEDIN = 'isLoggedIn';
+    static UPDATE_USER = 'updateUser';
+    static UPDATE_QUANTITY = 'updateQuantity';
+    static IS_FILTERED = 'isFiltered';
 }
 
 // shopping cart reducer======================================
 export const shoppingCartReducer = (shoppingCart, action) =>{
   switch(action.type){
     case StoreActions.SHOPPINGCARD:
-        return action.payload;
+        return [...shoppingCart, action.payload];
 
     case StoreActions.UPDATE_SHOPPINGCART:
         return shoppingCart.map((el) => {
@@ -67,13 +76,23 @@ export const shoppingCartReducer = (shoppingCart, action) =>{
         });
 
     case StoreActions.FILTER_SHOPPINGCART:
-        return shoppingCart.filter((el) => el.id !== action.payload.id);
+        return shoppingCart.filter((el) => el._id !== action.payload._id);
         
     default: 
         return shoppingCart;
   }
 }
 
+
+// basket items reducer======================================
+export const basketItemsReducer = (basketItems, action) =>{
+    switch(action.type){
+      case StoreActions.UPDATE_BASKETITEMS:
+          return action.payload;
+      default: 
+          return basketItems;
+    }
+  }
 // product reducer========================================
 export const productReducer = (product, action) => {
     switch(action.type){
@@ -108,7 +127,7 @@ export const randomProductsReducer = (randomProducts, action) => {
             return action.payload.sort((a, b) => a.price - b.price);
         
         case StoreActions.SHOW_RANDOMPRODUCTS:
-            return action.payload.data.filter(item => action.payload.productArrId.includes(item.id));
+            return action.payload.data.filter(item => action.payload.productArrId.includes(item._id));
 			
         default: 
             return randomProducts;
@@ -169,6 +188,26 @@ export const isLoggedInReducer = (isLoggedIn, action) => {
     }
 }
 
+// user reducer ====================================
+export const userReducer = (isLoggedIn, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_USER:
+            return action.payload;
+        default: 
+            return isLoggedIn;
+    }
+}
+
+// quantity reducer ====================================
+export const quantityReducer = (quantity, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_QUANTITY:
+            return action.payload;
+        default: 
+            return quantity;
+    }
+}
+
 // rating hover reducer==========================================
 export const ratingHoverReducer = (ratingHover, action) => {
     switch(action.type){
@@ -190,6 +229,36 @@ export const reviewInfoReducer = (reviewInfo, action) => {
     }
 }
 
+// is items filtered reducer==========================================
+export const isFilteredReducer = (isFiltered, action) => {
+    switch(action.type){
+        case StoreActions.IS_FILTERED:
+            return action.payload;
+        default:
+            return isFiltered;
+    }
+}
+
+// is sorted reducer==========================================
+export const isSortedReducer = (isSorted, action) => {
+    switch(action.type){
+        case StoreActions.IS_FILTERED:
+            return action.payload;
+        default:
+            return isSorted;
+    }
+}
+
+// is Searched reducer==========================================
+export const isSearchedReducer = (isSearched, action) => {
+    switch(action.type){
+        case StoreActions.IS_FILTERED:
+            return action.payload;
+        default:
+            return isSearched;
+    }
+}
+
 //  combine reducers======================================
 const combineReducers = reducers => {
     return (state = {}, action) => {
@@ -204,6 +273,7 @@ const combineReducers = reducers => {
 // export all reducers ===================================
 export const rootReducer = combineReducers({
     shoppingCart: shoppingCartReducer,
+    basketItems: basketItemsReducer,
     product: productReducer,
     searchValue: searchValueReducer,
     randomProducts: randomProductsReducer,
@@ -212,5 +282,8 @@ export const rootReducer = combineReducers({
     rating: ratingReducer,
     ratingHover: ratingHoverReducer,
     reviewInfo: reviewInfoReducer,
-    isLoggedIn: isLoggedInReducer
+    isLoggedIn: isLoggedInReducer,
+    user: userReducer,
+    quantity: quantityReducer,
+    isFiltered: isFilteredReducer
 })

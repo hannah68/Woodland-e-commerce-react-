@@ -9,7 +9,6 @@ import DummyReview from "../components/DummyReview";
 import ProductDetails from "../components/ProductDetails";
 import { StoreActions, StoreContext } from "../store";
 
-
 const ProductInfos = () => {
 	const store = useContext(StoreContext);
 
@@ -17,13 +16,14 @@ const ProductInfos = () => {
 	const [isReview, setIsReview] = useState(false);
 
 	const location = useLocation();
-
+	
 	// use effect for accessing data from location=======================
 	useEffect(() => {
 		if (location.state) {
 			const { item } = location.state;
 			store.dispatch({type: StoreActions.UPDATE_PRODUCT, payload: item})
 		}
+		// eslint-disable-next-line
 	}, [location]);
 
 	

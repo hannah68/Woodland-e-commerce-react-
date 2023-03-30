@@ -12,12 +12,14 @@ const TotalCart = () => {
 
 	// update total============================================
 	useEffect(() => {
-		if (store.state.shoppingCart.length >= 1) {
-			const priceQty = store.state.shoppingCart.map((el) => el.price * Number(el.quantity));
+		if (store.state.basketItems.length >= 1) {
+			const priceQty = store.state.basketItems.map(el => {
+				return Number(el.productId.price) * Number(el.quantity)
+			});
 			const total = priceQty.reduce((acc, curr) => acc + curr).toFixed(2);
 			setTotal(total);
 		}
-	}, [store.state.shoppingCart]);
+	}, [store.state.basketItems]);
 
 	return (
 		<>
@@ -43,7 +45,7 @@ const TotalCart = () => {
 					<p className="delivery-price">£39</p>
 				</div>
 				<div className="total-section">
-					<p>{`Subtotal (${store.state.shoppingCart.length} item)`}</p>
+					<p>{`Subtotal (${store.state.basketItems.length} item)`}</p>
 					<p>£{total}</p>
 				</div>
 			</div>

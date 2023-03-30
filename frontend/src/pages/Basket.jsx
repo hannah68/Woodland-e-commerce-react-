@@ -1,34 +1,56 @@
-import { useEffect } from "react";
-
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 
 import "../styles/Basket.css";
-import { StoreContext, StoreActions } from "../store";
-import { APIEndPoints } from "../utils/config";
 
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
 
+import { LOCAL_STORAGE } from "../utils/config";
+import { StoreContext, StoreActions } from "../store";
+
 const Basket = () => {
 	const store = useContext(StoreContext);
 
-	// get data from basket (json server)=====================
+	// get data from db=====================
 	useEffect(() => {
-		const getBasketData = async () => {
-			const res = await fetch(APIEndPoints.basket);
-			const data = await res.json();
-			store.dispatch({ type: StoreActions.SHOPPINGCARD, payload: data });
-		};
-		getBasketData();
+		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+
+		if (userId) {
+			const getBasketData = async () => {
+				try {
+					const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+					const res = await fetch(`http://localhost:5000/basket/${userId}`, {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+						},
+					});
+					const resData = await res.json();
+					
+					if (resData && resData.data && resData.data.items) {
+						store.dispatch({ 
+							type: StoreActions.UPDATE_BASKETITEMS, 
+							payload: resData.data.items 
+						});
+					} else {
+						console.log("Data not found");
+					}
+				} catch (err) {  console.log(err); }
+				
+			};
+			getBasketData();
+		}
+		// eslint-disable-next-line
 	}, []);
 
 	return (
 		<div className="shopping-cart">
 			<h1>
-				Shopping Cart <span>: {store.state.shoppingCart.length} items</span>
+				Shopping Cart <span>: {store.state.basketItems.length} items</span>
 			</h1>
-			{store.state.shoppingCart.length < 1 ? (
+			{store.state.basketItems.length < 1 ? (
 				<EmptyBasket />
 			) : (
 				<>
@@ -40,17 +62,15 @@ const Basket = () => {
 							<p className="header">Total</p>
 						</div>
 						<div className="cart">
-							{store.state.shoppingCart.map((item, index) => {
-								return (
-									<CartItem
-										key={index}
-										item={item}
-									/>
-								);
+							{store.state.basketItems.map((item, index) => {
+								return <CartItem 
+									key={index} 
+									item={item} 
+								/>;
 							})}
 						</div>
 					</div>
-					<TotalCart/>
+					<TotalCart />
 				</>
 			)}
 		</div>

@@ -18,32 +18,44 @@ const Register = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-	  if(submit){
-		const postUserInfoToDB = async() => {
-			const useRes = await fetch("http://localhost:5000/user/register", {
-				method: "POST",
-				headers: {"Content-Type": "application/json"},
-				body: JSON.stringify(userInfo)
-			});
-			const userData = await useRes.json();
+		const postUserInfoToDB = async () => {
+			try {
+				const userRes = await fetch("http://localhost:5000/user/register", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(userInfo),
+				});
+				const userData = await userRes.json();
 
-			localStorage.setItem("token", userData.token);
-			if(userData.data){
-				localStorage.setItem("userId", userData.data.id.toString());
-				navigate()
+				if (userRes.ok) {
+					localStorage.setItem("token", userData.token);
+
+					if (userData.data) {
+						localStorage.setItem("userId", userData.data.id.toString());
+					}
+				}
+			} catch (err) {
+				console.log("An error occurred while registering in user: ", err);
 			}
+		};
+		if (submit) {
+			postUserInfoToDB();
+			navigate(PAGE_LINK.login, { replace: true });
 		}
-		postUserInfoToDB()
-	  }
-	  setSubmit(false);
-	}, [submit, userInfo, navigate])
-	
+		return () => {
+			// Cancel any outstanding asynchronous tasks or subscriptions here
+		}
 
+		// setSubmit(false);
+	}, [submit, userInfo, navigate]);
+
+	// submit register form handler
 	const submitRegisterFormHandler = (e) => {
 		e.preventDefault();
 		setSubmit(true);
 	};
 
+	// change register form handler
 	const changeHandler = (e) => {
 		const { name, value } = e.target;
 		setUserInfo({ ...userInfo, [name]: value });
@@ -109,13 +121,13 @@ const Register = () => {
 						</span>
 					</div>
 					<button type="submit" className="register-button">
-						Register
+						REGISTER
 					</button>
 
 					<div className="login-container">
 						<p className="signin-text">Already have an account?</p>
 						<Link to={PAGE_LINK.login} className="signin-btn">
-							Signin
+						SIGN IN
 						</Link>
 					</div>
 				</form>

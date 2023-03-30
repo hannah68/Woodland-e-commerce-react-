@@ -7,7 +7,6 @@ export const seedProducts = [
 		category: "Bed",
 		img: "./assets/images/bed5.jpg",
 		price: 590,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -18,7 +17,6 @@ export const seedProducts = [
 		category: "Bed",
 		img: "./assets/images/bed3.jpg",
 		price: 550,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -29,7 +27,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/sofa2.jpg",
 		price: 480,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -40,7 +37,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/sofa6.jpg",
 		price: 499,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -51,7 +47,6 @@ export const seedProducts = [
 		category: "Bed",
 		img: "./assets/images/bed1.jpg",
 		price: 189,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -62,7 +57,6 @@ export const seedProducts = [
 		category: "Bed",
 		img: "./assets/images/bed2.jpg",
 		price: 299,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -73,7 +67,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/sofa1.jpg",
 		price: 399,
-		quantity: 0,
 		feature: true,
 	},
 	{
@@ -84,7 +77,6 @@ export const seedProducts = [
 		category: "Bed",
 		img: "./assets/images/bed4.jpg",
 		price: 590,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -95,7 +87,6 @@ export const seedProducts = [
 		category: "Chair",
 		img: "./assets/images/chair6.jpg",
 		price: 79,
-		quantity: 0,
 		feature: true,
 	},
 	{
@@ -106,7 +97,6 @@ export const seedProducts = [
 		category: "Bed",
 		img: "./assets/images/bed6.jpg",
 		price: 390,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -117,7 +107,6 @@ export const seedProducts = [
 		category: "Bed",
 		img: "./assets/images/bed7.jpg",
 		price: 590,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -128,7 +117,6 @@ export const seedProducts = [
 		category: "Chair",
 		img: "./assets/images/chair1.jpg",
 		price: 150,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -139,7 +127,6 @@ export const seedProducts = [
 		category: "Chair",
 		img: "./assets/images/chair2.jpg",
 		price: 250,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -150,7 +137,6 @@ export const seedProducts = [
 		category: "Chair",
 		img: "./assets/images/chair3.jpg",
 		price: 180,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -161,7 +147,6 @@ export const seedProducts = [
 		category: "Chair",
 		img: "./assets/images/chair4.jpg",
 		price: 120,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -172,7 +157,6 @@ export const seedProducts = [
 		category: "Chair",
 		img: "./assets/images/chair5.jpg",
 		price: 280,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -183,7 +167,6 @@ export const seedProducts = [
 		category: "Chair",
 		img: "./assets/images/chair.jpg",
 		price: 169,
-		quantity: 0,
 		feature: true,
 	},
 	{
@@ -194,7 +177,6 @@ export const seedProducts = [
 		category: "Lamp",
 		img: "./assets/images/lamp.jpg",
 		price: 59,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -205,7 +187,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/sofa4.jpg",
 		price: 519,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -216,7 +197,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/sofa5.jpg",
 		price: 389,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -227,7 +207,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/sofa3.jpg",
 		price: 499,
-		quantity: 0,
 		feature: true,
 	},
 	{
@@ -238,7 +217,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/sofa7.jpg",
 		price: 499,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -249,7 +227,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/table1.jpg",
 		price: 399,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -260,7 +237,6 @@ export const seedProducts = [
 		category: "Table",
 		img: "./assets/images/table2.jpg",
 		price: 199,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -271,7 +247,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/table3.jpg",
 		price: 390,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -282,7 +257,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/table4.jpg",
 		price: 390,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -293,7 +267,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/table5.jpg",
 		price: 490,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -304,7 +277,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/table6.jpg",
 		price: 290,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -315,7 +287,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/g.jpg",
 		price: 590,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -326,7 +297,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/g1.jpg",
 		price: 419,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -337,7 +307,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/g2.jpg",
 		price: 490,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -348,7 +317,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/g3.jpg",
 		price: 590,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -359,7 +327,6 @@ export const seedProducts = [
 		category: "Sofa",
 		img: "./assets/images/g4.jpg",
 		price: 690,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -370,7 +337,6 @@ export const seedProducts = [
 		category: "Lamp",
 		img: "./assets/images/bed3.jpg",
 		price: 28,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -381,7 +347,6 @@ export const seedProducts = [
 		category: "Lamp",
 		img: "./assets/images/bed7.jpg",
 		price: 50,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -392,7 +357,6 @@ export const seedProducts = [
 		category: "Table",
 		img: "./assets/images/sofa5.jpg",
 		price: 189,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -403,7 +367,6 @@ export const seedProducts = [
 		category: "Lamp",
 		img: "./assets/images/sofa6.jpg",
 		price: 99,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -414,7 +377,6 @@ export const seedProducts = [
 		category: "Table",
 		img: "./assets/images/sofa7.jpg",
 		price: 150,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -425,7 +387,6 @@ export const seedProducts = [
 		category: "Table",
 		img: "./assets/images/table1.jpg",
 		price: 200,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -436,7 +397,6 @@ export const seedProducts = [
 		category: "Table",
 		img: "./assets/images/table3.jpg",
 		price: 199,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -447,7 +407,6 @@ export const seedProducts = [
 		category: "Table",
 		img: "./assets/images/table4.jpg",
 		price: 129,
-		quantity: 0,
 		feature: false,
 	},
 	{
@@ -458,7 +417,6 @@ export const seedProducts = [
 		category: "Table",
 		img: "./assets/images/table5.jpg",
 		price: 129,
-		quantity: 0,
 		feature: false,
 	},
 ];

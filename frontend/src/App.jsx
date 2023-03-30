@@ -28,15 +28,9 @@ const App = () => {
 				<Routes>
 					<Route path={PAGE_LINK.home} element={<Home />} />
 					<Route path={PAGE_LINK.shop} element={<Shop />} />
-					<Route
-						path={PAGE_LINK.login}
-						element={<Login />}
-					/>
-					<Route
-						path={PAGE_LINK.register}
-						element={<Register/>}
-					/>
-					<Route path={`${PAGE_LINK.shop}/:id`} element={<ProductInfos />} />
+					<Route path={PAGE_LINK.login} element={<Login />}/>
+					<Route path={PAGE_LINK.register} element={<Register />}/>
+					<Route path={`${PAGE_LINK.shop}/:id`} element={<ProductInfos />}/>
 					<Route path={PAGE_LINK.contact} element={<Contact />} />
 					<Route path={PAGE_LINK.basket} element={<Basket />} />
 				</Routes>

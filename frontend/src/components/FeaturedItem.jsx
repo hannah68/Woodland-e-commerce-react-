@@ -7,7 +7,6 @@ import { randomStar, starIcons } from "../utils/utils";
 import { PAGE_LINK } from "../utils/config";
 
 const FeaturedItem = ({ item }) => {
-
 	return (
 		<div className="features-item">
 			<img src={item.img} alt={item.category} />
@@ -22,7 +21,7 @@ const FeaturedItem = ({ item }) => {
 					</div>
 					<p>£{item.price}</p>
 				</div>
-				<Link to={`${PAGE_LINK.shop}/${item.id}`} state={{ item }}>
+				<Link to={`${PAGE_LINK.shop}/${item._id}`} state={{ item }}>
 					<button className="sub-img__btn">more details</button>
 				</Link>
 			</div>
