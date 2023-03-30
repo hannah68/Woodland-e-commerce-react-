@@ -13,8 +13,6 @@ import "../styles/Header.css";
 const Header = () => {
 	const store = useContext(StoreContext);
 
-	const className =
-		store.state.basketItems.length === 0 ? "basket-num hide" : "basket-num";
 
 	// format username================================
 	const formatUserName = (user) => {
@@ -73,9 +71,10 @@ const Header = () => {
 							</span>
 
 							<Link to={ PAGE_LINK.basket }>
-								<div className={ className }>
+								{store.state.basketItems.length > 0 && (
+								<div className="basket-num">
 									{ store.state.basketItems.length }
-								</div>
+								</div>)}
 								<span className="basket">
 									<FaShoppingCart />
 								</span>

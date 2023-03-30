@@ -30,14 +30,20 @@ const CartItem = ({ item }) => {
 			const updatedItems = store.state.basketItems.filter((item) =>
 				item.productId._id !== productId 
 			);
-			store.dispatch({ type: StoreActions.BASKETITEMS, payload: updatedItems });
+			store.dispatch({ 
+				type: StoreActions.UPDATE_BASKETITEMS, 
+				payload: updatedItems 
+			});
 
 		}else{
 			// update the quantity of the item in the state
 			const updatedItems = store.state.basketItems.map((item) =>
 				item.productId._id === productId ? { ...item, quantity } : item
 			);
-			store.dispatch({ type: StoreActions.BASKETITEMS, payload: updatedItems });
+			store.dispatch({ 
+				type: StoreActions.UPDATE_BASKETITEMS, 
+				payload: updatedItems 
+			});
 		}
 	};
 

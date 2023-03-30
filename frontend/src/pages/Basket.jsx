@@ -1,49 +1,49 @@
-import { useEffect, useContext, useCallback } from "react";
-// import { useDispatch } from 'react-redux';
+import { useEffect, useContext } from "react";
 
 import "../styles/Basket.css";
-import { LOCAL_STORAGE } from "../utils/config";
 
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
+
+import { LOCAL_STORAGE } from "../utils/config";
 import { StoreContext, StoreActions } from "../store";
-// import { store } from '../store';
 
 const Basket = () => {
 	const store = useContext(StoreContext);
-	// const dispatch = useDispatch();
-
-	const getBasketData = useCallback(async () => {
-		try {
-			const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
-			const res = await fetch(`http://localhost:5000/basket/${userId}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
-				},
-			});
-			const resData = await res.json();
-			
-			if (resData && resData.data && resData.data.items) {
-				store.dispatch({ 
-					type: StoreActions.BASKETITEMS, payload: resData.data.items 
-				});
-			} else {
-				console.log("Data not found");
-			}
-		} catch (err) {  console.log(err); }
-	}, []);
 
 	// get data from db=====================
 	useEffect(() => {
 		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
 
 		if (userId) {
+			const getBasketData = async () => {
+				try {
+					const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+					const res = await fetch(`http://localhost:5000/basket/${userId}`, {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
+						},
+					});
+					const resData = await res.json();
+					
+					if (resData && resData.data && resData.data.items) {
+						store.dispatch({ 
+							type: StoreActions.UPDATE_BASKETITEMS, 
+							payload: resData.data.items 
+						});
+					} else {
+						console.log("Data not found");
+					}
+				} catch (err) {  console.log(err); }
+				
+			};
 			getBasketData();
 		}
-	}, [getBasketData]);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div className="shopping-cart">
