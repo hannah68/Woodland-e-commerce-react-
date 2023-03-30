@@ -7,6 +7,7 @@ import SearchShop from "../components/SearchShop";
 import "../styles/Shop.css";
 
 import { StoreActions, StoreContext } from "../store";
+import { LOCAL_STORAGE } from "../utils/config.js";
 
 const Shop = () => {
 	const store = useContext(StoreContext);
@@ -32,23 +33,25 @@ const Shop = () => {
 		});
 	};
 
+	const fetchFilteredProducts = async () => {
+		const searchValue = store.state.searchValue;
+		const res = await fetch(`http://localhost:5000/products/${searchValue}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		const resData = await res.json();
+		// update UI of shop page
+		setProducts(resData.data);
+		// reset the search value to empty string
+		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload: "" });
+	};
+
 	// submit Search Handler ================================================
 	const submitSearchHandler = (e) => {
 		e.preventDefault();
-
-		const filteredData = products.filter((el) => {
-			return (
-				el.category === store.state.searchValue ||
-				el.title === store.state.searchValue
-			);
-		});
-		console.log("filteredData", filteredData);
-		store.dispatch({
-			type: StoreActions.UPDATE_RANDOMPRODUCTS,
-			payload: filteredData,
-		});
-		console.log("random", store.state.randomProducts);
-		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload: "" });
+		fetchFilteredProducts();
 	};
 
 	// use effect for fetching products and displaying on screen==================
