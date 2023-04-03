@@ -7,33 +7,51 @@ import SearchShop from "../components/SearchShop";
 import "../styles/Shop.css";
 
 import { StoreActions, StoreContext } from "../store";
-import { LOCAL_STORAGE } from "../utils/config.js";
 
 const Shop = () => {
 	const store = useContext(StoreContext);
 	const [products, setProducts] = useState([]);
 
+	// fetch filtered products=================================================
+	const fetchFilteredProducts = async() => {
+		const data = store.state.filterData;
+		const price = store.state.priceValue;
+	
+		const colors = data.color.join(",");
+		const categories = data.category.join(",");
+		const collections = data.collection.join(",");
+		let url = "http://localhost:5000/products?";
+
+		if(data && price){
+			if(data.color.length >= 1){
+				url += `color=${colors}&`
+			}
+			if(data.category.length >= 1){
+				url += `category=${categories}&`
+			}
+			if(data.collection.length >= 1){
+				url += `collection=${collections}&`
+			}
+			if(price){
+				url += `price=${price}&`
+			}
+			// Remove the last "&" character from the URL
+			url = url.slice(0, -1);
+			
+			const res = await fetch(url);
+			const resData = await res.json();
+			setProducts(resData.data);
+		}
+	}
+
 	// submit Filter Form Handler ============================================
 	const submitFilterFormHandler = (e) => {
 		e.preventDefault();
-		const data = store.state.filterData;
-
-		const filteredArr = products.filter((el) => {
-			return (
-				data.collection.includes(el.collection) &&
-				data.color.includes(el.color) &&
-				data.category.includes(el.category) &&
-				el.price <= store.state.priceValue
-			);
-		});
-
-		store.dispatch({
-			type: StoreActions.UPDATE_RANDOMPRODUCTS,
-			payload: filteredArr,
-		});
+		fetchFilteredProducts();
 	};
 
-	const fetchFilteredProducts = async () => {
+	// fetch searched products=================================================
+	const fetchSearchedProducts = async () => {
 		const searchValue = store.state.searchValue;
 		const res = await fetch(`http://localhost:5000/products/${searchValue}`, {
 			method: "GET",
@@ -51,20 +69,32 @@ const Shop = () => {
 	// submit Search Handler ================================================
 	const submitSearchHandler = (e) => {
 		e.preventDefault();
-		fetchFilteredProducts();
+		fetchSearchedProducts();
+	};
+
+	// clear All Filters Handler================================================
+	const clearAllFilterHandler = async() => {
+		store.dispatch({
+			type: StoreActions.UPDATE_FILTERDATA, 
+			payload: { collection: [], category: [], color: [] }
+		});
+		store.dispatch({ type: StoreActions.UPDATE_PRICEVALUE, payload: 1000 });
+		await fetchProducts();
+	};
+
+	// fetch random products=====================================================
+	const fetchProducts = async () => {
+		try {
+			const res = await fetch("http://localhost:5000/products/");
+			const products = await res.json();
+			setProducts(products.data);
+		} catch (error) {
+			console.error("error", error);
+		}
 	};
 
 	// use effect for fetching products and displaying on screen==================
 	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const res = await fetch("http://localhost:5000/products/");
-				const products = await res.json();
-				setProducts(products.data);
-			} catch (error) {
-				console.error("error", error);
-			}
-		};
 		fetchProducts();
 	}, []);
 
@@ -74,7 +104,10 @@ const Shop = () => {
 
 			<section className="container">
 				<div className="filter-container">
-					<FilterProducts submitFilterFormHandler={submitFilterFormHandler} />
+					<FilterProducts 
+						submitFilterFormHandler={submitFilterFormHandler} 
+						clearAllFilterHandler={clearAllFilterHandler}
+					/>
 				</div>
 
 				<div className="product-container">

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 import "../styles/Shop.css";
@@ -7,24 +7,12 @@ import FilterCollectionMenu from "./FilterCollectionMenu";
 import FilterColorMenu from "./FilterColorMenu";
 import FilterCategoryMenu from "./FilterCategoryMenu";
 import FilterPrice from "./FilterPrice";
-import { StoreContext, StoreActions } from "../store";
 
-const FilterProducts = ({ submitFilterFormHandler }) => {
-	const store = useContext(StoreContext);		
+const FilterProducts = ({ submitFilterFormHandler, clearAllFilterHandler }) => {
 
 	const [collectionMenuOpen, setCollectionMenuOpen] = useState(false);
 	const [colorMenuOpen, setColorMenuOpen] = useState(false);
 	const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
-
-	// clear All Filters Handler================================================
-	const clearAllFilterHandler = () => {
-		store.dispatch({
-			type: StoreActions.UPDATE_FILTERDATA, 
-			payload: { collection: [], category: [], color: [] }
-		});
-		store.dispatch({ type: StoreActions.UPDATE_PRICEVALUE, payload: 1000 })
-		window.location.reload();
-	};
 
 	return (
 		<>
