@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { StoreContext, StoreActions } from "../store";
 import { starIcons, randomStar } from "../utils/utils";
-import { LOCAL_STORAGE } from "../utils/config.js";
+import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
 
 import "../styles/Basket.css";
 
@@ -12,7 +12,7 @@ const CartItem = ({ item }) => {
 
 	const updateBasketData = async (quantity, productId) => {
 		
-		await fetch(`http://localhost:5000/basket/${productId}`, {
+		await fetch(`${APIEndPoints.BASKET}${productId}`, {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",

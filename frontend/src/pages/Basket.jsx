@@ -6,7 +6,7 @@ import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
 
-import { LOCAL_STORAGE } from "../utils/config";
+import { LOCAL_STORAGE, APIEndPoints } from "../utils/config";
 import { StoreContext, StoreActions } from "../store";
 
 const Basket = () => {
@@ -20,7 +20,7 @@ const Basket = () => {
 			const getBasketData = async () => {
 				try {
 					const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
-					const res = await fetch(`http://localhost:5000/basket/${userId}`, {
+					const res = await fetch(`${APIEndPoints.BASKET}${userId}`, {
 						method: "GET",
 						headers: {
 							"Content-Type": "application/json",

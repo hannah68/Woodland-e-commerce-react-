@@ -33,26 +33,26 @@ const Header = () => {
 			<nav className="navbar-container">
 				<div className="navbar">
 					<div className="navbar__logo">
-						<Link to={PAGE_LINK.home}>
+						<Link to={PAGE_LINK.HOME}>
 							<img src="../assets/images/logo.svg" alt="logo" />
 						</Link>
 					</div>
 
 					<ul className="navbar__lists">
 						<li className="navbar__lists--item">
-							<Link to={PAGE_LINK.home}>Home</Link>
+							<Link to={PAGE_LINK.HOME}>Home</Link>
 						</li>
 						<li className="navbar__lists--item">
-							<Link to={PAGE_LINK.shop}>Shop</Link>
+							<Link to={PAGE_LINK.SHOP}>Shop</Link>
 						</li>
 						<li className="navbar__lists--item">
-							<Link to={PAGE_LINK.contact}>Contact Us</Link>
+							<Link to={PAGE_LINK.CONTACT}>Contact Us</Link>
 						</li>
 					</ul>
 
 					{!store.state.isLoggedIn && (
 						<div className="navbar__icon">
-							<Link to={ PAGE_LINK.login }>
+							<Link to={ PAGE_LINK.LOGIN }>
 								<span className="login-icon">
 									<BsFillPersonFill />
 								</span>
@@ -67,10 +67,10 @@ const Header = () => {
 							</span>
 
 							<span onClick={ handleClick }>
-								<Link to={ PAGE_LINK.home }>Sign Out</Link>
+								<Link to={ PAGE_LINK.HOME }>Sign Out</Link>
 							</span>
 
-							<Link to={ PAGE_LINK.basket }>
+							<Link to={ PAGE_LINK.BASKET }>
 								{store.state.basketItems.length > 0 && (
 								<div className="basket-num">
 									{ store.state.basketItems.length }

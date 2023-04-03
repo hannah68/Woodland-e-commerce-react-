@@ -15,17 +15,17 @@ const Footer = () => {
 
 				<ul className="footer__lists">
 					<li className="footer__lists--item">
-						<Link to={PAGE_LINK.home} className="disabled-link">
+						<Link to={PAGE_LINK.HOME} className="disabled-link">
 							Information
 						</Link>
 					</li>
 					<li className="footer__lists--item">
-						<Link to={PAGE_LINK.home}className="disabled-link">
+						<Link to={PAGE_LINK.HOME}className="disabled-link">
 							Customer service
 						</Link>
 					</li>
 					<li className="footer__lists--item">
-						<Link to={PAGE_LINK.contact}>Contact</Link>
+						<Link to={PAGE_LINK.CONTACT}>Contact</Link>
 					</li>
 				</ul>
 

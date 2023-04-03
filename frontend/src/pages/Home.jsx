@@ -14,7 +14,7 @@ const Home = () => {
 	useEffect(() => {
 		try {
 		  const fetchFeaturedItems = async () => {
-			const res = await fetch(APIEndPoints.home);
+			const res = await fetch(APIEndPoints.HOME);
 			const featuredData = await res.json();
 			setFeaturedItems(featuredData.data);
 		  };

@@ -26,13 +26,13 @@ const App = () => {
 			<Header />
 			<main>
 				<Routes>
-					<Route path={PAGE_LINK.home} element={<Home />} />
-					<Route path={PAGE_LINK.shop} element={<Shop />} />
-					<Route path={PAGE_LINK.login} element={<Login />}/>
-					<Route path={PAGE_LINK.register} element={<Register />}/>
-					<Route path={`${PAGE_LINK.shop}/:id`} element={<ProductInfos />}/>
-					<Route path={PAGE_LINK.contact} element={<Contact />} />
-					<Route path={PAGE_LINK.basket} element={<Basket />} />
+					<Route path={PAGE_LINK.HOME} element={<Home />} />
+					<Route path={PAGE_LINK.SHOP} element={<Shop />} />
+					<Route path={PAGE_LINK.LOGIN} element={<Login />}/>
+					<Route path={PAGE_LINK.REGISTER} element={<Register />}/>
+					<Route path={`${PAGE_LINK.SHOP}/:id`} element={<ProductInfos />}/>
+					<Route path={PAGE_LINK.CONTACT} element={<Contact />} />
+					<Route path={PAGE_LINK.BASKET} element={<Basket />} />
 				</Routes>
 			</main>
 			<Footer />

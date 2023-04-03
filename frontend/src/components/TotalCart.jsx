@@ -51,7 +51,7 @@ const TotalCart = () => {
 			</div>
 			<Link 
 				className="checkout-btn" 
-				to={!store.state.isLoggedIn ? PAGE_LINK.register : ''}>
+				to={!store.state.isLoggedIn ? PAGE_LINK.REGISTER : ''}>
 				Go to checkout
 			</Link>
 			

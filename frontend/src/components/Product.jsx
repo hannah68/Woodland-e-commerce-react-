@@ -23,7 +23,7 @@ const Product = ({ item }) => {
 			</div>
 			<Link
 				className="product__btn"
-				to={`${PAGE_LINK.shop}/${item._id}`}
+				to={`${PAGE_LINK.SHOP}/${item._id}`}
 				state={{ item }}
 			>
 				More details

@@ -4,7 +4,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
-import { PAGE_LINK } from "../utils/config.js";
+import { PAGE_LINK, APIEndPoints } from "../utils/config.js";
 
 import "../styles/Register.css";
 
@@ -20,7 +20,7 @@ const Register = () => {
 	useEffect(() => {
 		const postUserInfoToDB = async () => {
 			try {
-				const userRes = await fetch("http://localhost:5000/user/register", {
+				const userRes = await fetch(`${APIEndPoints.REGISTER}`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(userInfo),
@@ -40,13 +40,12 @@ const Register = () => {
 		};
 		if (submit) {
 			postUserInfoToDB();
-			navigate(PAGE_LINK.login, { replace: true });
+			navigate(PAGE_LINK.LOGIN, { replace: true });
 		}
 		return () => {
 			// Cancel any outstanding asynchronous tasks or subscriptions here
 		}
 
-		// setSubmit(false);
 	}, [submit, userInfo, navigate]);
 
 	// submit register form handler
@@ -126,7 +125,7 @@ const Register = () => {
 
 					<div className="login-container">
 						<p className="signin-text">Already have an account?</p>
-						<Link to={PAGE_LINK.login} className="signin-btn">
+						<Link to={PAGE_LINK.LOGIN} className="signin-btn">
 						SIGN IN
 						</Link>
 					</div>

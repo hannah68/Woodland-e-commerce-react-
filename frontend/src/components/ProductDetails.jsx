@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 
 import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
-import { LOCAL_STORAGE } from "../utils/config.js";
+import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
 
 import { StoreContext, StoreActions } from "../store";
 import { randomStar, starIcons, randomReviewNum } from "../utils/utils";
@@ -19,7 +19,7 @@ const ProductDetails = () => {
 		if (submit && userId) {
 			// trigger the POST request
 			const postBasketData = async () => {
-				await fetch("http://localhost:5000/basket/", {
+				await fetch(`${APIEndPoints.BASKET}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
