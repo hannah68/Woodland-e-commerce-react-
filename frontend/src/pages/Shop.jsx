@@ -80,6 +80,9 @@ const Shop = () => {
 		});
 		store.dispatch({ type: StoreActions.UPDATE_PRICEVALUE, payload: 1000 });
 		await fetchProducts();
+		store.dispatch({ type: StoreActions.UPDATE_COLLECTIOMENU_OPEN, payload: false });
+		store.dispatch({ type: StoreActions.UPDATE_COLORMENU_OPEN, payload: false });
+		store.dispatch({ type: StoreActions.UPDATE_CATEGORYMENU_OPEN, payload: false });
 	};
 
 	// fetch random products=====================================================
@@ -100,7 +103,11 @@ const Shop = () => {
 
 	return (
 		<div className="shop-section">
-			<SearchShop submitSearchHandler={submitSearchHandler} />
+			<SearchShop 
+				submitSearchHandler={submitSearchHandler}
+				setProducts={setProducts}
+				products={products}
+			/>
 
 			<section className="container">
 				<div className="filter-container">

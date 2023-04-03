@@ -38,6 +38,7 @@ const FilterCategoryMenu = () => {
 				return (
 					<div key={index}>
 						<input
+							className="filter-input"
 							type="checkbox"
 							id={ categoryName }
 							name={ categoryName }

@@ -26,7 +26,10 @@ export const initialState = {
     quantity: 0,
     isFiltered: false,
     isSearched: false,
-    isSorted: false
+    isSorted: false,
+    collectionMenuOpen: false,
+    colorMenuOpen: false,
+    categoryMenuOpen: false
 }
 
 export const StoreContext = createContext();
@@ -55,6 +58,10 @@ export class StoreActions {
     static UPDATE_USER = 'updateUser';
     static UPDATE_QUANTITY = 'updateQuantity';
     static IS_FILTERED = 'isFiltered';
+    static UPDATE_COLLECTIOMENU_OPEN='updateCollectionMenuOpen';
+    static UPDATE_COLORMENU_OPEN='updateColorMenuOpen';
+    static UPDATE_CATEGORYMENU_OPEN='updateCategoryMenuOpen';
+
 }
 
 // shopping cart reducer======================================
@@ -208,6 +215,36 @@ export const quantityReducer = (quantity, action) => {
     }
 }
 
+// collectionMenuOpen reducer ====================================
+export const collectionMenuOpenReducer = (collectionMenuOpen, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_COLLECTIOMENU_OPEN:
+            return action.payload;
+        default: 
+            return collectionMenuOpen;
+    }
+}
+
+// colorMenuOpen reducer ====================================
+export const colorMenuOpenReducer = (colorMenuOpen, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_COLORMENU_OPEN:
+            return action.payload;
+        default: 
+            return colorMenuOpen;
+    }
+}
+
+// categoryMenuOpen reducer ====================================
+export const categoryMenuOpenReducer = (categoryMenuOpen, action) => {
+    switch(action.type){
+        case StoreActions.UPDATE_CATEGORYMENU_OPEN:
+            return action.payload;
+        default: 
+            return categoryMenuOpen;
+    }
+}
+
 // rating hover reducer==========================================
 export const ratingHoverReducer = (ratingHover, action) => {
     switch(action.type){
@@ -285,5 +322,8 @@ export const rootReducer = combineReducers({
     isLoggedIn: isLoggedInReducer,
     user: userReducer,
     quantity: quantityReducer,
-    isFiltered: isFilteredReducer
+    isFiltered: isFilteredReducer,
+    collectionMenuOpen: collectionMenuOpenReducer,
+    colorMenuOpen: colorMenuOpenReducer,
+    categoryMenuOpen: categoryMenuOpenReducer
 })

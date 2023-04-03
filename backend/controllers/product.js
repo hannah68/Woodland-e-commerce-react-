@@ -35,7 +35,6 @@ export const getAllProducts = async (req, res) => {
 			}
 
 			const products = await Product.find(query);
-			console.log(products);
 			return res.json({ data: products });
 
 		}

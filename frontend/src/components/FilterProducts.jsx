@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 import "../styles/Shop.css";
@@ -7,12 +7,10 @@ import FilterCollectionMenu from "./FilterCollectionMenu";
 import FilterColorMenu from "./FilterColorMenu";
 import FilterCategoryMenu from "./FilterCategoryMenu";
 import FilterPrice from "./FilterPrice";
+import { StoreContext, StoreActions } from "../store";
 
 const FilterProducts = ({ submitFilterFormHandler, clearAllFilterHandler }) => {
-
-	const [collectionMenuOpen, setCollectionMenuOpen] = useState(false);
-	const [colorMenuOpen, setColorMenuOpen] = useState(false);
-	const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
+	const store = useContext(StoreContext)
 
 	return (
 		<>
@@ -27,41 +25,50 @@ const FilterProducts = ({ submitFilterFormHandler, clearAllFilterHandler }) => {
 				{/* collection section */}
 				<div
 					className={
-						collectionMenuOpen
+						store.state.collectionMenuOpen
 							? "collection__menu removeBorder"
 							: "collection__menu"
 					}
 				>
 					<span>Collection</span>
-					<span onClick={() => setCollectionMenuOpen(!collectionMenuOpen)}>
+					<span onClick={() => store.dispatch({
+							type: StoreActions.UPDATE_COLLECTIOMENU_OPEN, 
+							payload: !store.state.collectionMenuOpen
+						})}>
 						<FaChevronDown />
 					</span>
 				</div>
-				{ collectionMenuOpen && <FilterCollectionMenu/> }
+				{ store.state.collectionMenuOpen && <FilterCollectionMenu/> }
 
 				{/* color section */}
 				<div
-					className={colorMenuOpen ? "color__menu removeBorder" : "color__menu"}
+					className={store.state.colorMenuOpen ? "color__menu removeBorder" : "color__menu"}
 				>
 					<span>Color</span>
-					<span onClick={ () => setColorMenuOpen(!colorMenuOpen) }>
+					<span onClick={ () => store.dispatch({
+							type: StoreActions.UPDATE_COLORMENU_OPEN,
+							payload: !store.state.colorMenuOpen
+						}) }>
 						<FaChevronDown />
 					</span>
 				</div>
-				{ colorMenuOpen && <FilterColorMenu/> }
+				{ store.state.colorMenuOpen && <FilterColorMenu/> }
 
 				{/* category section */}
 				<div
 					className={
-						categoryMenuOpen ? "category__menu removeBorder" : "category__menu"
+						store.state.categoryMenuOpen ? "category__menu removeBorder" : "category__menu"
 					}
 				>
 					<span>Category</span>
-					<span onClick={ () => setCategoryMenuOpen(!categoryMenuOpen) }>
+					<span onClick={ () => store.dispatch({
+						type: StoreActions.UPDATE_CATEGORYMENU_OPEN,
+						payload: !store.state.categoryMenuOpen
+						}) }>
 						<FaChevronDown />
 					</span>
 				</div>
-				{categoryMenuOpen && <FilterCategoryMenu/>}
+				{store.state.categoryMenuOpen && <FilterCategoryMenu/>}
 
 				{/* price section */}
 				<div className="price__menu">

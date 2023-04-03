@@ -74,6 +74,10 @@
 	display: block;
 }
 
+.filter-input{
+	cursor: pointer;
+}
+
 .clear-container {
 	display: flex;
 	justify-content: space-between;
@@ -131,6 +135,8 @@
 	display: flex;
 	justify-content: space-between;
 	padding: 2.5rem 0;
+	cursor: pointer;
+
 }
 
 .collection__menu.removeBorder,
