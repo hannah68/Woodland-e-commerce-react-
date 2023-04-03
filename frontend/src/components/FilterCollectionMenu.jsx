@@ -37,6 +37,7 @@ const FilterCollectionMenu = () => {
 				return (
 					<div key={index}>
 						<input
+							className="filter-input"
 							type="checkbox"
 							id={ collectionName }
 							name={ collectionName }

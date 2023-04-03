@@ -24,6 +24,7 @@ const FilterPrice = () => {
 					step="10"
 				/>
 				<input
+					className="filter-input"
 					type="range"
 					id="max-price"
 					name="max-price"

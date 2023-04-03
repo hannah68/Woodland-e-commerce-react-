@@ -37,6 +37,7 @@ const FilterColorMenu = () => {
 				return (
 					<div key={ index }>
 						<input
+							className="filter-input"
 							type="checkbox"
 							id={ colorName }
 							name={ colorName }

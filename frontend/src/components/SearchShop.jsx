@@ -6,7 +6,7 @@ import "../styles/Shop.css";
 import SortProducts from "./SortProducts";
 import { StoreContext, StoreActions } from "../store";
 
-const SearchShop = ({ submitSearchHandler }) => {
+const SearchShop = ({ submitSearchHandler, setProducts, products }) => {
 	const store = useContext(StoreContext); 
 	const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
 
@@ -42,7 +42,10 @@ const SearchShop = ({ submitSearchHandler }) => {
 								<FaAngleDown />
 							</span>
 						</div>
-						{ isSortMenuOpen && ( <SortProducts/> )}
+						{ isSortMenuOpen && ( <SortProducts 
+							setProducts={setProducts}
+							products={products}
+						/> )}
 					</button>
 				</div>
 			</div>

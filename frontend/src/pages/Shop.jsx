@@ -12,66 +12,109 @@ const Shop = () => {
 	const store = useContext(StoreContext);
 	const [products, setProducts] = useState([]);
 
+	// fetch filtered products=================================================
+	const fetchFilteredProducts = async() => {
+		const data = store.state.filterData;
+		const price = store.state.priceValue;
+	
+		const colors = data.color.join(",");
+		const categories = data.category.join(",");
+		const collections = data.collection.join(",");
+		let url = "http://localhost:5000/products?";
+
+		if(data && price){
+			if(data.color.length >= 1){
+				url += `color=${colors}&`
+			}
+			if(data.category.length >= 1){
+				url += `category=${categories}&`
+			}
+			if(data.collection.length >= 1){
+				url += `collection=${collections}&`
+			}
+			if(price){
+				url += `price=${price}&`
+			}
+			// Remove the last "&" character from the URL
+			url = url.slice(0, -1);
+			
+			const res = await fetch(url);
+			const resData = await res.json();
+			setProducts(resData.data);
+		}
+	}
+
 	// submit Filter Form Handler ============================================
 	const submitFilterFormHandler = (e) => {
 		e.preventDefault();
-		const data = store.state.filterData;
+		fetchFilteredProducts();
+	};
 
-		const filteredArr = products.filter((el) => {
-			return (
-				data.collection.includes(el.collection) &&
-				data.color.includes(el.color) &&
-				data.category.includes(el.category) &&
-				el.price <= store.state.priceValue
-			);
+	// fetch searched products=================================================
+	const fetchSearchedProducts = async () => {
+		const searchValue = store.state.searchValue;
+		const res = await fetch(`http://localhost:5000/products/${searchValue}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
 		});
-
-		store.dispatch({
-			type: StoreActions.UPDATE_RANDOMPRODUCTS,
-			payload: filteredArr,
-		});
+		const resData = await res.json();
+		// update UI of shop page
+		setProducts(resData.data);
+		// reset the search value to empty string
+		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload: "" });
 	};
 
 	// submit Search Handler ================================================
 	const submitSearchHandler = (e) => {
 		e.preventDefault();
+		fetchSearchedProducts();
+	};
 
-		const filteredData = products.filter((el) => {
-			return (
-				el.category === store.state.searchValue ||
-				el.title === store.state.searchValue
-			);
-		});
-		console.log("filteredData", filteredData);
+	// clear All Filters Handler================================================
+	const clearAllFilterHandler = async() => {
 		store.dispatch({
-			type: StoreActions.UPDATE_RANDOMPRODUCTS,
-			payload: filteredData,
+			type: StoreActions.UPDATE_FILTERDATA, 
+			payload: { collection: [], category: [], color: [] }
 		});
-		console.log("random", store.state.randomProducts);
-		store.dispatch({ type: StoreActions.UPDATE_SEARCHVALUE, payload: "" });
+		store.dispatch({ type: StoreActions.UPDATE_PRICEVALUE, payload: 1000 });
+		await fetchProducts();
+		store.dispatch({ type: StoreActions.UPDATE_COLLECTIOMENU_OPEN, payload: false });
+		store.dispatch({ type: StoreActions.UPDATE_COLORMENU_OPEN, payload: false });
+		store.dispatch({ type: StoreActions.UPDATE_CATEGORYMENU_OPEN, payload: false });
+	};
+
+	// fetch random products=====================================================
+	const fetchProducts = async () => {
+		try {
+			const res = await fetch("http://localhost:5000/products/");
+			const products = await res.json();
+			setProducts(products.data);
+		} catch (error) {
+			console.error("error", error);
+		}
 	};
 
 	// use effect for fetching products and displaying on screen==================
 	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const res = await fetch("http://localhost:5000/products/");
-				const products = await res.json();
-				setProducts(products.data);
-			} catch (error) {
-				console.error("error", error);
-			}
-		};
 		fetchProducts();
 	}, []);
 
 	return (
 		<div className="shop-section">
-			<SearchShop submitSearchHandler={submitSearchHandler} />
+			<SearchShop 
+				submitSearchHandler={submitSearchHandler}
+				setProducts={setProducts}
+				products={products}
+			/>
 
 			<section className="container">
 				<div className="filter-container">
-					<FilterProducts submitFilterFormHandler={submitFilterFormHandler} />
+					<FilterProducts 
+						submitFilterFormHandler={submitFilterFormHandler} 
+						clearAllFilterHandler={clearAllFilterHandler}
+					/>
 				</div>
 
 				<div className="product-container">
