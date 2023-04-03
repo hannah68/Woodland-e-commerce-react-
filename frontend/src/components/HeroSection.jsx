@@ -13,7 +13,7 @@ const HeroSection = () => {
 						The unique furniture for your special house
 					</h1>
 
-					<Link to={PAGE_LINK.shop} className="hero-section__text--btn">
+					<Link to={PAGE_LINK.SHOP} className="hero-section__text--btn">
 						Shop Now
 					</Link>
 				</div>

@@ -3,9 +3,8 @@ import { useState, useEffect, useContext } from "react";
 
 import "../styles/Login.css";
 
-import { PAGE_LINK } from "../utils/config";
-import { StoreContext } from "../store";
-import { StoreActions } from "../store";
+import { PAGE_LINK, APIEndPoints } from "../utils/config";
+import { StoreContext, StoreActions } from "../store";
 
 const Login = () => {
 	const store = useContext(StoreContext);
@@ -16,7 +15,7 @@ const Login = () => {
 	useEffect(() => {
 		const postUserLoginToDB = async () => {
 			try {
-				const userRes = await fetch("http://localhost:5000/user/login", {
+				const userRes = await fetch(`${APIEndPoints.LOGIN}`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(userLogin),
@@ -39,12 +38,13 @@ const Login = () => {
 		if(submit){ 
 			postUserLoginToDB();
 			store.dispatch({ type: StoreActions.UPDATE_ISLOGGEDIN, payload: true});
-			navigate(PAGE_LINK.home, { replace: true });
+			navigate(PAGE_LINK.HOME, { replace: true });
 		}
 		
 	  return () => {
 		// Cancel any outstanding asynchronous tasks or subscriptions here
 	  }
+	  // eslint-disable-next-line
 	}, [navigate, userLogin, submit])
 	
 
@@ -90,7 +90,7 @@ const Login = () => {
 					SIGN IN
 				</button>
 				<span style={{ display: "block" }}>Or</span>
-				<Link to={PAGE_LINK.register} className="register-btn">
+				<Link to={PAGE_LINK.REGISTER} className="register-btn">
 					CREATE AN ACCOUNT
 				</Link>
 			</form>
