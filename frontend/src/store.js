@@ -1,11 +1,9 @@
 import { createContext } from "react";
 
 export const initialState = {
-    shoppingCart : [],
     basketItems:[],
     product: {},
     searchValue: "",
-    randomProducts: [],
     priceValue: 1000,
     filterData: {
 		collection: [],
@@ -24,9 +22,6 @@ export const initialState = {
     isLoggedIn: false,
     user: null,
     quantity: 0,
-    isFiltered: false,
-    isSearched: false,
-    isSorted: false,
     collectionMenuOpen: false,
     colorMenuOpen: false,
     categoryMenuOpen: false
@@ -35,18 +30,9 @@ export const initialState = {
 export const StoreContext = createContext();
 
 export class StoreActions {
-    static UPDATE_SHOPPINGCART = 'updateShoppingCart';
     static UPDATE_BASKETITEMS = 'updateBaketItems';
     static UPDATE_PRODUCT = 'updateProduct';
-    static REMOVEITEM_FROMBASKET = 'removeItemFromBasket';
-    static ADDMOREITEM_TOBASKET = 'addMoreItemToBasket';
-    static FILTER_SHOPPINGCART = 'filterShoppingCart';
-    static SHOPPINGCARD = 'shoppingCard';
     static UPDATE_SEARCHVALUE = 'updateSerachValue';
-    static UPDATE_RANDOMPRODUCTS = 'updateRandomproducts';
-    static SORTRANDOMBY_HIGHEST = 'sortRandomByHighest';
-    static SORTRANDOMBY_LOWEST = 'sortRandomByLowest';
-    static SHOW_RANDOMPRODUCTS = 'showRandomProducts';
     static UPDATE_FILTERDATA = 'updateFilterData';
     static ISEXISTED_FILTERNAME = 'isExistedFilterName';
     static NEW_FILTERNAME = 'newFilterName';
@@ -57,37 +43,9 @@ export class StoreActions {
     static UPDATE_ISLOGGEDIN = 'isLoggedIn';
     static UPDATE_USER = 'updateUser';
     static UPDATE_QUANTITY = 'updateQuantity';
-    static IS_FILTERED = 'isFiltered';
     static UPDATE_COLLECTIOMENU_OPEN='updateCollectionMenuOpen';
     static UPDATE_COLORMENU_OPEN='updateColorMenuOpen';
     static UPDATE_CATEGORYMENU_OPEN='updateCategoryMenuOpen';
-
-}
-
-// shopping cart reducer======================================
-export const shoppingCartReducer = (shoppingCart, action) =>{
-  switch(action.type){
-    case StoreActions.SHOPPINGCARD:
-        return [...shoppingCart, action.payload];
-
-    case StoreActions.UPDATE_SHOPPINGCART:
-        return shoppingCart.map((el) => {
-            if (el.id === action.payload.id) {
-                return { 
-                    ...el, 
-                    quantity: Number(el.quantity) + Number(action.payload.quantity) 
-                };
-            } else {
-                return el;
-            }
-        });
-
-    case StoreActions.FILTER_SHOPPINGCART:
-        return shoppingCart.filter((el) => el._id !== action.payload._id);
-        
-    default: 
-        return shoppingCart;
-  }
 }
 
 
@@ -118,26 +76,6 @@ export const searchValueReducer = (searchValue, action) => {
             return action.payload;
         default: 
             return searchValue;
-    }
-}
-
-// random product reducer=================================
-export const randomProductsReducer = (randomProducts, action) => {
-    switch(action.type){
-        case StoreActions.UPDATE_RANDOMPRODUCTS:
-            return action.payload;
-
-        case StoreActions.SORTRANDOMBY_HIGHEST:
-            return action.payload.sort((a, b) => b.price - a.price);
-
-        case StoreActions.SORTRANDOMBY_LOWEST:
-            return action.payload.sort((a, b) => a.price - b.price);
-        
-        case StoreActions.SHOW_RANDOMPRODUCTS:
-            return action.payload.data.filter(item => action.payload.productArrId.includes(item._id));
-			
-        default: 
-            return randomProducts;
     }
 }
 
@@ -172,16 +110,6 @@ export const priceValueReducer = (priceValue, action) => {
             return action.payload;
         default:
             return priceValue;
-    }
-}
-
-// rating reducer==========================================
-export const ratingReducer = (rating, action) => {
-    switch(action.type){
-        case StoreActions.ADD_RATING:
-            return action.payload;
-        default:
-            return rating;
     }
 }
 
@@ -245,6 +173,16 @@ export const categoryMenuOpenReducer = (categoryMenuOpen, action) => {
     }
 }
 
+// rating reducer==========================================
+export const ratingReducer = (rating, action) => {
+    switch(action.type){
+        case StoreActions.ADD_RATING:
+            return action.payload;
+        default:
+            return rating;
+    }
+}
+
 // rating hover reducer==========================================
 export const ratingHoverReducer = (ratingHover, action) => {
     switch(action.type){
@@ -266,35 +204,6 @@ export const reviewInfoReducer = (reviewInfo, action) => {
     }
 }
 
-// is items filtered reducer==========================================
-export const isFilteredReducer = (isFiltered, action) => {
-    switch(action.type){
-        case StoreActions.IS_FILTERED:
-            return action.payload;
-        default:
-            return isFiltered;
-    }
-}
-
-// is sorted reducer==========================================
-export const isSortedReducer = (isSorted, action) => {
-    switch(action.type){
-        case StoreActions.IS_FILTERED:
-            return action.payload;
-        default:
-            return isSorted;
-    }
-}
-
-// is Searched reducer==========================================
-export const isSearchedReducer = (isSearched, action) => {
-    switch(action.type){
-        case StoreActions.IS_FILTERED:
-            return action.payload;
-        default:
-            return isSearched;
-    }
-}
 
 //  combine reducers======================================
 const combineReducers = reducers => {
@@ -309,11 +218,9 @@ const combineReducers = reducers => {
 
 // export all reducers ===================================
 export const rootReducer = combineReducers({
-    shoppingCart: shoppingCartReducer,
     basketItems: basketItemsReducer,
     product: productReducer,
     searchValue: searchValueReducer,
-    randomProducts: randomProductsReducer,
     filterData: filterDataReducer,
     priceValue: priceValueReducer,
     rating: ratingReducer,
@@ -322,7 +229,6 @@ export const rootReducer = combineReducers({
     isLoggedIn: isLoggedInReducer,
     user: userReducer,
     quantity: quantityReducer,
-    isFiltered: isFilteredReducer,
     collectionMenuOpen: collectionMenuOpenReducer,
     colorMenuOpen: colorMenuOpenReducer,
     categoryMenuOpen: categoryMenuOpenReducer

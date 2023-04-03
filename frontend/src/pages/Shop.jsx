@@ -4,6 +4,8 @@ import FilterProducts from "../components/FilterProducts";
 import Product from "../components/Product";
 import SearchShop from "../components/SearchShop";
 
+import { APIEndPoints } from "../utils/config";
+
 import "../styles/Shop.css";
 
 import { StoreActions, StoreContext } from "../store";
@@ -20,7 +22,7 @@ const Shop = () => {
 		const colors = data.color.join(",");
 		const categories = data.category.join(",");
 		const collections = data.collection.join(",");
-		let url = "http://localhost:5000/products?";
+		let url = `${APIEndPoints.SHOP}?`;
 
 		if(data && price){
 			if(data.color.length >= 1){
@@ -53,7 +55,7 @@ const Shop = () => {
 	// fetch searched products=================================================
 	const fetchSearchedProducts = async () => {
 		const searchValue = store.state.searchValue;
-		const res = await fetch(`http://localhost:5000/products/${searchValue}`, {
+		const res = await fetch(`${APIEndPoints.SHOP}/${searchValue}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -88,7 +90,7 @@ const Shop = () => {
 	// fetch random products=====================================================
 	const fetchProducts = async () => {
 		try {
-			const res = await fetch("http://localhost:5000/products/");
+			const res = await fetch(`${APIEndPoints.SHOP}/`);
 			const products = await res.json();
 			setProducts(products.data);
 		} catch (error) {
