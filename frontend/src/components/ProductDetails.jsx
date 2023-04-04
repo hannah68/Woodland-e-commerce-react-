@@ -50,8 +50,9 @@ const ProductDetails = () => {
 		<section className="product-item">
 			<div className="productImg-container">
 				<img
-					src={`.${store.state.product.img}`}
+					src={store.state.product.img}
 					alt={store.state.product.title}
+					loading="lazy"
 				/>
 				<CarouselImages />
 			</div>
