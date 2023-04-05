@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import "../styles/Home.css";
 
-import { randomStar, starIcons } from "../utils/utils";
+import { getRating, starIcons } from "../utils/utils";
 
 import { PAGE_LINK } from "../utils/config";
 
@@ -17,7 +17,7 @@ const FeaturedItem = ({ item }) => {
 						{starIcons.map((star, index) => {
 							return <span key={index}>{star}</span>;
 						})}
-						<span>{randomStar()}</span>
+						<span>{getRating(item.rating)}</span>
 					</div>
 					<p>£{item.price}</p>
 				</div>

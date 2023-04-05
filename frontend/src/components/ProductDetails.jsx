@@ -6,7 +6,7 @@ import ProductInfo from "./ProductInfo";
 import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
 
 import { StoreContext, StoreActions } from "../store";
-import { randomStar, starIcons, randomReviewNum } from "../utils/utils";
+import { getRating, starIcons, randomReviewNum } from "../utils/utils";
 
 const ProductDetails = () => {
 	const store = useContext(StoreContext);
@@ -62,7 +62,7 @@ const ProductDetails = () => {
 					{starIcons.map((star, index) => {
 						return <span key={index}>{star}</span>;
 					})}
-					<span>{randomStar()}</span>
+					<span>{getRating(store.state.product.rating)}</span>
 					{/* react-scroll */}
 					<Link to="review" spy="true" smooth="true" className="review-number">
 						{randomReviewNum()}Reviews

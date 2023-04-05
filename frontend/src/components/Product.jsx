@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import "../styles/Shop.css";
 
-import { randomStar, starIcons } from "../utils/utils";
+import { getRating, starIcons } from "../utils/utils";
 
 import { PAGE_LINK } from "../utils/config";
 
@@ -17,7 +17,7 @@ const Product = ({ item }) => {
 					{starIcons.map((star, index) => {
 						return <span key={index}>{star}</span>;
 					})}
-					<span>{randomStar()}</span>
+					<span>{getRating(item.rating)}</span>
 				</div>
 				<p className="product__price">£{item.price}</p>
 			</div>

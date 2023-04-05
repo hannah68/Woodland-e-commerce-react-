@@ -1,11 +1,11 @@
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai";
 
-// create random class=======================================
-export const randomStar = () => {
-	const starClass = Math.floor(Math.random() * 2) + 1;
-	return starClass === 1 ? <FaStarHalfAlt /> : <FaStar />;
-};
+// get rating =======================================
+export const getRating = (rating) => {
+	if(rating === 5) return <FaStar />
+	else return <FaStarHalfAlt />
+}
 
 // create a random review number=============================
 export const randomReviewNum = () => {
