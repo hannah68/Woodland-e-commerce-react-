@@ -28,7 +28,7 @@ const DummyReview = ({ isSubmitReviewForm }) => {
 						</div>
 						<div className="review-body">
 							<img
-								src={`.${store.state.product.img}`}
+								src={store.state.product.img}
 								alt="furniture"
 								className="review-body-img"
 							/>
