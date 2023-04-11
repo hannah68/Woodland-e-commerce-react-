@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { StoreContext, StoreActions } from "../store";
-import { starIcons, randomStar } from "../utils/utils";
+import { starIcons, getRating } from "../utils/utils";
 import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
 
 import "../styles/Basket.css";
@@ -76,7 +76,7 @@ const CartItem = ({ item }) => {
 						{starIcons.map((star, index) => {
 							return <span key={index}>{star}</span>;
 						})}
-						<span>{randomStar()}</span>
+						<span>{getRating(item.productId.rating)}</span>
 					</div>
 					<p className="delivery">Estimated dispatch within 5 working days</p>
 				</div>

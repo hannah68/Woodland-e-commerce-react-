@@ -26,7 +26,7 @@ const Review = () => {
 				</div>
 				<div className="review-body">
 					<img
-						src={`.${ store.state.product.img }`}
+						src={ store.state.product.img }
 						alt={ store.state.product.title }
 						className="review-body-img"
 					/>

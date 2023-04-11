@@ -30,6 +30,18 @@ const ProductInfos = () => {
 	// review handler ======================
 	const writeReviewHandler = () => {
 		setIsReview(!isReview);
+		if(isReview){
+			store.dispatch({ 
+				type: StoreActions.UPDATE_REVIEWINFO, 
+				payload:{
+					reviewerName: "",
+					reviewerEmail: "",
+					stars: [],
+					feedback: "",
+					date: ""
+				},
+			});
+		}
 	};
 
 	return (
@@ -48,8 +60,8 @@ const ProductInfos = () => {
 			)}
 
 			<div className="review-btn-container">
-				<button onClick={writeReviewHandler} id="review">
-					Write a review
+				<button onClick={writeReviewHandler} id="reviews">
+					{!isReview ? "Write a review" : "close"}
 					<FaChevronRight className="btnStyle" />
 				</button>
 			</div>
