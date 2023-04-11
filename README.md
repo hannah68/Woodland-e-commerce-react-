@@ -33,13 +33,14 @@ The user realizes they accidentally added the wrong item to their basket, so the
 After receiving the item, the user writes a review to share their thoughts and feedback with other customers.
 
 ## Methods Used
-- navigate UI with **react-router**
+- navigate UI with **react-router**.
 - Implement global state with **useContext** and **useReducer** hooks in **React**.
-- Transfer states between routes with **useNavigate**
-- Work with **useLocation** to get the necessary information about the current route
-- Remove the side effect of fetching data from API endpoints by using **useEffect**
-- Create MongoDB backend
-- Use Cloudinary for storing images and optimzed 
+- Transfer states between routes with **useNavigate**.
+- Work with **useLocation** to get the necessary information about the current route.
+- Remove the side effect of fetching data from API endpoints by using **useEffect**.
+- Create **MongoDB backend** to manage and store data.
+- Use **Cloudinary** for storing images, ensuring optimal performance and user experience.
+- utilize two popular third-party libraries: **bcrypt and jsonwebtoken** To ensure secure user authentication and authorization in my app. 
 
 
 ## Tech Stack
@@ -49,12 +50,12 @@ After receiving the item, the user writes a review to share their thoughts and f
 - Express.js
 - Cloudinary
 - Mongoose
-
+- bcrypt & jsonwebtoken
 
 ## Installation
 - First, run `npm ci` to install the dependencies (need node.js for npm)
-- Finally, run `npm run start` to run the app via <a href="http://localhost:3000">localhost<a/>
+- Finally, run `npm run start` to run the app via <a href="http://localhost:3030">localhost<a/> and run `npm run start` for server 
 
 ## In Progress
-1. Users should be able to register on the website to keep track of the items added to their basket and write reviews. Currently, I am working on a branch to create a backend for my project using **MongoDB and Express**.
-2. I will probably use a CDN such as Cloudinary to enhance the speed of image loading instead of storing them in assests.
+1. Improve search functionality: Enhance the search functionality to include options like autocomplete, suggestions, and filters that could make the search process faster and more accurate.
+2. Implement a payment system: Currently, the app is under construction for the payment system. Adding a payment system will allow users to complete their purchases and create a more seamless checkout experience.
