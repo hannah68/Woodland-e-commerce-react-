@@ -33,14 +33,14 @@ The user realizes they accidentally added the wrong item to their basket, so the
 After receiving the item, the user writes a review to share their thoughts and feedback with other customers.
 
 ## Methods Used
-- navigate UI with **react-router**.
+- Navigate UI with **react-router**.
 - Implement global state with **useContext** and **useReducer** hooks in **React**.
 - Transfer states between routes with **useNavigate**.
 - Work with **useLocation** to get the necessary information about the current route.
 - Remove the side effect of fetching data from API endpoints by using **useEffect**.
 - Create **MongoDB backend** to manage and store data.
 - Use **Cloudinary** for storing images, ensuring optimal performance and user experience.
-- utilize two popular third-party libraries: **bcrypt and jsonwebtoken** To ensure secure user authentication and authorization in my app. 
+- Utilize two popular third-party libraries: **bcrypt and jsonwebtoken** To ensure secure user authentication and authorization in my app. 
 
 
 ## Tech Stack
