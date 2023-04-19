@@ -55,13 +55,13 @@ export const loginUser = async ( req, res ) => {
     try{
         const foundUser = await User.findOne({ email });
         if(!foundUser){
-            return res.status(500).json({ error: 'Invalid email or password...'} );
+            return res.status(500).json({ error: "Invalid email or password..."} );
         }
 
 		// check password match
 		const matchedPassword = await checkPasswordMatch(password, foundUser.password );
 		if (!matchedPassword) {
-			return res.status(401).json({ error: "Invalid email or password" });
+			return res.status(401).json({ error: "Invalid email or password..." });
 		}
 
 		const userWithoutPassword = await createUserWithoutPass(foundUser);
