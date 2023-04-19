@@ -10,6 +10,8 @@ import "../styles/Register.css";
 
 const Register = () => {
 	const [submit, setSubmit] = useState(false);
+	const [registerError, setRegisterError] = useState("");
+	const [emptyInfoErr, setEmptyInfoErr] = useState("");
 	const [userInfo, setUserInfo] = useState({
 		username: "",
 		email: "",
@@ -25,37 +27,55 @@ const Register = () => {
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(userInfo),
 				});
-				const userData = await userRes.json();
-
+				let userData;
+				
 				if (userRes.ok) {
+					userData = await userRes.json();
 					localStorage.setItem("token", userData.token);
 
 					if (userData.data) {
 						localStorage.setItem("userId", userData.data.id.toString());
+						navigate(PAGE_LINK.LOGIN, { replace: true });
 					}
 				}
+				if (userRes.status === 400) {
+					userData = await userRes.json();
+					setRegisterError(userData.email);
+					setSubmit(false);
+				}
+				  
 			} catch (err) {
 				console.log("An error occurred while registering in user: ", err);
 			}
 		};
+
 		if (submit) {
 			postUserInfoToDB();
-			navigate(PAGE_LINK.LOGIN, { replace: true });
-		}
-		return () => {
-			// Cancel any outstanding asynchronous tasks or subscriptions here
 		}
 
-	}, [submit, userInfo, navigate]);
+	}, [submit, navigate, userInfo]);
+
+	const checkUserFormValidation = () => {
+		const username = userInfo.username;
+		const email = userInfo.email;
+		const password = userInfo.password;
+		if(username === "" || email === "" || password === ""){
+			setEmptyInfoErr("Please complete the form before submitting.")
+		}else{
+			setSubmit(true);
+		}
+	}
 
 	// submit register form handler
 	const submitRegisterFormHandler = (e) => {
 		e.preventDefault();
-		setSubmit(true);
+		checkUserFormValidation();
 	};
 
 	// change register form handler
 	const changeHandler = (e) => {
+		setEmptyInfoErr("");
+		setRegisterError("");
 		const { name, value } = e.target;
 		setUserInfo({ ...userInfo, [name]: value });
 	};
@@ -95,10 +115,12 @@ const Register = () => {
 							id="email"
 							name="email"
 							data-lpignore="true"
+							className={registerError.length > 0 ? "red-border" : ""}
 							value={userInfo.email}
 							onChange={changeHandler}
 						/>
 					</div>
+					{registerError.length > 0 && <span className="register-error">{registerError}</span>}
 					<div className="input-groups">
 						<label htmlFor="password">
 							<RiLockPasswordFill />
@@ -119,10 +141,13 @@ const Register = () => {
 							I agree to the terms and privacy policy.
 						</span>
 					</div>
-					<button type="submit" className="register-button">
+					<button 
+						type="submit" 
+						className="register-button"
+					>
 						REGISTER
 					</button>
-
+					{emptyInfoErr.length > 0 && <span className="red-text">{emptyInfoErr}</span>}
 					<div className="login-container">
 						<p className="signin-text">Already have an account?</p>
 						<Link to={PAGE_LINK.LOGIN} className="signin-btn">

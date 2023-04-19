@@ -30,7 +30,7 @@ export const registerUser = async (req, res) => {
 			return res.status(400).json({email: "A user has already registered with this email address."});
 		} else {
 			// create a new user
-			const newUser = await new User({
+			const newUser = new User({
 				username,
 				email,
 				password: passwordHashed,
