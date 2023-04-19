@@ -7,16 +7,21 @@ import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
 
 import { StoreContext, StoreActions } from "../store";
 import { getRating, starIcons, randomReviewNum } from "../utils/utils";
+import Modal from "./Modal";
 
 const ProductDetails = () => {
 	const store = useContext(StoreContext);
+	const [showModal, setShowModal] = useState(false);
 	const [submit, setSubmit] = useState(false);
+
+	const onCloseModal = () => {
+		setShowModal(false)
+	}
 
 	// use effect for posting data to db===============================
 	useEffect(() => {
-		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
 		// if user logged in
-		if (submit && userId) {
+		if (submit) {
 			// trigger the POST request
 			const postBasketData = async () => {
 				await fetch(`${APIEndPoints.BASKET}`, {
@@ -43,7 +48,14 @@ const ProductDetails = () => {
 
 	// add item to basket handler ========================================
 	const addItemToBasketHandler = () => {
-		setSubmit(true);
+		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+		if(!userId){
+			setShowModal(true);
+			// reset the quantity after the item has been added to the basket
+			store.dispatch({ type: StoreActions.UPDATE_QUANTITY, payload: 0 });
+		}else{
+			setSubmit(true);
+		}
 	};
 
 	return (
@@ -97,6 +109,7 @@ const ProductDetails = () => {
 					</button>
 				</div>
 			</div>
+			{showModal && <Modal onCloseModal={onCloseModal}/>}
 		</section>
 	);
 };
