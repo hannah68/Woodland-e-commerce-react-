@@ -9,6 +9,7 @@ import { StoreContext, StoreActions } from "../store";
 const Login = () => {
 	const store = useContext(StoreContext);
 	const [submit, setSubmit] = useState(false);
+	const [loginError, setLoginError] = useState("");
 	const [userLogin, setUserLogin] = useState({ email: "", password: "" });
 	const navigate = useNavigate();
 
@@ -20,30 +21,36 @@ const Login = () => {
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(userLogin),
 				});
-				const userData = await userRes.json();
+				let userData;
 			
 				if (userRes.ok) {
+					userData = await userRes.json();
 					localStorage.setItem("token", userData.token);
 					
 					if (userData.data) {
 						localStorage.setItem("userId", userData.data.id.toString());
 						store.dispatch({ type: StoreActions.UPDATE_USER, payload: userData.data.username });
+						navigate(PAGE_LINK.HOME, { replace: true });
 					}
-				} 
+				}
+		
+				if (userRes.status === 500 || userRes.status === 401) {
+					userData = await userRes.json();
+					setLoginError(userData.error);
+					setSubmit(false);
+				}
 			} catch (err) {
 				console.log("An error occurred while logging in user: ", err);
 
 			}
 		};
+
 		if(submit){ 
 			postUserLoginToDB();
 			store.dispatch({ type: StoreActions.UPDATE_ISLOGGEDIN, payload: true});
-			navigate(PAGE_LINK.HOME, { replace: true });
+			
 		}
 		
-	  return () => {
-		// Cancel any outstanding asynchronous tasks or subscriptions here
-	  }
 	  // eslint-disable-next-line
 	}, [navigate, userLogin, submit])
 	
@@ -56,6 +63,7 @@ const Login = () => {
 
 	// change login form =================================
 	const changeHandler = (e) => {
+		setLoginError("");
 		const { name, value } = e.target;
 		setUserLogin({ ...userLogin, [name]: value });
 	};
@@ -74,6 +82,7 @@ const Login = () => {
 						name="email"
 						value={userLogin.email}
 						onChange={changeHandler}
+						className={loginError.length > 0 ? "red-border" : "email-input"}
 					/>
 				</div>
 				<div className="password-group">
@@ -84,8 +93,10 @@ const Login = () => {
 						name="password"
 						value={userLogin.password}
 						onChange={changeHandler}
+						className={loginError.length > 0 ? "red-border" : "password-input"}
 					/>
 				</div>
+				{loginError.length > 0 && <span className="login-error">{loginError}</span>}
 				<button type="submit" className="login-btn">
 					SIGN IN
 				</button>
