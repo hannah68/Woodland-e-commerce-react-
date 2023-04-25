@@ -6,7 +6,7 @@ import ProductInfo from "./ProductInfo";
 import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
 
 import { StoreContext, StoreActions } from "../store";
-import { getRating, starIcons, randomReviewNum } from "../utils/utils";
+import { getRating, starIcons } from "../utils/utils";
 import Modal from "./Modal";
 
 const ProductDetails = () => {
@@ -85,7 +85,7 @@ const ProductDetails = () => {
 						exact="true"
 						offset={-70}
 					>
-						{randomReviewNum()}Reviews
+						{store.state.product.review}Reviews
 					</ScrollLink>
 				</div>
 				<h3 className="productInfo-price">£{store.state.product.price}</h3>

@@ -8,7 +8,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed5.jpg",
 		price: 590,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 204
 	},
 	{
 		id: 2,
@@ -19,7 +20,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed3.jpg",
 		price: 550,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 344
 	},
 	{
 		id: 3,
@@ -30,7 +32,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa2.jpg",
 		price: 480,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 765
 	},
 	{
 		id: 4,
@@ -41,7 +44,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa6.jpg",
 		price: 499,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 34
 	},
 	{
 		id: 5,
@@ -52,7 +56,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed1.jpg",
 		price: 189,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 98
 	},
 	{
 		id: 6,
@@ -63,7 +68,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed2.jpg",
 		price: 299,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 564
 	},
 	{
 		id: 7,
@@ -74,7 +80,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa1.jpg",
 		price: 399,
 		feature: true,
-		rating: 5
+		rating: 5,
+		review: 87
 	},
 	{
 		id: 8,
@@ -85,7 +92,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed4.jpg",
 		price: 590,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 467
 	},
 	{
 		id: 9,
@@ -96,7 +104,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/chair6.jpg",
 		price: 79,
 		feature: true,
-		rating: 5
+		rating: 5,
+		review: 12
 	},
 	{
 		id: 10,
@@ -107,7 +116,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed6.jpg",
 		price: 390,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 43
 	},
 	{
 		id: 11,
@@ -118,7 +128,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed7.jpg",
 		price: 590,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 98
 	},
 	{
 		id: 12,
@@ -129,7 +140,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/chair1.jpg",
 		price: 150,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 47
 	},
 	{
 		id: 13,
@@ -140,7 +152,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/chair2.jpg",
 		price: 250,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 370
 	},
 	{
 		id: 14,
@@ -151,7 +164,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/chair3.jpg",
 		price: 180,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 381
 	},
 	{
 		id: 15,
@@ -162,7 +176,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/chair4.jpg",
 		price: 120,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 417
 	},
 	{
 		id: 16,
@@ -173,7 +188,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/chair5.jpg",
 		price: 280,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 932
 	},
 	{
 		id: 17,
@@ -184,7 +200,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/chair.jpg",
 		price: 169,
 		feature: true,
-		rating: 4.5
+		rating: 4.5,
+		review: 65
 	},
 	{
 		id: 18,
@@ -195,7 +212,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/lamp.jpg",
 		price: 59,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 51
 	},
 	{
 		id: 19,
@@ -206,7 +224,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa4.jpg",
 		price: 519,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 8
 	},
 	{
 		id: 20,
@@ -217,7 +236,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa5.jpg",
 		price: 389,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 89
 	},
 	{
 		id: 21,
@@ -228,7 +248,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa3.jpg",
 		price: 499,
 		feature: true,
-		rating: 5
+		rating: 5,
+		review: 63
 	},
 	{
 		id: 22,
@@ -239,7 +260,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa7.jpg",
 		price: 499,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 754
 	},
 	{
 		id: 23,
@@ -250,7 +272,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table1.jpg",
 		price: 399,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 987
 	},
 	{
 		id: 24,
@@ -261,7 +284,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table2.jpg",
 		price: 199,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 353
 	},
 	{
 		id: 25,
@@ -272,7 +296,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table3.jpg",
 		price: 390,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 156
 	},
 	{
 		id: 26,
@@ -283,7 +308,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table4.jpg",
 		price: 390,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 378
 	},
 	{
 		id: 27,
@@ -294,7 +320,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table5.jpg",
 		price: 490,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 258
 	},
 	{
 		id: 28,
@@ -305,7 +332,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table6.jpg",
 		price: 290,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 73
 	},
 	{
 		id: 29,
@@ -316,7 +344,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/g.jpg",
 		price: 590,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 92
 	},
 	{
 		id: 30,
@@ -327,7 +356,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/g1.jpg",
 		price: 419,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 74
 	},
 	{
 		id: 31,
@@ -338,7 +368,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/g2.jpg",
 		price: 490,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 26
 	},
 	{
 		id: 32,
@@ -349,7 +380,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/g3.jpg",
 		price: 590,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 29
 	},
 	{
 		id: 33,
@@ -360,7 +392,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/g4.jpg",
 		price: 690,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 45
 	},
 	{
 		id: 34,
@@ -371,7 +404,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed3.jpg",
 		price: 28,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 34
 	},
 	{
 		id: 35,
@@ -382,7 +416,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/bed7.jpg",
 		price: 50,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 85
 	},
 	{
 		id: 36,
@@ -393,7 +428,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa5.jpg",
 		price: 189,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 954
 	},
 	{
 		id: 37,
@@ -404,7 +440,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa6.jpg",
 		price: 99,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 637
 	},
 	{
 		id: 38,
@@ -415,7 +452,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/sofa7.jpg",
 		price: 150,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 267
 	},
 	{
 		id: 39,
@@ -426,7 +464,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table1.jpg",
 		price: 200,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 472
 	},
 	{
 		id: 40,
@@ -437,7 +476,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table3.jpg",
 		price: 199,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 782
 	},
 	{
 		id: 41,
@@ -448,7 +488,8 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table4.jpg",
 		price: 129,
 		feature: false,
-		rating: 5
+		rating: 5,
+		review: 97
 	},
 	{
 		id: 42,
@@ -459,6 +500,7 @@ export const seedProducts = [
 		img: "../frontend/public/assets/images/table5.jpg",
 		price: 129,
 		feature: false,
-		rating: 4.5
+		rating: 4.5,
+		review: 765
 	},
 ];

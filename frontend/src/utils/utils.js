@@ -7,13 +7,6 @@ export const getRating = (rating) => {
 	else return <FaStarHalfAlt />
 }
 
-// create a random review number=============================
-export const randomReviewNum = () => {
-	const min = 28;
-	const max = 350;
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 // capitalise letter===================================
 export const capitaliseFirstLetter = (name) =>
 	name.replace(/\b\w/g, (c) => c.toUpperCase());
