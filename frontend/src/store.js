@@ -3,6 +3,7 @@ import { createContext } from "react";
 export const initialState = {
     basketItems:[],
     product: {},
+    numOfItems: null,
     searchValue: "",
     priceValue: 1000,
     filterData: {
@@ -32,6 +33,7 @@ export const StoreContext = createContext();
 export class StoreActions {
     static UPDATE_BASKETITEMS = 'updateBaketItems';
     static UPDATE_PRODUCT = 'updateProduct';
+    static UPDATE_NUMOFITEMS = 'updateNumOfItems';
     static UPDATE_SEARCHVALUE = 'updateSerachValue';
     static UPDATE_FILTERDATA = 'updateFilterData';
     static ISEXISTED_FILTERNAME = 'isExistedFilterName';
@@ -66,6 +68,16 @@ export const productReducer = (product, action) => {
 
         default: 
             return product;
+    }
+}
+
+// basket items reducer======================================
+export const numOfItemsReducer = (numOfItems, action) =>{
+    switch(action.type){
+      case StoreActions.UPDATE_NUMOFITEMS:
+          return action.payload;
+      default: 
+          return numOfItems;
     }
 }
 
@@ -220,6 +232,7 @@ const combineReducers = reducers => {
 export const rootReducer = combineReducers({
     basketItems: basketItemsReducer,
     product: productReducer,
+    numOfItems: numOfItemsReducer,
     searchValue: searchValueReducer,
     filterData: filterDataReducer,
     priceValue: priceValueReducer,

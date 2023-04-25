@@ -71,9 +71,9 @@ const Header = () => {
 							</span>
 
 							<Link to={ PAGE_LINK.BASKET }>
-								{store.state.basketItems.length > 0 && (
+								{(store.state.basketItems.length > 0 || store.state.numOfItems !== null) && (
 								<div className="basket-num">
-									{ store.state.basketItems.length }
+									{ store.state.basketItems.length || store.state.numOfItems }
 								</div>)}
 								<span className="basket">
 									<FaShoppingCart />

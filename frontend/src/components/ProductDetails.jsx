@@ -24,7 +24,7 @@ const ProductDetails = () => {
 		if (submit) {
 			// trigger the POST request
 			const postBasketData = async () => {
-				await fetch(`${APIEndPoints.BASKET}`, {
+				const res = await fetch(`${APIEndPoints.BASKET}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -36,8 +36,15 @@ const ProductDetails = () => {
 						quantity: Number(store.state.quantity),
 					}),
 				});
+				const resData = await res.json();
+				const numberOfItems = resData.data.items;
+				store.dispatch({ 
+					type: StoreActions.UPDATE_NUMOFITEMS, 
+					payload: numberOfItems.length
+				});
 				// reset the quantity after the item has been added to the basket
 				store.dispatch({ type: StoreActions.UPDATE_QUANTITY, payload: 0 });
+				
 			};
 			postBasketData();
 		}

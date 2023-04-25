@@ -34,6 +34,10 @@ const CartItem = ({ item }) => {
 				type: StoreActions.UPDATE_BASKETITEMS, 
 				payload: updatedItems 
 			});
+			store.dispatch({ 
+				type: StoreActions.UPDATE_NUMOFITEMS, 
+				payload: null
+			});
 
 		}else{
 			// update the quantity of the item in the state
@@ -43,6 +47,10 @@ const CartItem = ({ item }) => {
 			store.dispatch({ 
 				type: StoreActions.UPDATE_BASKETITEMS, 
 				payload: updatedItems 
+			});
+			store.dispatch({ 
+				type: StoreActions.UPDATE_NUMOFITEMS, 
+				payload: updatedItems.length 
 			});
 		}
 	};
@@ -68,10 +76,10 @@ const CartItem = ({ item }) => {
 	return (
 		<div className="row body-row">
 			<div className="body-row-info">
-				<img src={item.productId? item.productId.img : item.img} 
-				alt={item.productId? item.productId.title: item.title} />
+				<img src={ item.productId.img} 
+				alt={item.productId.title} />
 				<div className="info-cart">
-					<p>{item.productId ? item.productId.title : item.title}</p>
+					<p>{ item.productId.title}</p>
 					<div className="cart-stars">
 						{starIcons.map((star, index) => {
 							return <span key={index}>{star}</span>;
@@ -81,7 +89,7 @@ const CartItem = ({ item }) => {
 					<p className="delivery">Estimated dispatch within 5 working days</p>
 				</div>
 			</div>
-			<p>£{item.productId ? item.productId.price: item.price}</p>
+			<p>£{item.productId.price}</p>
 			<div className="quantity-container">
 				<button className="popup-plus" onClick={() => removeItem(item)}>
 					<FaMinus />
