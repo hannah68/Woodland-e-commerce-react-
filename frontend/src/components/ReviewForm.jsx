@@ -3,20 +3,21 @@ import { MdEmail } from "react-icons/md";
 import { useContext } from "react";
 
 import StarRating from "./StarRating";
+
 import { starMaking } from "../utils/utils";
 import { StoreActions, StoreContext } from "../store";
 
 const ReviewForm = ({ setIsSubmitReviewForm }) => {
 	const store = useContext(StoreContext);
+	const reviewInfo = store.state.reviewInfo;
 
 	// reviewer change handler =================================
 	const changeHandler = (e) => {
 		const { name, value } = e.target;
-		const reviewInfo = store.state.reviewInfo;
 
-		store.dispatch({ 
-			type: StoreActions.UPDATE_REVIEWINFO, 
-			payload: { ...reviewInfo, [name]: value }
+		store.dispatch({
+			type: StoreActions.UPDATE_REVIEWINFO,
+			payload: { ...reviewInfo, [name]: value },
 		});
 	};
 
@@ -24,22 +25,22 @@ const ReviewForm = ({ setIsSubmitReviewForm }) => {
 	const submitReviewFormHandler = (e) => {
 		e.preventDefault();
 		let today = new Date().toLocaleDateString();
+		const rating = store.state.rating;
 
-		if (today && store.state.rating) {
-			const reviewInfo = store.state.reviewInfo;
-			const starArr = starMaking(store.state.rating);
+		if (today && rating) {
+			const starArr = starMaking(rating);
 
-			store.dispatch({ 
-				type: StoreActions.UPDATE_REVIEWINFO, 
-				payload: { ...reviewInfo, date: today, stars: starArr }
-			})
+			store.dispatch({
+				type: StoreActions.UPDATE_REVIEWINFO,
+				payload: { ...reviewInfo, date: today, stars: starArr },
+			});
 		}
 
 		setIsSubmitReviewForm(true);
 	};
 
 	return (
-		<form className="review-form" onSubmit={ submitReviewFormHandler }>
+		<form className="review-form" onSubmit={submitReviewFormHandler}>
 			<div className="review-container">
 				<p className="review-title">Your personal info.</p>
 				<div className="user-name">
@@ -51,8 +52,8 @@ const ReviewForm = ({ setIsSubmitReviewForm }) => {
 						className="user-input"
 						placeholder="Enter your name"
 						name="reviewerName"
-						value={ store.state.reviewInfo.reviewerName }
-						onChange={ changeHandler }
+						value={reviewInfo.reviewerName}
+						onChange={changeHandler}
 					/>
 				</div>
 				<div className="user-email">
@@ -64,13 +65,13 @@ const ReviewForm = ({ setIsSubmitReviewForm }) => {
 						className="user-input"
 						name="reviewerEmail"
 						placeholder="Enter your email"
-						value={ store.state.reviewInfo.reviewerEmail }
-						onChange={ changeHandler }
+						value={reviewInfo.reviewerEmail}
+						onChange={changeHandler}
 					/>
 				</div>
 				<div className="rating">
 					<p>Rate our overall services.</p>
-					<StarRating/>
+					<StarRating />
 				</div>
 
 				<div className="feedback">
@@ -81,8 +82,8 @@ const ReviewForm = ({ setIsSubmitReviewForm }) => {
 						</span>
 						<textarea
 							name="feedback"
-							value={ store.state.reviewInfo.feedback }
-							onChange={ changeHandler }
+							value={reviewInfo.feedback}
+							onChange={changeHandler}
 						></textarea>
 					</div>
 				</div>

@@ -20,7 +20,7 @@ const Footer = () => {
 						</Link>
 					</li>
 					<li className="footer__lists--item">
-						<Link to={PAGE_LINK.HOME}className="disabled-link">
+						<Link to={PAGE_LINK.HOME} className="disabled-link">
 							Customer service
 						</Link>
 					</li>

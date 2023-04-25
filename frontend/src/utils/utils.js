@@ -3,9 +3,9 @@ import { AiOutlineStar } from "react-icons/ai";
 
 // get rating =======================================
 export const getRating = (rating) => {
-	if(rating === 5) return <FaStar />
-	else return <FaStarHalfAlt />
-}
+	if (rating === 5) return <FaStar />;
+	else return <FaStarHalfAlt />;
+};
 
 // capitalise letter===================================
 export const capitaliseFirstLetter = (name) =>

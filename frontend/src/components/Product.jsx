@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import "../styles/Shop.css";
 
 import { getRating, starIcons } from "../utils/utils";
-
 import { PAGE_LINK } from "../utils/config";
 
 const Product = ({ item }) => {
-
 	return (
 		<div className="product">
 			<img className="product__img" src={item.img} alt={item.title} />

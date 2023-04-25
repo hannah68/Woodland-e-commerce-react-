@@ -1,7 +1,6 @@
 import "../styles/Shop.css";
 
-const SortProducts = ({setProducts, products}) => {
-
+const SortProducts = ({ setProducts, products }) => {
 	// sort By Highest price Handler=============================================
 	const sortByHighestHandler = () => {
 		const newArr = [...products];

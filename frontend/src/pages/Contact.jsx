@@ -15,8 +15,11 @@ const Contact = () => {
 				10am to 8pm.
 			</p>
 			<h2>Ask a question about a product you’ve received</h2>
-			<p>If you have a product aftercare question, please call 0800 808 8899 from
-			10am to 8pm Monday to Friday, Saturday 9am to 6pm and Sunday 10am to 6pm.</p>
+			<p>
+				If you have a product aftercare question, please call 0800 808 8899 from
+				10am to 8pm Monday to Friday, Saturday 9am to 6pm and Sunday 10am to
+				6pm.
+			</p>
 			<h2>Follow up on a delivery</h2>
 			<p>
 				At the moment, we’re experiencing delays to some orders. If you’ve

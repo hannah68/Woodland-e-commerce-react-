@@ -7,6 +7,7 @@ import "../styles/ProductInfos.css";
 import ReviewForm from "../components/ReviewForm";
 import DummyReview from "../components/DummyReview";
 import ProductDetails from "../components/ProductDetails";
+
 import { StoreActions, StoreContext } from "../store";
 
 const ProductInfos = () => {
@@ -16,29 +17,28 @@ const ProductInfos = () => {
 	const [isReview, setIsReview] = useState(false);
 
 	const location = useLocation();
-	
+
 	// use effect for accessing data from location=======================
 	useEffect(() => {
 		if (location.state) {
 			const { item } = location.state;
-			store.dispatch({type: StoreActions.UPDATE_PRODUCT, payload: item})
+			store.dispatch({ type: StoreActions.UPDATE_PRODUCT, payload: item });
 		}
 		// eslint-disable-next-line
 	}, [location]);
 
-	
 	// review handler ======================
 	const writeReviewHandler = () => {
 		setIsReview(!isReview);
-		if(isReview){
-			store.dispatch({ 
-				type: StoreActions.UPDATE_REVIEWINFO, 
-				payload:{
+		if (isReview) {
+			store.dispatch({
+				type: StoreActions.UPDATE_REVIEWINFO,
+				payload: {
 					reviewerName: "",
 					reviewerEmail: "",
 					stars: [],
 					feedback: "",
-					date: ""
+					date: "",
 				},
 			});
 		}
@@ -46,16 +46,12 @@ const ProductInfos = () => {
 
 	return (
 		<div className="product-info-section">
-			<ProductDetails/>
+			<ProductDetails />
 
 			{isReview && (
 				<div className="review-row">
-					<DummyReview
-						isSubmitReviewForm={isSubmitReviewForm}
-					/>
-					<ReviewForm
-						setIsSubmitReviewForm={setIsSubmitReviewForm}
-					/>
+					<DummyReview isSubmitReviewForm={isSubmitReviewForm} />
+					<ReviewForm setIsSubmitReviewForm={setIsSubmitReviewForm} />
 				</div>
 			)}
 

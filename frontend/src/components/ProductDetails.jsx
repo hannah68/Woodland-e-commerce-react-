@@ -3,20 +3,22 @@ import { useContext, useState, useEffect } from "react";
 
 import CarouselImages from "./CarouselImages";
 import ProductInfo from "./ProductInfo";
-import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
+import Modal from "./Modal";
 
 import { StoreContext, StoreActions } from "../store";
 import { getRating, starIcons } from "../utils/utils";
-import Modal from "./Modal";
+import { LOCAL_STORAGE, APIEndPoints } from "../utils/config.js";
 
 const ProductDetails = () => {
 	const store = useContext(StoreContext);
+	const product = store.state.product;
+	
 	const [showModal, setShowModal] = useState(false);
 	const [submit, setSubmit] = useState(false);
 
 	const onCloseModal = () => {
-		setShowModal(false)
-	}
+		setShowModal(false);
+	};
 
 	// use effect for posting data to db===============================
 	useEffect(() => {
@@ -24,6 +26,8 @@ const ProductDetails = () => {
 		if (submit) {
 			// trigger the POST request
 			const postBasketData = async () => {
+				const quantity = store.state.quantity;
+
 				const res = await fetch(`${APIEndPoints.BASKET}`, {
 					method: "POST",
 					headers: {
@@ -31,20 +35,20 @@ const ProductDetails = () => {
 						Authorization: localStorage.getItem(LOCAL_STORAGE.TOKEN),
 					},
 					body: JSON.stringify({
-						productId: store.state.product._id,
+						productId: product._id,
 						userId: localStorage.getItem(LOCAL_STORAGE.USER_ID),
-						quantity: Number(store.state.quantity),
+						quantity: Number(quantity),
 					}),
 				});
 				const resData = await res.json();
 				const numberOfItems = resData.data.items;
-				store.dispatch({ 
-					type: StoreActions.UPDATE_NUMOFITEMS, 
-					payload: numberOfItems.length
+				// update number of items add to basket
+				store.dispatch({
+					type: StoreActions.UPDATE_NUMOFITEMS,
+					payload: numberOfItems.length,
 				});
 				// reset the quantity after the item has been added to the basket
 				store.dispatch({ type: StoreActions.UPDATE_QUANTITY, payload: 0 });
-				
 			};
 			postBasketData();
 		}
@@ -56,11 +60,11 @@ const ProductDetails = () => {
 	// add item to basket handler ========================================
 	const addItemToBasketHandler = () => {
 		const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
-		if(!userId){
+		if (!userId) {
 			setShowModal(true);
 			// reset the quantity after the item has been added to the basket
 			store.dispatch({ type: StoreActions.UPDATE_QUANTITY, payload: 0 });
-		}else{
+		} else {
 			setSubmit(true);
 		}
 	};
@@ -69,22 +73,22 @@ const ProductDetails = () => {
 		<section className="product-item">
 			<div className="productImg-container">
 				<img
-					src={store.state.product.img}
-					alt={store.state.product.title}
+					src={product.img}
+					alt={product.title}
 					loading="lazy"
 				/>
 				<CarouselImages />
 			</div>
 			<div className="productInfo-container">
-				<h2 className="productInfo-title">{store.state.product.title}</h2>
+				<h2 className="productInfo-title">{product.title}</h2>
 				<div className="stars">
 					{starIcons.map((star, index) => {
 						return <span key={index}>{star}</span>;
 					})}
-					<span>{getRating(store.state.product.rating)}</span>
+					<span>{getRating(product.rating)}</span>
 					{/* react-scroll */}
-					<ScrollLink 
-						to="reviews" 
+					<ScrollLink
+						to="reviews"
 						className="review-number"
 						smooth={true}
 						duration={500}
@@ -92,10 +96,10 @@ const ProductDetails = () => {
 						exact="true"
 						offset={-70}
 					>
-						{store.state.product.review}Reviews
+						{product.review}Reviews
 					</ScrollLink>
 				</div>
-				<h3 className="productInfo-price">£{store.state.product.price}</h3>
+				<h3 className="productInfo-price">£{product.price}</h3>
 				<ProductInfo />
 				<div className="productInfo-select">
 					<input
@@ -116,7 +120,7 @@ const ProductDetails = () => {
 					</button>
 				</div>
 			</div>
-			{showModal && <Modal onCloseModal={onCloseModal}/>}
+			{showModal && <Modal onCloseModal={onCloseModal} />}
 		</section>
 	);
 };

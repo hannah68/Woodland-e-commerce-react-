@@ -13,16 +13,16 @@ const Home = () => {
 	// use effect for fetching featured item from server====================
 	useEffect(() => {
 		try {
-		  const fetchFeaturedItems = async () => {
-			const res = await fetch(APIEndPoints.HOME);
-			const featuredData = await res.json();
-			setFeaturedItems(featuredData.data);
-		  };
-		  fetchFeaturedItems();
+			const fetchFeaturedItems = async () => {
+				const res = await fetch(APIEndPoints.HOME);
+				const featuredData = await res.json();
+				setFeaturedItems(featuredData.data);
+			};
+			fetchFeaturedItems();
 		} catch (error) {
-		  console.log("could not fetch featured items from the server!");
+			console.log("could not fetch featured items from the server!");
 		}
-	  }, [])
+	}, []);
 
 	return (
 		<div className="home-section">

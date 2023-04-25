@@ -5,46 +5,45 @@ import Product from "../components/Product";
 import SearchShop from "../components/SearchShop";
 
 import { APIEndPoints } from "../utils/config";
+import { StoreActions, StoreContext } from "../store";
 
 import "../styles/Shop.css";
-
-import { StoreActions, StoreContext } from "../store";
 
 const Shop = () => {
 	const store = useContext(StoreContext);
 	const [products, setProducts] = useState([]);
 
 	// fetch filtered products=================================================
-	const fetchFilteredProducts = async() => {
+	const fetchFilteredProducts = async () => {
 		const data = store.state.filterData;
 		const price = store.state.priceValue;
-	
+
 		const colors = data.color.join(",");
 		const categories = data.category.join(",");
 		const collections = data.collection.join(",");
 		let url = `${APIEndPoints.SHOP}?`;
 
-		if(data && price){
-			if(data.color.length >= 1){
-				url += `color=${colors}&`
+		if (data && price) {
+			if (data.color.length >= 1) {
+				url += `color=${colors}&`;
 			}
-			if(data.category.length >= 1){
-				url += `category=${categories}&`
+			if (data.category.length >= 1) {
+				url += `category=${categories}&`;
 			}
-			if(data.collection.length >= 1){
-				url += `collection=${collections}&`
+			if (data.collection.length >= 1) {
+				url += `collection=${collections}&`;
 			}
-			if(price){
-				url += `price=${price}&`
+			if (price) {
+				url += `price=${price}&`;
 			}
 			// Remove the last "&" character from the URL
 			url = url.slice(0, -1);
-			
+
 			const res = await fetch(url);
 			const resData = await res.json();
 			setProducts(resData.data);
 		}
-	}
+	};
 
 	// submit Filter Form Handler ============================================
 	const submitFilterFormHandler = (e) => {
@@ -75,16 +74,25 @@ const Shop = () => {
 	};
 
 	// clear All Filters Handler================================================
-	const clearAllFilterHandler = async() => {
+	const clearAllFilterHandler = async () => {
 		store.dispatch({
-			type: StoreActions.UPDATE_FILTERDATA, 
-			payload: { collection: [], category: [], color: [] }
+			type: StoreActions.UPDATE_FILTERDATA,
+			payload: { collection: [], category: [], color: [] },
 		});
 		store.dispatch({ type: StoreActions.UPDATE_PRICEVALUE, payload: 1000 });
 		await fetchProducts();
-		store.dispatch({ type: StoreActions.UPDATE_COLLECTIOMENU_OPEN, payload: false });
-		store.dispatch({ type: StoreActions.UPDATE_COLORMENU_OPEN, payload: false });
-		store.dispatch({ type: StoreActions.UPDATE_CATEGORYMENU_OPEN, payload: false });
+		store.dispatch({
+			type: StoreActions.UPDATE_COLLECTIOMENU_OPEN,
+			payload: false,
+		});
+		store.dispatch({
+			type: StoreActions.UPDATE_COLORMENU_OPEN,
+			payload: false,
+		});
+		store.dispatch({
+			type: StoreActions.UPDATE_CATEGORYMENU_OPEN,
+			payload: false,
+		});
 	};
 
 	// fetch random products=====================================================
@@ -105,7 +113,7 @@ const Shop = () => {
 
 	return (
 		<div className="shop-section">
-			<SearchShop 
+			<SearchShop
 				submitSearchHandler={submitSearchHandler}
 				setProducts={setProducts}
 				products={products}
@@ -113,8 +121,8 @@ const Shop = () => {
 
 			<section className="container">
 				<div className="filter-container">
-					<FilterProducts 
-						submitFilterFormHandler={submitFilterFormHandler} 
+					<FilterProducts
+						submitFilterFormHandler={submitFilterFormHandler}
 						clearAllFilterHandler={clearAllFilterHandler}
 					/>
 				</div>

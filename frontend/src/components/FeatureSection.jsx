@@ -3,7 +3,6 @@ import "../styles/Home.css";
 import FeaturedItem from "./FeaturedItem";
 
 const FeatureSection = ({ featuredItems }) => {
-
 	return (
 		<section className="features-section">
 			<h2>Best selling furniture</h2>

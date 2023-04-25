@@ -1,6 +1,7 @@
 import { useContext } from "react";
 
 import { StoreContext, StoreActions } from "../store";
+
 import "../styles/Shop.css";
 
 const FilterPrice = () => {
@@ -19,7 +20,7 @@ const FilterPrice = () => {
 					type="range"
 					id="min-price"
 					name="min-price"
-					min={ 0 }
+					min={0}
 					max="8"
 					step="10"
 				/>
@@ -28,11 +29,11 @@ const FilterPrice = () => {
 					type="range"
 					id="max-price"
 					name="max-price"
-					value={ store.state.priceValue }
+					value={store.state.priceValue}
 					min="0"
-					max={ 1000 }
+					max={1000}
 					step="10"
-					onChange={ handleFilterPrice }
+					onChange={handleFilterPrice}
 				/>
 			</div>
 			<div className="price-text">
@@ -41,8 +42,8 @@ const FilterPrice = () => {
 					<input
 						type="number"
 						defaultValue="0"
-						min={ 0 }
-						max={ 1000 }
+						min={0}
+						max={1000}
 						id="min-num"
 					/>
 				</div>
@@ -50,11 +51,11 @@ const FilterPrice = () => {
 					<span>£</span>
 					<input
 						type="number"
-						value={ store.state.priceValue }
-						min={ 0 }
-						max={ 1000 }
+						value={store.state.priceValue}
+						min={0}
+						max={1000}
 						id="max-num"
-						onChange={ handleFilterPrice }
+						onChange={handleFilterPrice}
 					/>
 				</div>
 			</div>

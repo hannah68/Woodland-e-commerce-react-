@@ -12,23 +12,25 @@ const FilterCollectionMenu = () => {
 	const handleFilterChange = (e, filterName) => {
 		const data = store.state.filterData;
 		const name = e.target.name;
-		
+
 		if (data[filterName].includes(name)) {
 			store.dispatch({
 				type: StoreActions.ISEXISTED_FILTERNAME,
-				payload: { name, filterName }
-			})
+				payload: { name, filterName },
+			});
 		} else {
 			store.dispatch({
 				type: StoreActions.NEW_FILTERNAME,
-				payload: { name, filterName }
-			})
+				payload: { name, filterName },
+			});
 		}
 	};
 
 	// check Checkbox Handler ================================
 	const checkCheckboxHandler = (collectionName) => {
-		return store.state.filterData.collection.includes(collectionName) ? true : false;
+		return store.state.filterData.collection.includes(collectionName)
+			? true
+			: false;
 	};
 
 	return (
@@ -39,12 +41,12 @@ const FilterCollectionMenu = () => {
 						<input
 							className="filter-input"
 							type="checkbox"
-							id={ collectionName }
-							name={ collectionName }
-							onChange={ (e) => handleFilterChange(e, "collection") }
-							checked={ checkCheckboxHandler(collectionName) }
+							id={collectionName}
+							name={collectionName}
+							onChange={(e) => handleFilterChange(e, "collection")}
+							checked={checkCheckboxHandler(collectionName)}
 						/>
-						<label htmlFor={ collectionName }>{ collectionName }</label>
+						<label htmlFor={collectionName}>{collectionName}</label>
 					</div>
 				);
 			})}

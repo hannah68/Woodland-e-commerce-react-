@@ -74,7 +74,7 @@
 	display: block;
 }
 
-.filter-input{
+.filter-input {
 	cursor: pointer;
 }
 
@@ -136,7 +136,6 @@
 	justify-content: space-between;
 	padding: 2.5rem 0;
 	cursor: pointer;
-
 }
 
 .collection__menu.removeBorder,

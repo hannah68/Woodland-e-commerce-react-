@@ -7,7 +7,9 @@ import "../styles/ProductInfos.css";
 
 const StarRating = () => {
 	const store = useContext(StoreContext);
-	
+	const hover = store.state.hover;
+	const rating = store.state.rating;
+
 	return (
 		<div className="stars review-stars">
 			{/* create an array with 5 places */}
@@ -19,20 +21,26 @@ const StarRating = () => {
 							className="radio-stars"
 							type="radio"
 							name="rating"
-							value={ ratingValue }
-							onClick={() => store.dispatch(
-								{ type: StoreActions.ADD_RATING, payload: ratingValue }
-							)}
+							value={ratingValue}
+							onClick={() =>
+								store.dispatch({
+									type: StoreActions.ADD_RATING,
+									payload: ratingValue,
+								})
+							}
 						/>
 						<FaStar
 							className="star-icons"
-							color={ ratingValue <= (store.state.hover || store.state.rating) ? "#FF9529" : "#bbb6b2"}
-							onMouseEnter={() => store.dispatch(
-								{ type:StoreActions.ADD_HOVER, payload: ratingValue }
-							)}
-							onMouseLeave={() => store.dispatch(
-								{ type:StoreActions.ADD_HOVER, payload: null }
-							)}
+							color={ratingValue <= (hover || rating) ? "#FF9529" : "#bbb6b2"}
+							onMouseEnter={() =>
+								store.dispatch({
+									type: StoreActions.ADD_HOVER,
+									payload: ratingValue,
+								})
+							}
+							onMouseLeave={() =>
+								store.dispatch({ type: StoreActions.ADD_HOVER, payload: null })
+							}
 						/>
 					</label>
 				);
