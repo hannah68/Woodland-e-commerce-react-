@@ -8,7 +8,6 @@ import userRouter from "./routes/user.js";
 import initProductRouter from "./routes/init.js";
 import featuredItemsRouter from "./routes/featuredItems.js";
 import productsRouter from "./routes/product.js";
-import ordersRouter from "./routes/order.js";
 import basketRouter from "./routes/basket.js";
 
 const app = express();
@@ -25,7 +24,6 @@ app.use("/user", userRouter);
 app.use("/init", initProductRouter);
 app.use("/featuredItems", featuredItemsRouter);
 app.use("/products", productsRouter);
-app.use("/orders", ordersRouter);
 app.use("/basket", basketRouter);
 
 

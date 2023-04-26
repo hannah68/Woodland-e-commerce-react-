@@ -38,7 +38,7 @@ const Login = () => {
 					}
 				}
 
-				if (userRes.status === 500 || userRes.status === 401) {
+				if (userRes.status === 500 || userRes.status === 401 || userRes.status === 404) {
 					userData = await userRes.json();
 					setLoginError(userData.error);
 					setSubmit(false);

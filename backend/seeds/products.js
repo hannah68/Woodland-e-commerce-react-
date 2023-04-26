@@ -9,7 +9,7 @@ export const seedProducts = [
 		price: 590,
 		feature: false,
 		rating: 4.5,
-		review: 204
+		review: 204,
 	},
 	{
 		id: 2,
@@ -21,7 +21,7 @@ export const seedProducts = [
 		price: 550,
 		feature: false,
 		rating: 5,
-		review: 344
+		review: 344,
 	},
 	{
 		id: 3,
@@ -33,7 +33,7 @@ export const seedProducts = [
 		price: 480,
 		feature: false,
 		rating: 4.5,
-		review: 765
+		review: 765,
 	},
 	{
 		id: 4,
@@ -45,7 +45,7 @@ export const seedProducts = [
 		price: 499,
 		feature: false,
 		rating: 5,
-		review: 34
+		review: 34,
 	},
 	{
 		id: 5,
@@ -57,7 +57,7 @@ export const seedProducts = [
 		price: 189,
 		feature: false,
 		rating: 4.5,
-		review: 98
+		review: 98,
 	},
 	{
 		id: 6,
@@ -69,7 +69,7 @@ export const seedProducts = [
 		price: 299,
 		feature: false,
 		rating: 5,
-		review: 564
+		review: 564,
 	},
 	{
 		id: 7,
@@ -81,7 +81,7 @@ export const seedProducts = [
 		price: 399,
 		feature: true,
 		rating: 5,
-		review: 87
+		review: 87,
 	},
 	{
 		id: 8,
@@ -93,7 +93,7 @@ export const seedProducts = [
 		price: 590,
 		feature: false,
 		rating: 4.5,
-		review: 467
+		review: 467,
 	},
 	{
 		id: 9,
@@ -105,7 +105,7 @@ export const seedProducts = [
 		price: 79,
 		feature: true,
 		rating: 5,
-		review: 12
+		review: 12,
 	},
 	{
 		id: 10,
@@ -117,7 +117,7 @@ export const seedProducts = [
 		price: 390,
 		feature: false,
 		rating: 4.5,
-		review: 43
+		review: 43,
 	},
 	{
 		id: 11,
@@ -129,7 +129,7 @@ export const seedProducts = [
 		price: 590,
 		feature: false,
 		rating: 5,
-		review: 98
+		review: 98,
 	},
 	{
 		id: 12,
@@ -141,7 +141,7 @@ export const seedProducts = [
 		price: 150,
 		feature: false,
 		rating: 5,
-		review: 47
+		review: 47,
 	},
 	{
 		id: 13,
@@ -153,7 +153,7 @@ export const seedProducts = [
 		price: 250,
 		feature: false,
 		rating: 5,
-		review: 370
+		review: 370,
 	},
 	{
 		id: 14,
@@ -165,7 +165,7 @@ export const seedProducts = [
 		price: 180,
 		feature: false,
 		rating: 4.5,
-		review: 381
+		review: 381,
 	},
 	{
 		id: 15,
@@ -177,7 +177,7 @@ export const seedProducts = [
 		price: 120,
 		feature: false,
 		rating: 4.5,
-		review: 417
+		review: 417,
 	},
 	{
 		id: 16,
@@ -189,7 +189,7 @@ export const seedProducts = [
 		price: 280,
 		feature: false,
 		rating: 5,
-		review: 932
+		review: 932,
 	},
 	{
 		id: 17,
@@ -201,7 +201,7 @@ export const seedProducts = [
 		price: 169,
 		feature: true,
 		rating: 4.5,
-		review: 65
+		review: 65,
 	},
 	{
 		id: 18,
@@ -213,7 +213,7 @@ export const seedProducts = [
 		price: 59,
 		feature: false,
 		rating: 5,
-		review: 51
+		review: 51,
 	},
 	{
 		id: 19,
@@ -225,7 +225,7 @@ export const seedProducts = [
 		price: 519,
 		feature: false,
 		rating: 4.5,
-		review: 8
+		review: 8,
 	},
 	{
 		id: 20,
@@ -237,7 +237,7 @@ export const seedProducts = [
 		price: 389,
 		feature: false,
 		rating: 4.5,
-		review: 89
+		review: 89,
 	},
 	{
 		id: 21,
@@ -249,7 +249,7 @@ export const seedProducts = [
 		price: 499,
 		feature: true,
 		rating: 5,
-		review: 63
+		review: 63,
 	},
 	{
 		id: 22,
@@ -261,7 +261,7 @@ export const seedProducts = [
 		price: 499,
 		feature: false,
 		rating: 5,
-		review: 754
+		review: 754,
 	},
 	{
 		id: 23,
@@ -273,7 +273,7 @@ export const seedProducts = [
 		price: 399,
 		feature: false,
 		rating: 5,
-		review: 987
+		review: 987,
 	},
 	{
 		id: 24,
@@ -285,7 +285,7 @@ export const seedProducts = [
 		price: 199,
 		feature: false,
 		rating: 4.5,
-		review: 353
+		review: 353,
 	},
 	{
 		id: 25,
@@ -297,7 +297,7 @@ export const seedProducts = [
 		price: 390,
 		feature: false,
 		rating: 5,
-		review: 156
+		review: 156,
 	},
 	{
 		id: 26,
@@ -309,7 +309,7 @@ export const seedProducts = [
 		price: 390,
 		feature: false,
 		rating: 4.5,
-		review: 378
+		review: 378,
 	},
 	{
 		id: 27,
@@ -321,7 +321,7 @@ export const seedProducts = [
 		price: 490,
 		feature: false,
 		rating: 5,
-		review: 258
+		review: 258,
 	},
 	{
 		id: 28,
@@ -333,7 +333,7 @@ export const seedProducts = [
 		price: 290,
 		feature: false,
 		rating: 4.5,
-		review: 73
+		review: 73,
 	},
 	{
 		id: 29,
@@ -345,7 +345,7 @@ export const seedProducts = [
 		price: 590,
 		feature: false,
 		rating: 5,
-		review: 92
+		review: 92,
 	},
 	{
 		id: 30,
@@ -357,7 +357,7 @@ export const seedProducts = [
 		price: 419,
 		feature: false,
 		rating: 4.5,
-		review: 74
+		review: 74,
 	},
 	{
 		id: 31,
@@ -369,7 +369,7 @@ export const seedProducts = [
 		price: 490,
 		feature: false,
 		rating: 5,
-		review: 26
+		review: 26,
 	},
 	{
 		id: 32,
@@ -381,7 +381,7 @@ export const seedProducts = [
 		price: 590,
 		feature: false,
 		rating: 5,
-		review: 29
+		review: 29,
 	},
 	{
 		id: 33,
@@ -393,7 +393,7 @@ export const seedProducts = [
 		price: 690,
 		feature: false,
 		rating: 5,
-		review: 45
+		review: 45,
 	},
 	{
 		id: 34,
@@ -405,7 +405,7 @@ export const seedProducts = [
 		price: 28,
 		feature: false,
 		rating: 4.5,
-		review: 34
+		review: 34,
 	},
 	{
 		id: 35,
@@ -417,7 +417,7 @@ export const seedProducts = [
 		price: 50,
 		feature: false,
 		rating: 5,
-		review: 85
+		review: 85,
 	},
 	{
 		id: 36,
@@ -429,7 +429,7 @@ export const seedProducts = [
 		price: 189,
 		feature: false,
 		rating: 4.5,
-		review: 954
+		review: 954,
 	},
 	{
 		id: 37,
@@ -441,7 +441,7 @@ export const seedProducts = [
 		price: 99,
 		feature: false,
 		rating: 5,
-		review: 637
+		review: 637,
 	},
 	{
 		id: 38,
@@ -453,7 +453,7 @@ export const seedProducts = [
 		price: 150,
 		feature: false,
 		rating: 5,
-		review: 267
+		review: 267,
 	},
 	{
 		id: 39,
@@ -465,7 +465,7 @@ export const seedProducts = [
 		price: 200,
 		feature: false,
 		rating: 4.5,
-		review: 472
+		review: 472,
 	},
 	{
 		id: 40,
@@ -477,7 +477,7 @@ export const seedProducts = [
 		price: 199,
 		feature: false,
 		rating: 5,
-		review: 782
+		review: 782,
 	},
 	{
 		id: 41,
@@ -489,7 +489,7 @@ export const seedProducts = [
 		price: 129,
 		feature: false,
 		rating: 5,
-		review: 97
+		review: 97,
 	},
 	{
 		id: 42,
@@ -501,6 +501,6 @@ export const seedProducts = [
 		price: 129,
 		feature: false,
 		rating: 4.5,
-		review: 765
+		review: 765,
 	},
 ];
