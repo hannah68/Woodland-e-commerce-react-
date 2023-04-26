@@ -48,6 +48,6 @@ export const seedProductDB = async (req, res) => {
 		console.log(err);
 		res
 			.status(HTTP_RESPONSE.INTERNAL_ERROR.CODE)
-			.json("Error seeding database");
+			.json(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
 	}
 };

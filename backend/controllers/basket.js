@@ -52,7 +52,7 @@ export const addItemsToBasket = async (req, res) => {
 	} catch (err) {
 		res
 			.status(HTTP_RESPONSE.INTERNAL_ERROR.CODE)
-			.json(HTTP_RESPONSE.INTERNAL_ERROR.CODE);
+			.json(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
 	}
 };
 
@@ -70,7 +70,7 @@ export const getItemsFromBasket = async (req, res) => {
 	} catch (err) {
 		res
 			.status(HTTP_RESPONSE.INTERNAL_ERROR.CODE)
-			.json(HTTP_RESPONSE.INTERNAL_ERROR.CODE);
+			.json(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
 	}
 };
 
@@ -117,6 +117,6 @@ export const editItemsInBasket = async (req, res) => {
 	} catch (err) {
 		res
 			.status(HTTP_RESPONSE.INTERNAL_ERROR.CODE)
-			.json(HTTP_RESPONSE.INTERNAL_ERROR.CODE);
+			.json(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
 	}
 };
