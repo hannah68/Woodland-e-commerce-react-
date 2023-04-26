@@ -1,4 +1,3 @@
-
 export const APIEndPoints = {
 	BASKET: "http://localhost:5000/basket/",
 	LOGIN: "http://localhost:5000/user/login",
@@ -13,10 +12,10 @@ export const PAGE_LINK = {
 	REGISTER: "/register",
 	SHOP: "/shop",
 	CONTACT: "/contact",
-    BASKET: "/basket",
+	BASKET: "/basket",
 };
 
 export const LOCAL_STORAGE = {
-    TOKEN: "token",
-    USER_ID: "userId",
+	TOKEN: "token",
+	USER_ID: "userId",
 };

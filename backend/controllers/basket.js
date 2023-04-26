@@ -1,17 +1,20 @@
 import { Basket } from "../models/basket.js";
 import jwt from "jsonwebtoken";
+import { HTTP_RESPONSE } from "../utils/config.js";
 
-// post item to user's basket
+// post item to user's basket===========================
 export const addItemsToBasket = async (req, res) => {
 	try {
 		const { userId, quantity, productId } = req.body;
 		const token = req.headers.authorization;
-		
+
 		const decodedToken = jwt.decode(token);
 		const tokenId = decodedToken.id;
-		
-		if(tokenId !== userId){
-			return res.status(401).json({ error: "Unauthorized" });
+
+		if (tokenId !== userId) {
+			return res
+				.status(HTTP_RESPONSE.UNAUTHORIZED.CODE)
+				.json(HTTP_RESPONSE.UNAUTHORIZED.MESSAGE);
 		}
 		// find the user's basket
 		let basket = await Basket.findOne({ userId });
@@ -25,9 +28,9 @@ export const addItemsToBasket = async (req, res) => {
 		} else {
 			// check if the item is in the basket already
 			let foundItem = basket.items.find((item) => {
-				return (item.productId).toString() === productId
+				return item.productId.toString() === productId;
 			});
-			
+
 			if (foundItem) {
 				// update the quantity of the existing item
 				foundItem.quantity = Math.max(0, foundItem.quantity + quantity);
@@ -35,67 +38,72 @@ export const addItemsToBasket = async (req, res) => {
 				// remove the item if the quantity is zero
 				if (foundItem.quantity === 0) {
 					basket.items = basket.items.filter(
-						(item) => (item.productId).toString() !== productId
+						(item) => item.productId.toString() !== productId
 					);
 				}
 			} else {
 				// add the new item to the basket
 				basket.items.push({ productId, quantity });
 			}
-
 			basket = await basket.save();
 		}
 
-		res.status(200).json({ data: basket });
+		res.status(HTTP_RESPONSE.OK.CODE).json({ data: basket });
 	} catch (err) {
-		res.status(500).json({ success: false, message: "Server Error" });
+		res
+			.status(HTTP_RESPONSE.INTERNAL_ERROR.CODE)
+			.json(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
 	}
 };
 
-// get items from the basket
-export const getItemsFromBasket = async(req, res) => {
-  try{
-    // extract user id from URL parameter
-    const { userId } = req.params;
+// get items from the basket=============================================
+export const getItemsFromBasket = async (req, res) => {
+	try {
+		// extract user id from URL parameter
+		const { userId } = req.params;
 
-    // Retrieve the user's basket from the database
-    const basket = await Basket.findOne({ userId }).populate('items.productId');
+		// Retrieve the user's basket from the database
+		const basket = await Basket.findOne({ userId }).populate("items.productId");
 
-    // Send the basket as the response
-    res.status(200).json({data: basket});
-  }catch(err){
-    res.status(500).json({ error: 'Server error' });
-  }
-}
+		// Send the basket as the response
+		res.status(HTTP_RESPONSE.OK.CODE).json({ data: basket });
+	} catch (err) {
+		res
+			.status(HTTP_RESPONSE.INTERNAL_ERROR.CODE)
+			.json(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
+	}
+};
 
-// edit items inside the basket
-export const editItemsInBasket = async(req, res) => {
-	try{
+// edit items inside the basket==============================================
+export const editItemsInBasket = async (req, res) => {
+	try {
 		const { userId, quantity, productId } = req.body;
 		const token = req.headers.authorization;
-		
+
 		const decodedToken = jwt.decode(token);
 		const tokenId = decodedToken.id;
-		
-		if(tokenId !== userId){
-			return res.status(401).json({ error: "Unauthorized" });
+
+		if (tokenId !== userId) {
+			return res
+				.status(HTTP_RESPONSE.UNAUTHORIZED.CODE)
+				.json(HTTP_RESPONSE.UNAUTHORIZED.MESSAGE);
 		}
 
 		let basket = await Basket.findOne({ userId });
-		
+
 		// remove the item if the quantity is zero
-		if(quantity <= 0 ){
+		if (quantity <= 0) {
 			basket.items = basket.items.filter(
-				(item) => (item.productId).toString() !== productId
+				(item) => item.productId.toString() !== productId
 			);
 
 			basket = await basket.save();
 			// Send the basket as the response
-			res.status(200).json({data: basket});
-		}else{
+			res.status(HTTP_RESPONSE.OK.CODE).json({ data: basket });
+		} else {
 			// find the item
 			let foundItem = basket.items.find((item) => {
-				return (item.productId).toString() === productId
+				return item.productId.toString() === productId;
 			});
 
 			// update the quantity of the item
@@ -104,9 +112,11 @@ export const editItemsInBasket = async(req, res) => {
 			basket = await basket.save();
 
 			// Send the basket as the response
-			res.status(200).json({data: basket});
+			res.status(HTTP_RESPONSE.OK.CODE).json({ data: basket });
 		}
-	}catch(err){
-		res.status(500).json({ error: 'Server error' });
+	} catch (err) {
+		res
+			.status(HTTP_RESPONSE.INTERNAL_ERROR.CODE)
+			.json(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
 	}
-}
+};

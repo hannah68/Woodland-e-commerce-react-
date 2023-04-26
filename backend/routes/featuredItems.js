@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import { getFeaturedItems } from "../controllers/featuredItems.js";
 
 const router = Router();

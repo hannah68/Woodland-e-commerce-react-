@@ -3,4 +3,5 @@ export const HTTP_RESPONSE = {
 	INTERNAL_ERROR: { MESSAGE: "Internal server error", CODE: 500 },
 	UNAUTHORIZED: { MESSAGE: "Unauthorized", CODE: 401 },
 	NOT_FOUND: { MESSAGE: "Not found", CODE: 404 },
+	BAD_REQUEST: { MESSAGE: "Bad Request", CODE: 400 },
 };

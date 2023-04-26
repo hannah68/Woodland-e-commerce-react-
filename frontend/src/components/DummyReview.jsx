@@ -1,38 +1,38 @@
 import { AiOutlineLike } from "react-icons/ai";
-import { useContext } from 'react';
+import { useContext } from "react";
 
 import { StoreContext } from "../store";
+import { dummyReview } from "../utils/utils";
 
 import Review from "./Review";
 
-import {dummyReview } from "../utils/utils";
-
-import '../styles/ProductInfos.css';
+import "../styles/ProductInfos.css";
 
 const DummyReview = ({ isSubmitReviewForm }) => {
 	const store = useContext(StoreContext);
+	const product = store.state.product;
 
 	return (
 		<div className="review-section">
-			{ dummyReview.map((el, index) => {
+			{dummyReview.map((review, index) => {
 				return (
 					<div className="review" key={index}>
 						<div className="review-header">
-							<p className="review-header-name">{el.name}</p>
+							<p className="review-header-name">{review.name}</p>
 							<p className="review-header-star">
-								{el.star.map((star, index) => (
+								{review.star.map((star, index) => (
 									<span key={index}>{star}</span>
 								))}
 							</p>
-							<p className="review-header-date">{el.date}</p>
+							<p className="review-header-date">{review.date}</p>
 						</div>
 						<div className="review-body">
 							<img
-								src={store.state.product.img}
+								src={product.img}
 								alt="furniture"
 								className="review-body-img"
 							/>
-							<p className="review-body-text">{el.feedback}</p>
+							<p className="review-body-text">{review.feedback}</p>
 							<button className="review-body-btn">
 								<span>
 									<AiOutlineLike className="likeStyle" />
@@ -44,7 +44,7 @@ const DummyReview = ({ isSubmitReviewForm }) => {
 				);
 			})}
 
-			{ isSubmitReviewForm && <Review /> }
+			{isSubmitReviewForm && <Review />}
 		</div>
 	);
 };

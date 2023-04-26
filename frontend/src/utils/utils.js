@@ -3,15 +3,8 @@ import { AiOutlineStar } from "react-icons/ai";
 
 // get rating =======================================
 export const getRating = (rating) => {
-	if(rating === 5) return <FaStar />
-	else return <FaStarHalfAlt />
-}
-
-// create a random review number=============================
-export const randomReviewNum = () => {
-	const min = 28;
-	const max = 350;
-	return Math.floor(Math.random() * (max - min + 1)) + min;
+	if (rating === 5) return <FaStar />;
+	else return <FaStarHalfAlt />;
 };
 
 // capitalise letter===================================

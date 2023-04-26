@@ -7,74 +7,90 @@ import FilterCollectionMenu from "./FilterCollectionMenu";
 import FilterColorMenu from "./FilterColorMenu";
 import FilterCategoryMenu from "./FilterCategoryMenu";
 import FilterPrice from "./FilterPrice";
+
 import { StoreContext, StoreActions } from "../store";
 
 const FilterProducts = ({ submitFilterFormHandler, clearAllFilterHandler }) => {
-	const store = useContext(StoreContext)
+	const store = useContext(StoreContext);
+	const collectionMenuOpen = store.state.collectionMenuOpen;
+	const colorMenuOpen = store.state.colorMenuOpen;
+	const categoryMenuOpen = store.state.categoryMenuOpen;
 
 	return (
 		<>
 			<div className="clear-container">
 				<h2>Filtered by</h2>
-				<button className="clear-btn" onClick={ clearAllFilterHandler }>
+				<button className="clear-btn" onClick={clearAllFilterHandler}>
 					Clear All
 				</button>
 			</div>
 
-			<form className="filter__collection" onSubmit={ submitFilterFormHandler }>
+			<form className="filter__collection" onSubmit={submitFilterFormHandler}>
 				{/* collection section */}
 				<div
 					className={
-						store.state.collectionMenuOpen
+						collectionMenuOpen
 							? "collection__menu removeBorder"
 							: "collection__menu"
 					}
 				>
 					<span>Collection</span>
-					<span onClick={() => store.dispatch({
-							type: StoreActions.UPDATE_COLLECTIOMENU_OPEN, 
-							payload: !store.state.collectionMenuOpen
-						})}>
+					<span
+						onClick={() =>
+							store.dispatch({
+								type: StoreActions.UPDATE_COLLECTIOMENU_OPEN,
+								payload: !collectionMenuOpen,
+							})
+						}
+					>
 						<FaChevronDown />
 					</span>
 				</div>
-				{ store.state.collectionMenuOpen && <FilterCollectionMenu/> }
+				{collectionMenuOpen && <FilterCollectionMenu />}
 
 				{/* color section */}
 				<div
-					className={store.state.colorMenuOpen ? "color__menu removeBorder" : "color__menu"}
+					className={colorMenuOpen ? "color__menu removeBorder" : "color__menu"}
 				>
 					<span>Color</span>
-					<span onClick={ () => store.dispatch({
-							type: StoreActions.UPDATE_COLORMENU_OPEN,
-							payload: !store.state.colorMenuOpen
-						}) }>
+					<span
+						onClick={() =>
+							store.dispatch({
+								type: StoreActions.UPDATE_COLORMENU_OPEN,
+								payload: !colorMenuOpen,
+							})
+						}
+					>
 						<FaChevronDown />
 					</span>
 				</div>
-				{ store.state.colorMenuOpen && <FilterColorMenu/> }
+				{colorMenuOpen && <FilterColorMenu />}
 
 				{/* category section */}
 				<div
 					className={
-						store.state.categoryMenuOpen ? "category__menu removeBorder" : "category__menu"
+						categoryMenuOpen ? "category__menu removeBorder" : "category__menu"
 					}
 				>
 					<span>Category</span>
-					<span onClick={ () => store.dispatch({
-						type: StoreActions.UPDATE_CATEGORYMENU_OPEN,
-						payload: !store.state.categoryMenuOpen
-						}) }>
+					<span
+						onClick={() =>
+							store.dispatch({
+								type: StoreActions.UPDATE_CATEGORYMENU_OPEN,
+								payload: !categoryMenuOpen,
+							})
+						}
+					>
 						<FaChevronDown />
 					</span>
 				</div>
-				{store.state.categoryMenuOpen && <FilterCategoryMenu/>}
+				{categoryMenuOpen && <FilterCategoryMenu />}
 
 				{/* price section */}
 				<div className="price__menu">
 					<span className="price-name">Price Range</span>
 				</div>
-				<FilterPrice/>
+				<FilterPrice />
 
 				<button type="submit" className="search-btn">
 					Search

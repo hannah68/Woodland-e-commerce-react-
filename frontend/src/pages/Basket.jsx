@@ -1,7 +1,5 @@
 import { useEffect, useContext } from "react";
 
-import "../styles/Basket.css";
-
 import CartItem from "../components/CartItem";
 import EmptyBasket from "../components/EmptyBasket";
 import TotalCart from "../components/TotalCart";
@@ -9,8 +7,11 @@ import TotalCart from "../components/TotalCart";
 import { LOCAL_STORAGE, APIEndPoints } from "../utils/config";
 import { StoreContext, StoreActions } from "../store";
 
+import "../styles/Basket.css";
+
 const Basket = () => {
 	const store = useContext(StoreContext);
+	const basketItems = store.state.basketItems;
 
 	// get data from db=====================
 	useEffect(() => {
@@ -28,17 +29,18 @@ const Basket = () => {
 						},
 					});
 					const resData = await res.json();
-					
+
 					if (resData && resData.data && resData.data.items) {
-						store.dispatch({ 
-							type: StoreActions.UPDATE_BASKETITEMS, 
-							payload: resData.data.items 
+						store.dispatch({
+							type: StoreActions.UPDATE_BASKETITEMS,
+							payload: resData.data.items,
 						});
 					} else {
 						console.log("Data not found");
 					}
-				} catch (err) {  console.log(err); }
-				
+				} catch (err) {
+					console.log(err);
+				}
 			};
 			getBasketData();
 		}
@@ -48,9 +50,9 @@ const Basket = () => {
 	return (
 		<div className="shopping-cart">
 			<h1>
-				Shopping Cart <span>: {store.state.basketItems.length} items</span>
+				Shopping Cart <span>: {basketItems.length} items</span>
 			</h1>
-			{store.state.basketItems.length < 1 ? (
+			{basketItems.length < 1 ? (
 				<EmptyBasket />
 			) : (
 				<>
@@ -62,11 +64,8 @@ const Basket = () => {
 							<p className="header">Total</p>
 						</div>
 						<div className="cart">
-							{store.state.basketItems.map((item, index) => {
-								return <CartItem 
-									key={index} 
-									item={item} 
-								/>;
+							{basketItems.map((item, index) => {
+								return <CartItem key={index} item={item} />;
 							})}
 						</div>
 					</div>

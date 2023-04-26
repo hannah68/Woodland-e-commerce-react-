@@ -17,17 +17,17 @@ const FilterColorMenu = () => {
 	const handleFilterChange = (e, filterName) => {
 		const data = store.state.filterData;
 		const name = e.target.name;
-		
+
 		if (data[filterName].includes(name)) {
 			store.dispatch({
 				type: StoreActions.ISEXISTED_FILTERNAME,
-				payload: { name, filterName }
-			})
+				payload: { name, filterName },
+			});
 		} else {
 			store.dispatch({
 				type: StoreActions.NEW_FILTERNAME,
-				payload: { name, filterName }
-			})
+				payload: { name, filterName },
+			});
 		}
 	};
 
@@ -35,16 +35,16 @@ const FilterColorMenu = () => {
 		<div className="color__list">
 			{colorNames.map((colorName, index) => {
 				return (
-					<div key={ index }>
+					<div key={index}>
 						<input
 							className="filter-input"
 							type="checkbox"
-							id={ colorName }
-							name={ colorName }
-							onChange={ (e) => handleFilterChange(e, "color") }
-							checked={ checkCheckboxHandler(colorName) }
+							id={colorName}
+							name={colorName}
+							onChange={(e) => handleFilterChange(e, "color")}
+							checked={checkCheckboxHandler(colorName)}
 						/>
-						<label htmlFor={ colorName }>{ colorName }</label>
+						<label htmlFor={colorName}>{colorName}</label>
 					</div>
 				);
 			})}

@@ -13,6 +13,7 @@ const Login = () => {
 	const [userLogin, setUserLogin] = useState({ email: "", password: "" });
 	const navigate = useNavigate();
 
+	// post user info to DB================================
 	useEffect(() => {
 		const postUserLoginToDB = async () => {
 			try {
@@ -22,38 +23,38 @@ const Login = () => {
 					body: JSON.stringify(userLogin),
 				});
 				let userData;
-			
+
 				if (userRes.ok) {
 					userData = await userRes.json();
 					localStorage.setItem("token", userData.token);
-					
+
 					if (userData.data) {
 						localStorage.setItem("userId", userData.data.id.toString());
-						store.dispatch({ type: StoreActions.UPDATE_USER, payload: userData.data.username });
+						store.dispatch({
+							type: StoreActions.UPDATE_USER,
+							payload: userData.data.username,
+						});
 						navigate(PAGE_LINK.HOME, { replace: true });
 					}
 				}
-		
-				if (userRes.status === 500 || userRes.status === 401) {
+
+				if (userRes.status === 500 || userRes.status === 401 || userRes.status === 404) {
 					userData = await userRes.json();
 					setLoginError(userData.error);
 					setSubmit(false);
 				}
 			} catch (err) {
 				console.log("An error occurred while logging in user: ", err);
-
 			}
 		};
 
-		if(submit){ 
+		if (submit) {
 			postUserLoginToDB();
-			store.dispatch({ type: StoreActions.UPDATE_ISLOGGEDIN, payload: true});
-			
+			store.dispatch({ type: StoreActions.UPDATE_ISLOGGEDIN, payload: true });
 		}
-		
-	  // eslint-disable-next-line
-	}, [navigate, userLogin, submit])
-	
+
+		// eslint-disable-next-line
+	}, [navigate, userLogin, submit]);
 
 	// submit login form handler =========================
 	const submitLoginFormHandler = (e) => {
@@ -96,7 +97,9 @@ const Login = () => {
 						className={loginError.length > 0 ? "red-border" : "password-input"}
 					/>
 				</div>
-				{loginError.length > 0 && <span className="login-error">{loginError}</span>}
+				{loginError.length > 0 && (
+					<span className="login-error">{loginError}</span>
+				)}
 				<button type="submit" className="login-btn">
 					SIGN IN
 				</button>

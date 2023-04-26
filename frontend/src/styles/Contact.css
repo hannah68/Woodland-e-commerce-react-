@@ -1,21 +1,21 @@
-.contact-section{
-    max-width: 50rem;
-    margin: 4rem auto;
-    font-size: 1.3rem;
+.contact-section {
+	max-width: 50rem;
+	margin: 4rem auto;
+	font-size: 1.3rem;
 }
 
-.contact-section h1{
-    margin-bottom: 5px;
+.contact-section h1 {
+	margin-bottom: 5px;
 }
 
-.contact-section h2{
-    padding-bottom: 10px;
+.contact-section h2 {
+	padding-bottom: 10px;
 }
 
-.contact-section p{
-    padding-bottom: 2rem;
+.contact-section p {
+	padding-bottom: 2rem;
 }
 
-.first-title{
-    padding-top: 1rem;
+.first-title {
+	padding-top: 1rem;
 }

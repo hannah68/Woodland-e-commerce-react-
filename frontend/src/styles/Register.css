@@ -1,45 +1,45 @@
-.register-section{
-    max-width: 80rem;
-    margin: 6rem auto;
-    display: flex;
-    padding: 4rem;
-    gap: 3rem;
-    align-items: flex-start;
-    background-color: #cec6c1;
+.register-section {
+	max-width: 80rem;
+	margin: 6rem auto;
+	display: flex;
+	padding: 4rem;
+	gap: 3rem;
+	align-items: flex-start;
+	background-color: #cec6c1;
 }
-.register-error{
+.register-error {
 	font-size: 12px;
 	color: red;
 	text-align: center;
 }
 
-.register-images{
-    width: 50%;
+.register-images {
+	width: 50%;
 }
 
-.register-images img{
-    width: 100%;
+.register-images img {
+	width: 100%;
 }
 
-.register-page{
+.register-page {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-    width: 50%;
+	width: 50%;
 }
 
-.register-page h1{
+.register-page h1 {
 	text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    padding-top: 5px;
-    line-height: 1.5;
+	font-size: 1.8rem;
+	margin-bottom: 2rem;
+	padding-top: 5px;
+	line-height: 1.5;
 }
 
 .register-form {
-    width: 80%;
+	width: 80%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -51,26 +51,26 @@
 .input-groups {
 	display: flex;
 	align-items: flex-end;
-    gap: 10px;
+	gap: 10px;
 }
 
-.checkbox-group{
+.checkbox-group {
 	display: flex;
 	align-items: flex-end;
-    gap: 8px;
-    margin-left: 0;
+	gap: 8px;
+	margin-left: 0;
 }
 
-.checkbox-group input{
-    padding-right: 5px; 
+.checkbox-group input {
+	padding-right: 5px;
 }
 
-.red-border{
-    border-color: red;
+.red-border {
+	border-color: red;
 	font-size: 12px;
 }
 
-.red-text{
+.red-text {
 	color: red;
 	font-size: 15px;
 	font-weight: bold;
@@ -79,14 +79,14 @@
 .terms {
 	font-size: 12px;
 	padding-left: 5px;
-    margin-top: 2rem;
+	margin-top: 2rem;
 }
 
 .input-groups label {
 	padding-right: 5px;
-    font-size: 2rem;
-    align-items: center;
-    margin-left: 0;
+	font-size: 2rem;
+	align-items: center;
+	margin-left: 0;
 }
 
 .input-groups input {
@@ -103,14 +103,14 @@
 	cursor: pointer;
 	outline: none;
 	background-color: #ddd8d5;
-    box-shadow: 0 3px 2px #bbb;
+	box-shadow: 0 3px 2px #bbb;
 	border: none;
 	padding: 8px;
 	border-radius: 4px;
-    margin-top: 0;
+	margin-top: 0;
 }
 
-.login-container{
+.login-container {
 	display: flex;
 	justify-content: space-between;
 	gap: 1rem;

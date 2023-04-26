@@ -19,6 +19,7 @@ const Register = () => {
 	});
 	const navigate = useNavigate();
 
+	// register user info to DB=======================================
 	useEffect(() => {
 		const postUserInfoToDB = async () => {
 			try {
@@ -28,7 +29,7 @@ const Register = () => {
 					body: JSON.stringify(userInfo),
 				});
 				let userData;
-				
+
 				if (userRes.ok) {
 					userData = await userRes.json();
 					localStorage.setItem("token", userData.token);
@@ -43,7 +44,6 @@ const Register = () => {
 					setRegisterError(userData.email);
 					setSubmit(false);
 				}
-				  
 			} catch (err) {
 				console.log("An error occurred while registering in user: ", err);
 			}
@@ -52,19 +52,19 @@ const Register = () => {
 		if (submit) {
 			postUserInfoToDB();
 		}
-
 	}, [submit, navigate, userInfo]);
 
+	// check user form validation
 	const checkUserFormValidation = () => {
 		const username = userInfo.username;
 		const email = userInfo.email;
 		const password = userInfo.password;
-		if(username === "" || email === "" || password === ""){
-			setEmptyInfoErr("Please complete the form before submitting.")
-		}else{
+		if (username === "" || email === "" || password === "") {
+			setEmptyInfoErr("Please complete the form before submitting.");
+		} else {
 			setSubmit(true);
 		}
-	}
+	};
 
 	// submit register form handler
 	const submitRegisterFormHandler = (e) => {
@@ -120,7 +120,9 @@ const Register = () => {
 							onChange={changeHandler}
 						/>
 					</div>
-					{registerError.length > 0 && <span className="register-error">{registerError}</span>}
+					{registerError.length > 0 && (
+						<span className="register-error">{registerError}</span>
+					)}
 					<div className="input-groups">
 						<label htmlFor="password">
 							<RiLockPasswordFill />
@@ -141,17 +143,16 @@ const Register = () => {
 							I agree to the terms and privacy policy.
 						</span>
 					</div>
-					<button 
-						type="submit" 
-						className="register-button"
-					>
+					<button type="submit" className="register-button">
 						REGISTER
 					</button>
-					{emptyInfoErr.length > 0 && <span className="red-text">{emptyInfoErr}</span>}
+					{emptyInfoErr.length > 0 && (
+						<span className="red-text">{emptyInfoErr}</span>
+					)}
 					<div className="login-container">
 						<p className="signin-text">Already have an account?</p>
 						<Link to={PAGE_LINK.LOGIN} className="signin-btn">
-						SIGN IN
+							SIGN IN
 						</Link>
 					</div>
 				</form>
