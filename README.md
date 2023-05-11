@@ -41,10 +41,9 @@ After receiving the item, the user writes a review to share their thoughts and f
 </br>
 <p><img src='./frontend/public/assets/images/review.gif' width="800px" alt="review gif"/></p>
 
-7. #### Responsiveness: (Implemented responsivness throughout the app) ####
+7. #### Responsiveness: (Implement responsivness throughout the app) ####
 </br>
-<p><img src='./frontend/public/assets/images/responsive1.png' width="200px" alt="responsive1 pic"/></p>
-<p><img src='./frontend/public/assets/images/responsive2.png' width="200px" alt="responsive2 pic"/></p>
+<img src='./frontend/public/assets/images/responsive2.png' width="400px" alt="responsive2 pic" style="border: 2px solid black;"/>
 
 ## Methods Used
 - Navigate UI with **react-router**.
